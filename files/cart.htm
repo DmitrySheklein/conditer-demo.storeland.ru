@@ -1,0 +1,239 @@
+<div class="cart-info">
+  {% IF FORM_NOTICE %}
+    <div class="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>
+    <script>
+      $(function () {
+        new Noty({
+          text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
+          type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
+        }).show()         
+      });      
+    </script>
+  {% ENDIF %}
+  <div id="empty-cart" class="empty-cart _cart-page" style="{% IFNOT cart_count_empty %}display:none{% ENDIF %}">
+     <div class="empty-cart__content">
+       <h3 class="empty-cart__title">Ваша корзина пуста</h3>
+       <p class="empty-cart__subtext">
+         Вернитесь на главную и выберите интересующий товар.
+       </p>       
+        <div class="buttons">
+          <a href="{INDEX_PAGE_URL}" class="button">Перейти на главную</a>
+        </div>
+     </div>
+  </div>
+  {% IFNOT cart_count_empty %}
+  <div class="cart-info__wrap">
+    <div class="cart-info__content">
+        <!-- Шаги корзины-->
+        <div class="cart-tabs">
+            <button type="button" class="cart-tab _active" id="closeOrderTab">
+              Шаг 1 - Ваш заказ
+            </button>                        
+            <button type="button" class="cart-tab _disabled" id="startOrderTab">
+              Шаг 2 - Ваши данные
+            </button>
+        </div>
+        <!--Корзина-->
+        <div class="cart _cart-page">
+          <form action="{CART_URL}" method="post" id="cart-content">
+            <input type="hidden" name="fast_order" value="1" />
+            <input type="hidden" name="hash" value="{HASH}" />
+            
+            <div class="preloader _opacity"><span class="content-loading"></span></div>
+            <div class="cart__products">
+              <div class="cart__table"> 
+                <div class="cart__body">
+                  {% FOR cart_items %}
+                    <div class="cart__table-row" data-id="{cart_items.GOODS_MOD_ID}">
+                      <div class="cart__table-cell -photo">
+                        <div class="cart__table-item -photo">
+                          <a href="{cart_items.GOODS_URL}">
+                              <img class="cart__photo goods-image-other lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=techno{% ELSE %}{cart_items.GOODS_IMAGE_OTHER}{% ENDIF %}">
+                          </a>
+                      </div>
+                      </div>
+                      <div class="cart__table-cell -content">
+                        <div class="cart__table-item -name"> 
+                          <a class="cart__product-name" href="{cart_items.GOODS_URL}">{cart_items.GOODS_NAME}</a>
+                          <!-- Если у товара есть отличительные свойства для модификации товара, допишем их к названию товара -->
+                          {% IF cart_items.GOODS_MOD_ART_NUMBER %}<div class="cart__product-art">Артикул: <span>{cart_items.GOODS_MOD_ART_NUMBER}</span></div>{% ENDIF %}
+                          {% IFNOT cart_items.distinctive_properties_empty %}<div class="cart__product-properties">{% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %},<br> {% ENDIF %}{% ENDFOR %}</div>{% ENDIF %}
+                      </div>
+                        <div class="cart__table-item -actions">
+                          <div class="qty qty--cart">
+                              <div class="qty__wrap">
+                                <button class="qty__btn qty__btn--minus" title="Уменьшить">
+                                  <svg class="icon">
+                                    <use xlink:href="#minus-icon"></use>
+                                  </svg>
+                                </button>
+                                <input type="number" pattern="\d*" name="form[quantity][{cart_items.GOODS_MOD_ID}]" value="{cart_items.ORDER_LINE_QUANTITY}" min="1" title="Количество" class="input qty__input" onkeypress="return keyPress(this, event);"  autocomplete="off">
+                                <button class="qty__btn qty__btn--plus" title="Увеличить">
+                                  <svg class="icon">
+                                    <use xlink:href="#plus-icon"></use>
+                                  </svg>                                        
+                                </button>
+                              </div>
+                          </div>
+                          <div class="price-total">
+                            <span class="price cart__product-ajax-price {CURRENCY_CHAR_CODE}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
+                          </div>
+                        </div> 
+                      </div>
+                      <div class="cart__table-item -delete">
+                        <a class="cart__delete" href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить">
+                          <span class="cart__delete-icon">
+                            <svg class="icon _close"><use xlink:href="#close"></use></svg>
+                          </span>
+                          <span class="cart__delete-title">Удалить</span>
+                        </a>
+                      </div>
+                    </div>
+                  {% ENDFOR %}
+                </div>
+              </div>
+
+              <noscript>
+                <style>
+                  .qty.qty--cart .qty__btn {display:none;}
+                  .qty.qty--cart .qty__input.qty--cart {border: 1px solid #898989;display: inline-block;max-width: 50px;}
+                </style>
+                <!--<input class="button start-order" type="submit" name="next_step" value="Оформить заказ" title="Перейти к оформлению заказа в 4 шага" />            -->
+                <input class="button start-order _calc" type="submit" value="Пересчитать" title="Пересчитать" />
+              </noscript>
+            </div>
+          </form> 
+        </div>
+        
+        <!-- Сюда грузится форма оформления быстрого заказа -->
+        <div id="globalOrder" style="display: none"></div>
+    </div>
+    <div class="cart-info__cart">
+        <div class="cart _fast">
+          <div class="cart__header">
+            <span class="cart__header-title">
+              <svg class="icon _cart"><use xlink:href="#cart"></use></svg>
+              <span class="title-styled">
+                Ваша корзина
+              </span>
+            </span>
+          </div>
+          <ul class="cart-list">
+            {% FOR cart_items %}
+            <li class="cart-list__item">
+              <span class="cart-list__num">{cart_items.index}.</span>
+              <div class="cart-list__content">
+                <span class="cart-list__name">
+                  {cart_items.GOODS_NAME}
+                </span>
+                <span class="price {CURRENCY_CHAR_CODE} cart-list__price">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
+              </div>
+            </li>
+            {% ENDFOR %}
+          </ul>
+          <!-- Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->
+          {% IF TARIFF_FEATURE_DISCOUNT_COUPONS %}
+              <div class="coupon">
+                  <div class="coupon__wrap">
+                      <label class="coupon__label">Введите код купона</label>
+                      <div class="coupon__box input-box">
+                          <input type="text" id="quick_form_coupon_code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="input coupon__input _bordered" placeholder="" />                                
+                          <button type="button" class="coupon__clear" title="Очистить купон"><svg class="icon _close"><use xlink:href="#close"></use></svg></button>
+                          <button type="button" class="button coupon__btn"><svg class="icon _check"><use xlink:href="#check"></use></svg></button>
+                      </div>
+                  </div>
+              </div>
+          {% ENDIF %}
+          <!-- END Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->
+          <div class="cart__sum">
+                  <div class="cart__sum-row cart__sum--order-sum" style="display:none">
+                      <span class="cart__sum-label">Общая сумма заказа:</span>
+                      <span class="cart__sum-text-price"><span class="price {CURRENCY_CHAR_CODE}">{CART_SUM_NOW | money_format}</span></span>
+                  </div>            
+                  <!-- Скидки, действующие на заказ -->
+                  {% IF CART_SUM_DISCOUNT_PERCENT %}
+                    {% FOR cart_discount %}
+                      {% IF cart_discount.DISCOUNT_IS_ENABLED %}          
+                      <div class="cart__sum-row cart__sum--discount">
+                          <span class="cart__sum-label">Скидка(<span class="discount-type">{% IF cart_discount.DISCOUNT_TYPE= sum %}по сумме заказа{% ELSEIF  cart_discount.DISCOUNT_TYPE= cumulative%}накопительная{% ELSE %}по купону{% ENDIF %}</span>):</span>
+                          <span class="cart__sum-text-price" data-discount-value="{cart_discount.END_PRICE}"><span class="price {CURRENCY_CHAR_CODE}">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE} %{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span></span>
+                      </div>
+                      {% ENDIF %}
+                    {% ENDFOR %}
+                  {% ELSE %}
+                  <div class="cart__sum-row cart__sum--discount" style="display:none">
+                      <span class="cart__sum-label">Скидка(<span class="discount-type">{% IF cart_discount.DISCOUNT_TYPE= sum %}по сумме заказа{% ELSEIF  cart_discount.DISCOUNT_TYPE= cumulative%}накопительная{% ELSE %}по купону{% ENDIF %}</span>):</span>
+                      <span class="cart__sum-text-price" data-discount-value="0"></span>
+                  </div>
+                  {% ENDIF %}                
+                  <div class="cart__sum-row cart__sum--delivery-sum" style="display:none">
+                      <span class="cart__sum-label">Доставка:</span>
+                      <span class="cart__sum-text-price"><span class="price {CURRENCY_CHAR_CODE}"><span><span class="num">0</span><span>{CURRENCY_NAME}</span></span></span></span>
+                  </div>
+                  <div class="cart__sum-row cart__sum--total">
+                      <span class="cart__sum-label">Общая сумма заказа:</span>
+                      <span class="cart__sum-text-price">
+                          <span class="price total-sum {CURRENCY_CHAR_CODE}" data-total-sum="{CART_SUM_NOW}">
+                              {% FOR cart_sum %}
+                                  {cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}
+                              {% ENDFOR %}
+                          </span>                            
+                      </span>
+                  </div>               
+              </div>
+          <div class="cart__buttons">
+            <button id="startOrder" class="button cart__button cart__start-order _upppercase">Оформить заказ</button>
+            <button id="startFastOrder" class="button cart__button cart__start-fast-order _reverse _upppercase">Быстрый заказ</button>
+          </div>
+          
+          <div class="cart__confirm-order" id="confirmOrder" >
+            <a onclick="$('#quickform').submit()" class="button cart__button _upppercase">Оформить заказ</a>
+            <div class="politics -quickform">Нажимая на кнопку Оформить заказ, Вы соглашаетесь с <a class="underline" data-fancybox href="#fancybox-politics">правилами обработки данных</a></div>
+          </div>
+        </div>
+        <!-- Очистить корзину -->
+        <a id="cart-clear" class="cart__delete-all" title="Очистить корзину" href="{CART_TRUNCATE_URL}">
+          <span class="cart__delete-all-icon">
+            <svg class="icon _close"><use xlink:href="#close"></use></svg>
+          </span>
+          <span>Очистить корзину</span>
+        </a>
+        <!-- Вернуться к покупке -->
+        <a id="closeOrder" class="cart__return" style="display:none" href="/catalog">
+          <span class="cart__return-icon">
+            <svg class="icon _return-back"><use xlink:href="#return-back"></use></svg>
+          </span>          
+          <span>Вернуться к покупкам</span>
+        </a>
+    </div>
+  </div>
+  {% ENDIF %}
+</div>
+<style>
+.cart-info__wrap {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-align: start;-ms-flex-align: start;align-items: flex-start}
+.cart-info__content {width: calc(100% - 295px);padding-right: 15px}
+@media (max-width:768px) {
+.cart-info__content {width: 100%}
+}
+.cart-info__cart {width: 295px;position: -webkit-sticky;position: sticky;top: 0}
+@media (max-width: 769px){
+  .cart-info__cart {width: 100%;}
+}
+
+.cart-info__cart .cart__return {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center}
+.cart-info__cart .cart__return .cart__return-icon {width: 20px;height: 20px;line-height: 16px;border-radius: 50%;border: 1px solid #cacfd7;text-align: center;margin-right: 10px}
+.cart-info__cart .cart__return .cart__return-icon .icon {width: 8px;height: 8px;fill: #cacfd7}
+.cart-info__cart .cart__return:hover .cart__return-icon .icon {fill: #6053c7}
+.cart-info__cart .cart__return:hover .cart__return-icon {border-color: #6053c7}
+/**/
+.cart-info__cart .cart__delete-all {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;margin-bottom: 13px}
+.cart-info__cart .cart__delete-all .cart__delete-all-icon {width: 20px;height: 20px;line-height: 16px;border-radius: 50%;border: 1px solid #cacfd7;text-align: center;margin-right: 10px}
+.cart-info__cart .cart__delete-all .cart__delete-all-icon .icon {width: 8px;height: 8px;fill: #cacfd7}
+.cart-info__cart .cart__delete-all:hover .cart__delete-all-icon .icon {fill: #6053c7}
+.cart-info__cart .cart__delete-all:hover .cart__delete-all-icon {border-color: #6053c7}
+</style>
+<style>
+.show-password {display: flex;position: absolute;z-index: 1;top: 0;right: 0;height: 100%;padding: 0 15px}
+.show-password .icon {fill: #d5daeb;width: 32px;height: 28px}
+.show-password .icon._active {fill: #6053c7}
+</style>
