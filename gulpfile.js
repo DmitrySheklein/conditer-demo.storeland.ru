@@ -1,27 +1,24 @@
 // VARIABLES & PATHS
 let preprocessor = 'scss', // Preprocessor (sass, scss, less, styl),
 	preprocessorOn = false,
-    fileswatch   = 'html,htm,txt,json,md,woff2', // List of files extensions for watching & hard reload (comma separated)
+    fileswatch   = 'html,htm', // List of files extensions for watching & hard reload (comma separated)
     imageswatch  = 'jpg,jpeg,png,webp,svg', // List of images extensions for watching & compression (comma separated)
     baseDir      = 'files', // Base directory path without «/» at the end
-    online       = true; // If «false» - Browsersync will work offline without internet connection
+    online       = true, // If «false» - Browsersync will work offline without internet connection
+	WAIT_TIME    = 0;  // Время задержки перед обновлением страницы.
 
 let paths = {
 
 	scripts: {
 		src: [
 			// 'node_modules/jquery/dist/jquery.min.js', // npm vendor example (npm i --save-dev jquery)
-			//baseDir + '/js/app.js' // app.js. Always at the end
 			baseDir + '/main.js' // app.js. Always at the end
 		],
 		dest: baseDir + '/js',
 	},
 
 	styles: {
-		// src:  baseDir + '/' + preprocessor + '/main.*',
-		src:  (preprocessorOn) ? baseDir + '/' + preprocessor + '/main.scss' : baseDir + '/main.css',
-		// dest: baseDir + '../css',
-		// dest: baseDir + '/design/',
+		src:  (preprocessorOn) ? baseDir + '/' + preprocessor + '/main.scss' : baseDir + '/main.css',				
 		dest: baseDir + '/',
 	},
 
@@ -104,10 +101,7 @@ function browsersync() {
 
 function scripts() {
 	return src(paths.scripts.src)
-	// .pipe(concat(paths.jsOutputName))
-	// .pipe(uglify())
-	// .pipe(dest(paths.scripts.dest))
-	// .pipe(browserSync.stream())
+	.pipe(wait(WAIT_TIME))
 	.pipe(browserSync.stream())
 }
 
@@ -124,8 +118,7 @@ function styles() {
 		.pipe(browserSync.stream())
 	} else {
 		return src(paths.styles.src)
-		// .pipe(dest(paths.styles.dest))
-		// .pipe(wait(1500))
+		.pipe(wait(WAIT_TIME))
 		.pipe(browserSync.stream())
 	}
 }
@@ -147,97 +140,52 @@ function startwatch() {
 		watch(baseDir  + '/**/*.scss', { delay: 100 }, styles);
 	}
 	watch(baseDir  + '/**/*.css').on('change', function(event){
+		uploadFile(event);
 		if(!preprocessorOn){
 			styles()
-		}
-		uploadFile(event);
+		}		
 	})	
-	watch(baseDir  + '/**/*.{' + imageswatch + '}', images);
+	watch(baseDir  + '/**/*.{' + imageswatch + '}')
+	.on('add', function(event){
+		uploadFile(event)
+	})
+	.on('change', function(event){
+		uploadFile(event)
+	});
 	watch(baseDir  + '/**/*.{' + fileswatch + '}').on('change', function(event){
 		uploadFile(event)
 	});
-	watch([baseDir + '/**/*.js', '!' + paths.scripts.dest + '/*.min.js'], scripts);
-}
-
-function download(done) {
-	let params = new URLSearchParams();
-	params.append('secret_key', SECRET_KEY);
-
-	fetch(`${SITE}/api/v1/site_files/get_list`, {
-		method: 'post',
-		body:    params,
-		timeout: 5000,
-	})
-	.then(res => res.json())
-	.then(json => {
-		if(json.status === `ok`) {
-		  console.log(`Загружен json ✔️`);  
-		  const dir = './download';
-
-		  if (!fs.existsSync(dir)){
-			  fs.mkdirSync(dir);
-		  }
-		
-		  const filesArray = json.data.map((item)=>{
-			  return {
-				file_id: item['file_id']['value'],
-				file_name: item['file_name']['value'],
-			  }
-		  });
-		  
-		  return filesArray;
-
-		} else if (json.status == `error`) {
-		  console.log(`Ошибка загрузки ⛔`);                         
+	watch([baseDir + '/**/*.js']).on('change', function(event){
+		uploadFile(event);
+		if(!preprocessorOn){
+			scripts()
 		}
 	})
-	.then(array =>{
-
-		for (const item of array) {			
-			if(item.file_name.includes('css')){		
-				let params = new URLSearchParams();
-				params.append('secret_key', SECRET_KEY);
-
-				fetch(`${SITE}/api/v1/site_files/get/${item.file_id}`, {
-					method: 'post',
-					body:    params,
-					timeout: 5000,
-				})
-				.then(res => res.json())
-				.then(json => {
-					if(json.status === `ok`) {
-						console.log(json.data)
-						return
-						const binaryData = new Buffer(json.data.file_content, 'base64').toString('binary');
-
-						fs.writeFile(`./download/${item.file_name}`, binaryData, 'binary', function(err) {
-							console.log(err);
-						});	
-					}	
-				})					
-			}
-
-		}
-	})
-
-	done();
 }
+
 function uploadFile(event){
 	let file = event;
-	let fileName = path.basename(file)    
-	let fileContent = fs.readFileSync(`${file}`, "utf8");
+	let fileName = path.basename(file)
+	let fileExt =  path.extname(file);	
 
-	const base64Content = new Promise(resolve => {
-		resolve(base64encode(fileContent));
+	new Promise(resolve => {
+		fs.readFile(`${file}`, {encoding: 'utf8'}, (err, data) =>{
+			if (err) throw err;
+			resolve(base64encode(data));
+		});
+
+		if(imageswatch.includes(fileExt.replace('.',''))){				
+			resolve(Buffer.from(fs.readFileSync(file)).toString('base64'))
+		}
 	})
-	.then((encoded) => {
+	.then((encoded) => {		
 		let params = new URLSearchParams();
 		params.append('secret_key', SECRET_KEY);
 		params.append('form[file_name]', `${fileName}`);
 		params.append('form[file_content]', `${encoded}`);
-		if(fileName.includes('css')){
+		// if(fileName.includes('css')){
 			params.append('form[do_not_receive_file]', `1`);
-		}	
+		// }	
 	
 		fetch(href, {
 			method: 'post',
@@ -245,8 +193,7 @@ function uploadFile(event){
 			timeout: 5000,
 		})
 		.then(res => res.json())
-		.then(json=>{  
-
+		.then(json=>{
 			if(json.status === `ok`){
 				console.log(`[${moment().format("HH:mm:ss")}] Файл ${chalk.red(fileName)} успешно отправлен ✔️`);     
 				if(!fileName.includes('css')){
@@ -258,9 +205,7 @@ function uploadFile(event){
 			}
 		}); 
 	})
-
-	
-
+	.catch(err => console.error(err));
 }
 exports.browsersync = browsersync;
 exports.assets      = series(cleanimg, styles, scripts, images);
@@ -268,5 +213,4 @@ exports.styles      = styles;
 exports.scripts     = scripts;
 exports.images      = images;
 exports.cleanimg    = cleanimg;
-exports.download    = download;
-exports.default     = parallel(checkConfig, images, styles, scripts, browsersync, startwatch);
+exports.default     = parallel(checkConfig, styles, scripts, browsersync, startwatch);
