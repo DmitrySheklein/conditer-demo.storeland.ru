@@ -997,7 +997,7 @@ function addCart() {
               }
             })
             $('.header .cart-header .cart-header__counter .num').html($(data).filter('#newCartCount').html());
-            $('.header .cart-header .cart-header__cart-sum .num').html($(data).filter('#newCartSum').html());
+            $('.header .cart-header .cart-header__cart-sum').html($(data).filter('#newCartSum').html());            
           } else {
             new Noty({
               timeout: "3000",
@@ -2083,7 +2083,7 @@ function goodspage() {
   })
   
   // Сопутствующие | С этим товом смотрят
-  $(".pdt-related .products-grid,  .pdt-related .products-grid").owlCarousel(
+  $(".pdt-related-views .products-grid,  .pdt-related .products-grid").owlCarousel(
   $.extend(OWL_DEFAULT,
   {
     items: 4,
