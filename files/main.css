@@ -2770,10 +2770,22 @@ font-weight: 700;
 /*** Страница Поиск ***/
 .search {display: inline-block;position: relative;vertical-align: middle;width: 100%;height:50px;margin: 0;z-index: 1;}
 .search .search__form {display: inline-block;vertical-align: middle;position: relative;width: 100%;height: 100%;}
-.search .search__form .search__input {font-size: 18px;color: #21293c;width: 100%;height: 100%;max-width: 100%;margin: 0;line-height: 20px;padding-right: 90px;border-radius: 4px;border: none;background: #fafbfd;}
-.search .search__form input::-webkit-input-placeholder {color: #cddada}
-.search .search__form input::-moz-placeholder {color: #cddada}
-.search .search__form input:-ms-input-placeholder {color: #cddada}
+.search .search__form.search__filled {
+  border: 1px solid #f962ad;
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;  
+}
+.search .search__form.search__filled .search__input,
+.search .search__form.search__filled .search__input:hover {
+  border-color: transparent!important;
+}
+.search .search__form.search__filled .search__form-submit  {
+  border-bottom-right-radius: 0;  
+}
+.search .search__form .search__input {font-size: 18px;color: #cbd0d8}
+.search .search__form input::-moz-placeholder {color: #cbd0d8}
+.search .search__form input:-ms-input-placeholder {color: #cbd0d8}
 .search .search__form-reset-btn {
     position: absolute;
     z-index: 1;
