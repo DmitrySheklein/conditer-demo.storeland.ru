@@ -1124,7 +1124,7 @@ function quickOrder(formSelector) {
 			  baseClass: "quickOrder",
 			  afterShow: function(){
           var $btn = $('.button._add-cart._loading').removeClass('_loading');
-          $btn.removeClass('_added').find('span').html('Купить в 1 клик')			
+          $btn.removeClass('_added').find('span').html('Купить <br> в 1 клик')			
 			  }
 			});
 		}

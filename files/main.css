@@ -522,7 +522,9 @@ border: 1px solid #f962ad;
 @media (max-width:576px) {
   #main._index .DescriptionBlock {font-size: 14px;}
 }
-.section {padding: 30px 0}
+.section {padding: 0}
+.section {margin-bottom: 60px;}
+.section._no-margin {margin:0;}
 .section._no-padding {padding:0;}
 .section-title {
     display: inline-block;
@@ -890,7 +892,7 @@ border: 1px solid #f962ad;
   .header-catalog__link:hover {color: #f962ad}
 }
 /*** Слайдер ***/
-.slideshow {position: relative;min-height: 70px;    margin-bottom: 30px;}
+.slideshow {position: relative;min-height: 70px;    margin-bottom: 60px;}
 .slideshow .container {position: relative;}
 .slideshow .slideshow__container {
     border-radius: 4px;
@@ -1475,7 +1477,7 @@ color: #052f38;
 .product .product__bottom {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;height: 65px;position: absolute;top: 100%;left: 0;padding: 0 15px;background: #fff;opacity: 0;visibility: hidden;-webkit-transform: translateY(-15px);transform: translateY(-15px);-webkit-transition: all .3s;transition: all .3s}
 .product .product__bottom-ico {width: 50%;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;font-size: 15px}
 .product .product__bottom-ico._added,.product .product__bottom-ico:hover {color: #6053c7}
-.product .product__bottom-ico .icon {width: 20px;fill: #cfd5e9;margin-right: 11px}
+.product .product__bottom-ico .icon {width: 20px;fill: #cfd5e9;margin-right: 11px;flex-shrink: 0;}
 .product .product__bottom-ico._added .icon,.product .product__bottom-ico:hover .icon {fill: #6053c7}
 .product .product__bottom-ico._add-cart {text-transform: none;background: 0 0;color: #052f38;font-size: 15px;line-height: 1;padding: 0;margin: 0;text-align: left;}
 

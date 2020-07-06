@@ -58,8 +58,8 @@ const path = require('path');
 const chalk = require('chalk');
 const moment = require('moment'); // require
 const notifier = require('node-notifier');
-const uuidv4 = require('uuid/v4'); // <== NOW DEPRECATED!
-uuidv4();
+// const uuidv4 = require('uuid/v4'); // <== NOW DEPRECATED!
+// uuidv4();
 
 const {SECRET_KEY, SITE} = require('./storeland-uploader-config.json');
 
