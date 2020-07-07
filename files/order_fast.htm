@@ -406,3 +406,14 @@
     <!--{print_r}-->
   </div>
 </div>
+
+<div id="cart-message" data-message-type="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}">
+  {% IF FORM_NOTICE %}{FORM_NOTICE}{% ENDIF %}
+</div>
+<!-- Блок для обновления данных корзины. Не виден пользователю -->
+<div style="display:none;" id="newCartCount">
+  {CART_COUNT_TOTAL}
+</div>
+<div style="display:none;" id="newCartSum">
+  {CART_SUM_NOW | money_format}
+</div>

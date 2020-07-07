@@ -2,10 +2,11 @@
   {% IF FORM_NOTICE %}<div class="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>{% ENDIF %}
   {% IF index_page %}
   <!-- Заголовок страницы -->
-  <h1 id="page-title" class="page-title">{PAGE_NAME}</h1>
-  <script>
-    document.querySelector("#page-title").classList.add('section-title')
-  </script>
+  <h1 id="page-title" class="page-title section-title">
+    <span class="section-title__word">
+      {PAGE_NAME}
+    </span>
+  </h1>  
   <!-- /END Заголовок страницы --> 
   {% ENDIF %}  
   <div class="htmlDataBlock">

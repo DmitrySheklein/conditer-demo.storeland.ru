@@ -138,7 +138,7 @@
 
             <div class="header-actions">
               <!-- Логин -->
-              <div class="login-header {% IF CLIENT_IS_LOGIN %}_isLogin{% ENDIF %}">
+              <div class="login-header header-actions__login {% IF CLIENT_IS_LOGIN %}_isLogin{% ENDIF %}" >
                 <div class="login-header__menu">
                   <div class="login-header__body">
                     <div class="login-header__icon-wrap icon-wrap">
@@ -269,9 +269,7 @@
                       <input required type="text" name="q" value="{SEARCH_QUERY}" class="input search__input" placeholder="Поиск по каталогу" autocomplete="off">
                       
                       <button type="reset" title="Очистить" class="search__form-reset-btn">
-                        <span class="search__form-icon">
-                          
-                        </span>
+                        <svg class="icon"><use xlink:href="#close"></use></svg>
                       </button>
                       <button type="submit" title="Искать" class="search__form-submit">
                           <svg class="search__form-submit-icon" xmlns="http://www.w3.org/2000/svg" width="310.42" height="310.42" viewBox="0 0 310.42 310.42"><path d="M273.587 214.965c49.11-49.111 49.109-129.021 0-178.132-49.111-49.111-129.02-49.111-178.13 0C53.793 78.497 47.483 140.462 76.51 188.85c0 0 2.085 3.498-.731 6.312l-64.263 64.263c-12.791 12.79-15.836 30.675-4.493 42.02l1.953 1.951c11.343 11.345 29.229 8.301 42.019-4.49l64.128-64.128c2.951-2.951 6.448-.866 6.448-.866 48.387 29.026 110.352 22.717 152.016-18.947zM118.711 191.71c-36.288-36.288-36.287-95.332.001-131.62 36.288-36.287 95.332-36.288 131.619 0 36.288 36.287 36.288 95.332 0 131.62-36.288 36.286-95.331 36.286-131.62 0z"/><path d="M126.75 118.424c-1.689 0-3.406-.332-5.061-1.031-6.611-2.798-9.704-10.426-6.906-17.038 17.586-41.559 65.703-61.062 107.261-43.476 6.611 2.798 9.704 10.426 6.906 17.038-2.799 6.612-10.425 9.703-17.039 6.906-28.354-11.998-61.186 1.309-73.183 29.663-2.099 4.959-6.913 7.938-11.978 7.938z"/></svg>
@@ -533,7 +531,11 @@
       {% IFNOT index_page_favorites_goods_empty %}
       <section class="section _no-padding pdt-favorites products-container">
         <div class="container">
-          <h2 class="section-title">Бестселлеры</h2>
+          <h2 class="section-title">
+            <span class="section-title__word">
+              Бестселлеры
+            </span>
+          </h2>
           <div class="products-grid owl-carousel">
             {% FOR index_page_favorites_goods %}
             <div class="product _carousel {% IF index_page_favorites_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_empty{% ENDIF %}">
@@ -1167,7 +1169,11 @@
       {% IFNOT index_page_sale_goods_empty %}
       <section class="section _no-padding pdt-sale products-container">
         <div class="container">
-          <h2 class="section-title">Распродажа</h2>
+          <h2 class="section-title">
+            <span class="section-title__word">
+              Распродажа
+            </span>
+          </h2>
           <div class="products-grid owl-carousel">
                 {% FOR index_page_sale_goods %}
                 <div class="product _carousel {% IF index_page_sale_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_empty{% ENDIF %}">
@@ -1481,7 +1487,7 @@
               <div class="our-features-list__item-wrap">
                 <div class="our-features-list__content">
                     <div class="our-features-list__image-wrap">
-                      <img class="our-features-list__image lozad" src="{ASSETS_IMAGES_PATH}no-photo-icon.png" data-src="/design/features-discount.svg" alt="Скидочная карта">
+                      <img class="our-features-list__image _1 lozad" src="{ASSETS_IMAGES_PATH}no-photo-icon.png" data-src="/design/features-discount.svg" alt="Скидочная карта">
                     </div>
                     <span class="our-features-list__label">Скидочная карта</span>
                     <p class="our-features-list__text">
@@ -1498,7 +1504,7 @@
               <div class="our-features-list__item-wrap">
                 <div class="our-features-list__content">
                     <div class="our-features-list__image-wrap">
-                      <img class="our-features-list__image lozad" src="{ASSETS_IMAGES_PATH}no-photo-icon.png" data-src="/design/features-brands.svg" alt="Популярные бренды">
+                      <img class="our-features-list__image _2 lozad" src="{ASSETS_IMAGES_PATH}no-photo-icon.png" data-src="/design/features-brands.svg" alt="Популярные бренды">
                     </div>
                     <span class="our-features-list__label">Популярные бренды</span>
                     <p class="our-features-list__text">
@@ -1516,7 +1522,7 @@
               <div class="our-features-list__item-wrap">
                 <div class="our-features-list__content">
                     <div class="our-features-list__image-wrap">
-                      <img class="our-features-list__image lozad" src="{ASSETS_IMAGES_PATH}no-photo-icon.png" data-src="/design/features-speed.svg" alt="Скорость оформления">
+                      <img class="our-features-list__image _3 lozad" src="{ASSETS_IMAGES_PATH}no-photo-icon.png" data-src="/design/features-speed.svg" alt="Скорость оформления">
                     </div>
                     <span class="our-features-list__label">Скорость оформления</span>
                     <p class="our-features-list__text">
@@ -1533,7 +1539,7 @@
               <div class="our-features-list__item-wrap">
                 <div class="our-features-list__content">
                     <div class="our-features-list__image-wrap">
-                      <img class="our-features-list__image lozad" src="{ASSETS_IMAGES_PATH}no-photo-icon.png" data-src="/design/features-price.svg" alt="Низкие цены">
+                      <img class="our-features-list__image _4 lozad" src="{ASSETS_IMAGES_PATH}no-photo-icon.png" data-src="/design/features-price.svg" alt="Низкие цены">
                     </div>
                     <span class="our-features-list__label">Низкие цены</span>
                     <p class="our-features-list__text">
@@ -2283,7 +2289,11 @@
       <section id="news" class="news section">
         <div class="container">
              <!-- Все новости-->
-              <h2 class="section-title">Новости</h2>
+              <h2 class="section-title">
+                <span class="section-title__word">
+                  Новости
+                </span>
+              </h2>
               <div class="news__list owl-carousel">
                 <!--  Если есть список из любых новостей и если в тарифном плане подключен модуль новостей -->
                 {% IFNOT news_list_all_empty %}
@@ -2378,7 +2388,11 @@
         <div class="offer__content lozad" data-background-image="{ASSETS_IMAGES_PATH}offer-bg.png">
           <div class="offer__wrap">
           <p class="offer__top-title">Нужен совет? Не нашли, что искали?</p>
-          <h3 class="offer__title title-styled">Мы поможем</h3>
+          <h3 class="offer__title section-title">
+            <span class="section-title__word">
+              Мы поможем
+            </span>
+          </h3>
           <p class="offer__sub-title">Оставьте телефон и мы свяжемся с Вами в течение 5 минут</p>
           
           <form method="post" action="{CALLBACK_URL}" class="offer-form" enctype="multipart/form-data">

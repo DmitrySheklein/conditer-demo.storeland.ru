@@ -688,10 +688,12 @@ function mainFunctions() {
     
   })
   // Добавление товара в корзину
-  $(document).on('click', '.button._add-cart:not(.quickview)', function() {
+  $(document).on('click', '.button._add-cart:not(.quickview):not()', function() {
     var $btn  = $(this);
     $btn.addClass('_loading')
-    $btn.find('span').html('<span class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>')
+    if(!$btn.hasClass('_quick')) {
+      $btn.find('span').html('<span class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>')
+    }
     
     var form = $(this).closest('form');
     if ($(this).hasClass('_quick')) {
@@ -1120,11 +1122,19 @@ function quickOrder(formSelector) {
 		url		  : formBlock.attr('action'),
 		data		: formData,
 		success: function(data) {
+      $.fancybox.close();
+      
 			$.fancybox.open(data,{
 			  baseClass: "quickOrder",
 			  afterShow: function(){
           var $btn = $('.button._add-cart._loading').removeClass('_loading');
-          $btn.removeClass('_added').find('span').html('Купить <br> в 1 клик')			
+          $btn.removeClass('_added')
+          if(!$btn.hasClass('_product-view-quick')){
+            $btn.find('span').html('Купить <br> в 1 клик');
+          }
+          $('.quickform__buttons').show();
+          $('.header .cart-header .cart-header__counter .num').html($(data).filter('#newCartCount').html());
+          $('.header .cart-header .cart-header__cart-sum').html($(data).filter('#newCartSum').html());             
 			  }
 			});
 		}
@@ -2249,14 +2259,14 @@ function goodsMods(){
 function goodsImage() {
   // Изображения товара
   $(function(){
-     $('.main-image').slick({
+     $('.main-image').not('.slick-initialized').slick({
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
       fade: true,
       asNavFor: '.image-list'
     });
-    $('.image-list').slick({
+    $('.image-list').not('.slick-initialized').slick({
       slidesToShow: 3,
       slidesToScroll: 1,
       asNavFor: '.main-image',
@@ -2267,7 +2277,7 @@ function goodsImage() {
       centerMode: false,
       focusOnSelect: true,
       infinite: false
-    });    
+    });
   })
 }
 // Инициализация табов на странице товара
