@@ -44,7 +44,7 @@
                   data-action-add-title="Добавить &laquo;{GOODS_NAME}&raquo; в избранное"
                   data-action-delete-title="Убрать &laquo;{GOODS_NAME}&raquo; из избранного"
                   data-prodname="{GOODS_NAME}"
-                  data-prodimage="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}"
+                  data-prodimage="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}"
                   data-produrl="{GOODS_URL}"
                   data-id="{GOODS_ID}"
                   data-mod-id="{GOODS_MOD_ID}" 
@@ -86,7 +86,7 @@
                     data-action-add-title="Добавить &laquo;{goods.NAME}&raquo; в список сравнения с другими товарами"
                     data-action-delete-title="Убрать &laquo;{goods.NAME}&raquo; из списка сравнения с другими товарами"
                     data-prodname="{GOODS_NAME}"
-                    data-prodimage="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}"
+                    data-prodimage="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}"
                     data-produrl="{GOODS_URL}"
                     data-id="{GOODS_ID}"
                     data-mod-id="{GOODS_MOD_ID}"
@@ -630,7 +630,7 @@
               </div>
               <a href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" class="product__image-link">
                 {% IF related_goods.IMAGE_EMPTY %}
-                  <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=techno" alt="{related_goods.NAME}" title="{related_goods.NAME}"  itemprop="image">
+                  <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=conditer" alt="{related_goods.NAME}" title="{related_goods.NAME}"  itemprop="image">
                 {% ELSE %}
                   <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{related_goods.IMAGE_MEDIUM}" alt="{related_goods.NAME}" title="{related_goods.NAME}"  itemprop="image">
                 {% ENDIF %}
@@ -684,7 +684,7 @@
                           data-action-add-title="Добавить &laquo;{related_goods.NAME}&raquo; в избранное"
                           data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
                           data-prodname="{related_goods.NAME}"
-                          data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                          data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
                           data-produrl="{related_goods.URL}"
                           data-id="{related_goods.ID}"
                           data-mod-id="{related_goods.MIN_PRICE_NOW_ID}" 
@@ -726,7 +726,7 @@
                             data-action-add-title="Добавить &laquo;{related_goods.NAME}&raquo; в список сравнения с другими товарами"
                             data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из списка сравнения с другими товарами"
                             data-prodname="{related_goods.NAME}"
-                            data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                            data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
                             data-produrl="{related_goods.URL}"
                             data-id="{related_goods.ID}"
                             data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
@@ -783,7 +783,7 @@
                   data-action-add-title="Добавить &laquo;{related_goods.NAME}&raquo; в избранное"
                   data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из избранного"
                   data-prodname="{related_goods.NAME}"
-                  data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                  data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
                   data-produrl="{related_goods.URL}"
                   data-id="{related_goods.ID}"
                   data-mod-id="{related_goods.MIN_PRICE_NOW_ID}" 
@@ -825,7 +825,7 @@
                     data-action-add-title="Добавить &laquo;{related_goods.NAME}&raquo; в список сравнения с другими товарами"
                     data-action-delete-title="Убрать &laquo;{related_goods.NAME}&raquo; из списка сравнения с другими товарами"
                     data-prodname="{related_goods.NAME}"
-                    data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                    data-prodimage="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}"
                     data-produrl="{related_goods.URL}"
                     data-id="{related_goods.ID}"
                     data-mod-id="{related_goods.MIN_PRICE_NOW_ID}"
@@ -938,7 +938,7 @@
               </div>
               <a href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}" class="product__image-link">
                 {% IF related_views_goods.IMAGE_EMPTY %}
-                  <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=techno" alt="{related_views_goods.NAME}" title="{related_views_goods.NAME}"  itemprop="image">
+                  <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{ASSETS_IMAGES_PATH}no-photo-medium.png?design=conditer" alt="{related_views_goods.NAME}" title="{related_views_goods.NAME}"  itemprop="image">
                 {% ELSE %}
                   <img class="lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{related_views_goods.IMAGE_MEDIUM}" alt="{related_views_goods.NAME}" title="{related_views_goods.NAME}"  itemprop="image">
                 {% ENDIF %}
@@ -992,7 +992,7 @@
                           data-action-add-title="Добавить &laquo;{related_views_goods.NAME}&raquo; в избранное"
                           data-action-delete-title="Убрать &laquo;{related_views_goods.NAME}&raquo; из избранного"
                           data-prodname="{related_views_goods.NAME}"
-                          data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                          data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
                           data-produrl="{related_views_goods.URL}"
                           data-id="{related_views_goods.ID}"
                           data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}" 
@@ -1034,7 +1034,7 @@
                             data-action-add-title="Добавить &laquo;{related_views_goods.NAME}&raquo; в список сравнения с другими товарами"
                             data-action-delete-title="Убрать &laquo;{related_views_goods.NAME}&raquo; из списка сравнения с другими товарами"
                             data-prodname="{related_views_goods.NAME}"
-                            data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                            data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
                             data-produrl="{related_views_goods.URL}"
                             data-id="{related_views_goods.ID}"
                             data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}"
@@ -1091,7 +1091,7 @@
                   data-action-add-title="Добавить &laquo;{related_views_goods.NAME}&raquo; в избранное"
                   data-action-delete-title="Убрать &laquo;{related_views_goods.NAME}&raquo; из избранного"
                   data-prodname="{related_views_goods.NAME}"
-                  data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                  data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
                   data-produrl="{related_views_goods.URL}"
                   data-id="{related_views_goods.ID}"
                   data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}" 
@@ -1133,7 +1133,7 @@
                     data-action-add-title="Добавить &laquo;{related_views_goods.NAME}&raquo; в список сравнения с другими товарами"
                     data-action-delete-title="Убрать &laquo;{related_views_goods.NAME}&raquo; из списка сравнения с другими товарами"
                     data-prodname="{related_views_goods.NAME}"
-                    data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=techno{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
+                    data-prodimage="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}"
                     data-produrl="{related_views_goods.URL}"
                     data-id="{related_views_goods.ID}"
                     data-mod-id="{related_views_goods.MIN_PRICE_NOW_ID}"
