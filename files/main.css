@@ -344,7 +344,7 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
 .caps-lock .fa-warning {font-size: 30px;color: #cc003d;}
 
 /*** Кнопки ***/
-.button {display: inline-block;vertical-align: middle;height: 35px;overflow: visible;font-size: 16px;font-weight: 400;font-family: 'Gilroy', sans-serif;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-shadow: none;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;-webkit-appearance: none;user-select: none;/* text-transform: uppercase; */border-radius: 5px;}.button {position: relative;display: inline-block;vertical-align: middle;height: 35px;overflow: visible;font-size: 16px;font-weight: 400;font-family: 'Gilroy', sans-serif;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-shadow: none;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;-webkit-appearance: none;user-select: none;/* text-transform: uppercase; */border-radius: 5px;}.button {display: inline-block;vertical-align: middle;height: 35px;overflow: visible;font-size: 16px;font-weight: 400;font-family: 'Gilroy', sans-serif;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-shadow: none;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;-webkit-appearance: none;user-select: none;/* text-transform: uppercase; */border-radius: 5px;}.button {display: inline-block;height: 35px;overflow: visible;font-size: 16px;font-weight: 400;font-family: 'Gilroy', sans-serif;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-shadow: none;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;-webkit-appearance: none;user-select: none;/* text-transform: uppercase; */border-radius: 5px;}
+.button {position: relative;display: inline-block;vertical-align: middle;height: 35px;overflow: visible;font-size: 16px;font-weight: 400;font-family: 'Gilroy', sans-serif;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-shadow: none;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;-webkit-appearance: none;user-select: none;/* text-transform: uppercase; */border-radius: 5px;}.button {position: relative;display: inline-block;vertical-align: middle;height: 35px;overflow: visible;font-size: 16px;font-weight: 400;font-family: 'Gilroy', sans-serif;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-shadow: none;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;-webkit-appearance: none;user-select: none;/* text-transform: uppercase; */border-radius: 5px;}.button {display: inline-block;vertical-align: middle;height: 35px;overflow: visible;font-size: 16px;font-weight: 400;font-family: 'Gilroy', sans-serif;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-shadow: none;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;-webkit-appearance: none;user-select: none;/* text-transform: uppercase; */border-radius: 5px;}.button {display: inline-block;height: 35px;overflow: visible;font-size: 16px;font-weight: 400;font-family: 'Gilroy', sans-serif;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-shadow: none;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;-webkit-appearance: none;user-select: none;/* text-transform: uppercase; */border-radius: 5px;}
 .button:hover, .button._added, .button:focus {color: #fff;background-color: #6053c7;}
 
 .button._darkText {color: #052f38;}
@@ -1487,6 +1487,9 @@ color: #052f38;
 .product .product__ico {display: block;width: 170px;margin: 0;padding: 15px;font-size: 15px;line-height: 1;color: #fff;border-radius: 5px;z-index: 1;-webkit-transition: .1s all;transition: .1s all;background-color: rgba(10,7,5,.6)}
 .product .product__ico._added,.product .product__ico:hover {text-decoration: underline;}
 .product .product__ico._add-compare,.product .product__ico._add-wishlist {display: none}
+.product .product__ico.quickview {
+  height: 45px;
+}
 .product .product__shop {position: static;padding: 15px 0;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column}
 .product .product__shop .product__name {margin-bottom: 15px;display: -webkit-box;display: -ms-flexbox;display: flex}
 .product .product__shop .product__name a {display: block;overflow: hidden;color: #052f38;font-size: 18px;font-weight: 400;line-height: 22px;text-align: left;margin: 0}
@@ -3062,12 +3065,12 @@ font-weight: 700;
 @keyframes load8 {0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
 
 .lds-ellipsis {display: inline-block;position: relative;width: 80px;height: 35px}
-.products-container .lds-ellipsis {
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 1%;
-    transform: translateX(-50%);
+.lds-ellipsis {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
 }
 .lds-ellipsis span {position: absolute;top: 13px;width: 10px;height: 10px;border-radius: 50%;background: #fff;-webkit-animation-timing-function: cubic-bezier(0,1,1,0);animation-timing-function: cubic-bezier(0,1,1,0)}
 .lds-ellipsis.pink span {background: #f962ad;}

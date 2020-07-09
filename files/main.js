@@ -993,6 +993,7 @@ function addCart() {
           // Если товар добавлен
           if(type === 'success'){
             // $btn.addClass('_added').find('span').html('<i class="fal fa-check-circle"></i>');
+            $.fancybox.close()
             $.fancybox.open(data,{
               afterShow: function(){
                 addTo()                
@@ -1877,66 +1878,46 @@ $(function(){
 // Действие при нажатии на кнопку быстрого просмотра.  
 $(function(){
   $(document).on('click', 'a.quickview', function() {
-    var href = $(this).attr('href');
+    var $link = $(this);
+    $link.find('span').html('<span class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>')
+    var href = $(this).attr('href');    
     href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
     
-    quickViewShow(href);
+    quickViewShow(href, $link);
     return false;
   });
 });
 // Быстрый просмотр товара
-function quickViewShow(href, atempt) {
-  // Если данные по быстрому просмотру уже подгружены
-  if(typeof(document.quickviewPreload[href]) != 'undefined') {
-    // Если мы в режиме загрузки страницы и ждём результата от другой функции, то тоже подождём, когда тот контент загрузится и будет доступен в этом массиве.
-    if(1 == document.quickviewPreload[href]) {
-      // Если попытки ещё не указывались, ставим 0 - первая попытка
-      if(typeof(atempt) == 'undefined') {
-        atempt = 0;
-        // console.log("typeof(atempt) == 'undefined'", atempt)
-      // Иначе прибавляем счётчик попыток
-      } else {
-        atempt += 1;
-        // Если больше 500 попыток, то уже прошло 25 секунд и похоже, что быстрый просмотр не подгрузится, отменяем информацию о том, что контент загружен
-        if(atempt > 500) {
-          delete document.quickviewPreload[href];
-          // TODO сделать вывод красивой таблички
-          alert('Не удалось загрузить страницу товара. Пожалуйста, повторите попытку позже.');
-          return true;
-        }
-      }
-      // Запустим функцию быстрого просмотра через 5 сотых секунды, вероятно запрошендная страница товара уже подгрузится. 
-      setTimeout('quickViewShow("' + href + '", '+ atempt +')', 50);
-      
-      return true;
-    } else {
-      $.fancybox.close();
-      fancyboxShow(document.quickviewPreload[href])
-    }
-  } else {
+function quickViewShow(href, $link) {
     $.get(href, function(content) {
       $.fancybox.close();
       fancyboxShow($(content).getColumnContent())
-    });
-  }
-  function fancyboxShow(content){
-      $.fancybox.open(content, {
-        baseClass: 'quickView',
-        beforeShow: function(){
-          goodsImage()          
-        },
-        afterShow: function() {
-          goodsImage();
-          goodsMods();
-          addCart();
-          quantity();
-          initTabs();
-          goodspage();
-          lozad().observe();
-          $('.products-grid._related_goods, .products-grid._related_views').find(".mouseHoverImgCarousel").HoverMouseCarousel();
-        }        
-      })    
-  }
+    })
+    .fail(function() {
+      alert("Не удалось загрузить быстрый просмотр");
+    })
+    .always(function(){
+      $link.find('span').html('Быстрый просмотр')
+    })
+    function fancyboxShow(content){
+        $.fancybox.open(content, {
+          baseClass: 'quickView',
+          beforeShow: function(){
+            goodsImage()          
+          },
+          afterShow: function() {
+            goodsImage();
+            goodsMods();
+            addCart();
+            quantity();
+            initTabs();
+            goodspage();
+            addTo();
+            lozad().observe();
+            $('.products-grid._related_goods, .products-grid._related_views').find(".mouseHoverImgCarousel").HoverMouseCarousel();
+          }        
+        })    
+    }
 }
 
 // Функция + - для товаров
@@ -1996,8 +1977,8 @@ function calcDiscount(){
 }
 /* Скрипты для карточки товара */
 function goodspage() {
-  // Модификация селектов
-  $('.product-modifications select').styler();
+  // Модификация селектов  
+  $('.product-modifications select[id^="select-mod"]').styler();  
   // Валидация отзывов
   $('.goods-opinion-form').validate();
 
