@@ -1832,16 +1832,14 @@ function coupons() {
   })
 })*/
 
+// Получение центральной разметки страницы (для быстрого просмотра)
+$.fn.getColumnContent = function() {
+  var $block = ($(this).length && $(this).hasClass('product-wrap') ? $(this).filter('.product-wrap') : $('div.product-wrap:eq(0)'));
+  $block.find('.fancybox-close-small').show();
+  return $block;
+}
 // Функция Быстрого просмотра товара
 function quickView() {
-// Получение центральной разметки страницы (для быстрого просмотра)
-$(function(){
-  $.fn.getColumnContent = function() {
-    var $block = ($(this).length && $(this).hasClass('product-wrap') ? $(this).filter('.product-wrap') : $('div.product-wrap:eq(0)'));
-    $block.find('.fancybox-close-small').show();
-    return $block;
-  }
-});
 
 // Быстрый просмотр товара
 $(function(){
@@ -1918,6 +1916,44 @@ function quickViewShow(href, $link) {
           }        
         })    
     }
+}
+// Функция Быстрого просмотра товара c модификацией
+function quickViewMod() {
+  // Действие при нажатии на кнопку в корзину товара c модификацией
+  $(document).ready(function() {
+    $(document).on('click', 'a._quickviewmod', function() {
+      var href = $(this).attr('href');
+      href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
+      quickViewShowMod(href);
+      return false;
+    });
+  });
+}
+// Быстрый просмотр товара с модификацией
+function quickViewShowMod(href) {
+  $.get(href, function(content) {
+    $.fancybox.close();
+    fancyboxShow($(content).find('.product-view__order-wrap'))
+  })
+  .fail(function() {
+    alert("Не удалось загрузить выбор модификаций");
+  })
+  .always(function(){
+    
+  })
+  function fancyboxShow(content){
+      $.fancybox.open(content, {
+        baseClass: 'quickViewMod product-view',
+        beforeShow: function(){
+        },
+        afterShow: function() {
+          goodspage();      
+          goodsMods();
+          addCart();
+          quantity();
+        }        
+      })    
+  }
 }
 
 // Функция + - для товаров
@@ -2677,6 +2713,7 @@ $(function(){
   addCart();
   quantity();
   quickView();
+  quickViewMod();
   // Запуск Избранное & Сравнение
   addTo();
 });

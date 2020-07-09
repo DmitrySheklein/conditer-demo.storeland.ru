@@ -724,7 +724,11 @@
                             <!-- /END Сравнение -->                                    
                         </div>
                         <!-- Добавление товара в корзину -->
+                        {% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}
+                          <a class="button _quickviewmod" title="В корзину" rel="nofollow" href="{index_page_favorites_goods.URL_MIN_PRICE_NOW}"><span>В корзину</span></a>
+                        {% ELSE %}
                           <a class="button _add-cart {% IF index_page_favorites_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_favorites_goods.MIN_PRICE_NOW_ID}"><span>В корзину</span></a>
+                        {% ENDIF %}
                         <!-- /END Добавление товара в корзину -->
                       </div>
                     </div>
@@ -935,11 +939,19 @@
                                   </div>
                                   <div class="product__action-buttons">
                                     <!-- Добавление товара в корзину -->
-                                      <a class="button _add-cart {% IF recently_viewed_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={recently_viewed_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={recently_viewed_goods.MIN_PRICE_NOW_ID}">
-                                        <svg class="icon _cart">
-                                          <use xlink:href="#cart"></use>
-                                        </svg>
-                                      </a>
+                                    {% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}
+                                    <a class="button _quickviewmod" title="В корзину" rel="nofollow" href="{recently_viewed_goods.URL_MIN_PRICE_NOW}">
+                                      <svg class="icon _cart">
+                                        <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>                                                          
+                                    {% ELSE %}
+                                    <a class="button _add-cart {% IF recently_viewed_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={recently_viewed_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={recently_viewed_goods.MIN_PRICE_NOW_ID}">
+                                      <svg class="icon _cart">
+                                        <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    {% ENDIF %}
                                     <!-- /END Добавление товара в корзину -->
                                   </div>
                                 </div>
@@ -1067,13 +1079,21 @@
                                   <span class="price _center {CURRENCY_CHAR_CODE}" itemprop="price" content="{favorites_goods.MIN_PRICE_NOW}">{% IF favorites_goods.COUNT_MODIFICATION > 1 %}<small class="price-mods-prefix">от</small>{% ENDIF %}{favorites_goods.MIN_PRICE_NOW | money_format}</span>
                                 </div>
                                 <div class="product__action-buttons">
-                                  <!-- Добавление товара в корзину -->
+                                    <!-- Добавление товара в корзину -->
+                                    {% IF favorites_goods.COUNT_MODIFICATION > 1 %}
+                                    <a class="button _quickviewmod" title="В корзину" rel="nofollow" href="{favorites_goods.URL_MIN_PRICE_NOW}">
+                                      <svg class="icon _cart">
+                                        <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>                                                          
+                                    {% ELSE %}
                                     <a class="button _add-cart {% IF favorites_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={favorites_goods.MIN_PRICE_NOW_ID}">
                                       <svg class="icon _cart">
                                         <use xlink:href="#cart"></use>
                                       </svg>
                                     </a>
-                                  <!-- /END Добавление товара в корзину -->
+                                    {% ENDIF %}
+                                    <!-- /END Добавление товара в корзину -->
                                 </div>
                               </div>
                             </div>
@@ -1122,13 +1142,21 @@
                                 <span class="price _center {CURRENCY_CHAR_CODE}" itemprop="price" content="{compare_goods.MIN_PRICE_NOW}">{% IF compare_goods.COUNT_MODIFICATION > 1 %}<small class="price-mods-prefix">от</small>{% ENDIF %}{compare_goods.MIN_PRICE_NOW | money_format}</span>
                               </div>
                               <div class="product__action-buttons">
-                                <!-- Добавление товара в корзину -->
-                                  <a class="button _add-cart {% IF compare_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={compare_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={compare_goods.MIN_PRICE_NOW_ID}">
-                                    <svg class="icon _cart">
-                                      <use xlink:href="#cart"></use>
-                                    </svg>
-                                  </a>
-                                <!-- /END Добавление товара в корзину -->
+                                    <!-- Добавление товара в корзину -->
+                                    {% IF compare_goods.COUNT_MODIFICATION > 1 %}
+                                    <a class="button _quickviewmod" title="В корзину" rel="nofollow" href="{compare_goods.URL_MIN_PRICE_NOW}">
+                                      <svg class="icon _cart">
+                                        <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>                                                          
+                                    {% ELSE %}
+                                    <a class="button _add-cart {% IF compare_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={compare_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={compare_goods.MIN_PRICE_NOW_ID}">
+                                      <svg class="icon _cart">
+                                        <use xlink:href="#cart"></use>
+                                      </svg>
+                                    </a>
+                                    {% ENDIF %}
+                                    <!-- /END Добавление товара в корзину -->
                               </div>
                             </div>
                           </div>
@@ -1362,7 +1390,11 @@
                                 <!-- /END Сравнение -->                                    
                             </div>
                             <!-- Добавление товара в корзину -->
+                            {% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}
+                              <a class="button _quickviewmod" title="В корзину" rel="nofollow" href="{index_page_sale_goods.URL_MIN_PRICE_NOW}"><span>В корзину</span></a>
+                            {% ELSE %}
                               <a class="button _add-cart {% IF index_page_sale_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}"><span>В корзину</span></a>
+                            {% ENDIF %}
                             <!-- /END Добавление товара в корзину -->
                           </div>
                         </div>
@@ -1768,7 +1800,11 @@
                                 <!-- /END Сравнение -->                                    
                             </div>
                             <!-- Добавление товара в корзину -->
+                            {% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}
+                              <a class="button _quickviewmod" title="В корзину" rel="nofollow" href="{index_page_new_goods.URL_MIN_PRICE_NOW}"><span>В корзину</span></a>
+                            {% ELSE %}
                               <a class="button _add-cart {% IF index_page_new_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_new_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_new_goods.MIN_PRICE_NOW_ID}"><span>В корзину</span></a>
+                            {% ENDIF %}
                             <!-- /END Добавление товара в корзину -->
                           </div>
                         </div>
@@ -2161,7 +2197,11 @@
                                 <!-- /END Сравнение -->                                    
                             </div>
                             <!-- Добавление товара в корзину -->
+                            {% IF index_page_goods.COUNT_MODIFICATION > 1 %}
+                              <a class="button _quickviewmod" title="В корзину" rel="nofollow" href="{index_page_goods.URL_MIN_PRICE_NOW}"><span>В корзину</span></a>
+                            {% ELSE %}
                               <a class="button _add-cart {% IF index_page_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_disabled{% ENDIF %}" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"><span>В корзину</span></a>
+                            {% ENDIF %}
                             <!-- /END Добавление товара в корзину -->
                           </div>
                         </div>
