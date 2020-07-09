@@ -19,7 +19,10 @@
         </div>
         <div class="cart-ajax__product-info">
           <h4 class="cart-ajax__product-name">{cart_items.GOODS_NAME}</h4>
-          <div class="cart-ajax__product-action">
+          {% IFNOT cart_items.distinctive_properties_empty %}<div class="cart-ajax__product-properties">{% FOR distinctive_properties %}{cart_items.distinctive_properties.NAME}: {cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %},<br> {% ENDIF %}{% ENDFOR %}</div>{% ENDIF %}
+          <form class="cart-ajax__product-action" id="cart-ajax-form">
+            <input type="hidden" name="hash" value="{HASH}" />
+
             <div class="qty cart-ajax__product-qty">
                 <div class="qty__wrap">
                   <button class="qty__btn qty__btn--minus" title="Уменьшить">
@@ -27,7 +30,7 @@
                       <use xlink:href="#minus-icon"></use>
                     </svg>
                   </button>
-                  <input type="number" pattern="\d*" name="form[goods_mod_quantity]" max="4" value="{cart_items.ORDER_LINE_QUANTITY}" min="1" title="Количество" class="input qty__input" onkeypress="return keyPress(this, event);"  autocomplete="off">
+                  <input type="number" pattern="\d*" name="form[quantity][{FORM_GOODS_MOD_ID}]" data-goods-mod-id="{FORM_GOODS_MOD_ID}" max="4" value="{cart_items.ORDER_LINE_QUANTITY}" min="1" title="Количество" class="input qty__input cart-ajax-input-qty" onkeypress="return keyPress(this, event);"  autocomplete="off">
                   <button class="qty__btn qty__btn--plus" title="Увеличить">
                     <svg class="icon">
                       <use xlink:href="#plus-icon"></use>
@@ -35,10 +38,8 @@
                   </button>
                 </div>
             </div>
-            <div class="cart-ajax__product-price">
-              <span class="price cart-ajax__product-price {CURRENCY_CHAR_CODE}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span> 
-            </div>
-          </div>
+            <span class="price cart-ajax__product-price {CURRENCY_CHAR_CODE}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>             
+          </form>
         </div>
       </div>
       {% ENDIF %}
@@ -210,5 +211,5 @@ $('.fancyModalClose').click(function(){$.fancybox.close();});*/
 }  
 </style>
 <div id="print_r">
-<!--{print_r}-->
+<!-- {print_r} -->
 </div>

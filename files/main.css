@@ -2368,6 +2368,11 @@ color: #052f38;
 .cart-ajax__product-image {margin-right: 30px;max-width: 170px;width: 100%;height: 170px;display: flex;justify-content: center;align-items: center;}
 .cart-ajax__product-action {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}
 .cart-ajax__product-name {font-size: 18px;font-weight: 400;line-height: 24px;text-transform: none;margin-bottom: 10px}
+.cart-ajax__product-properties {
+  margin-bottom: 10px;
+  color: #052f38;
+  opacity: 0.6;  
+}
 .cart-ajax__product-info {
   width: calc(100% - 200px);
   flex-grow: 1;

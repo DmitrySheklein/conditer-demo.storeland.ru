@@ -209,6 +209,17 @@
   </div>
   {% ENDIF %}
 </div>
+<!-- Блок для обновления данных корзины. Не виден пользователю -->
+<div style="display:none;" id="newCartCount">
+  {CART_COUNT_TOTAL}
+</div>
+<div style="display:none;" id="newCartSum">
+  {CART_SUM_NOW | money_format}
+</div>
+<div id="cart-message" data-message-type="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}">
+  {% IF FORM_NOTICE %}{FORM_NOTICE}{% ENDIF %}
+</div>
+
 <style>
 .cart-info__wrap {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-align: start;-ms-flex-align: start;align-items: flex-start}
 .cart-info__content {width: calc(100% - 295px);padding-right: 15px}

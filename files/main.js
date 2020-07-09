@@ -996,7 +996,9 @@ function addCart() {
             $.fancybox.close()
             $.fancybox.open(data,{
               afterShow: function(){
-                addTo()                
+                addTo();
+                ajaxCartQty();
+                quantity();
               }
             })
             $('.header .cart-header .cart-header__counter .num').html($(data).filter('#newCartCount').html());
@@ -1516,10 +1518,65 @@ function orderScripts(){
   }
 })();
 
+// Мини корзина в окне AJAX добавления товара
+function ajaxCartQty(){
+  $(function(){
+    $('.cart-ajax-input-qty').off('change').change(
+      $.debounce(300, function(){
+        var $qtyInput = $(this);
+        var id = $qtyInput.data('goods-mod-id');
+        var qtyInputVal = $qtyInput.val();
+        
+        if(qtyInputVal < 1) {
+          $qtyInput.val(1)
+        }
+        var formData = $('#cart-ajax-form').serializeArray();
+        formData.push({name: 'only_body', value: 1});
+    
+        $.ajax({
+          url: '/cart',
+          data: formData,
+          cache: false,
+          success: function(data) {
+            var $data = $(data);
+            var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input').val();
+            
+            if(qtyInputVal > newQtyInputVal){
+              var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input').val();    
+              $qtyInput.val(newQtyInputVal)
+
+              var $cartMessage = $data.filter('#cart-message');
+              var type = $cartMessage.data('message-type');
+
+              new Noty({
+                  timeout: "3000",
+                  layout: 'center',
+                  text: $cartMessage.html(),
+                  type: type,
+                  animation: {
+                    open: null, 
+                    close: null
+                  }   
+              }).show()
+  
+              return;
+            }
+            /* Обновляем счётчики */
+            $('.header .cart-header .cart-header__counter .num').html($data.filter('#newCartCount').html());
+            $('.header .cart-header .cart-header__cart-sum').html($data.filter('#newCartSum').html());               
+            /**/
+            var newPrice = $data.find('[data-id="' + id + '"]').find('.cart__product-ajax-price').html();
+            $('#cart-ajax-form').find('.cart-ajax__product-price').html(newPrice)
+          }
+        })
+      })
+    );
+  })
+}
 // Корзина
 function cartAjaxQty(){
   $(function(){
-    $('.qty__input.qty--cart').off('change').change(
+    $('.qty__input').off('change').change(
       $.debounce(300, function(){
         var $qtyInput = $(this);
         var id = $qtyInput.closest('.cart__table-row').data('id');
@@ -1542,12 +1599,12 @@ function cartAjaxQty(){
             // var $data = $(data).find('#cart-content');
             var $data = $(data);
             var count = 0;
-            $data.find('.qty__input.qty--cart').each(function(){
+            $data.find('.qty__input').each(function(){
               count += Number($(this).val())
             })  
             $('.cart-header .cart-header__counter .num').html(count);
             
-            var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input.qty--cart').val();
+            var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input').val();
     
             $qtyInput.val(newQtyInputVal)
             
@@ -1566,14 +1623,17 @@ function cartAjaxQty(){
             
             DeliveryModule.changeCartSum();
             
-            var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input.qty--cart').val();
+            var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input').val();
     
             if(qtyInputVal > newQtyInputVal){
+              var $cartMessage = $data.filter('#cart-message');
+              var type = $cartMessage.data('message-type');
+
               new Noty({
                   timeout: "3000",
                   layout: 'center',
-                  text: 'Вы пытаетесь положить в корзину товара больше, чем есть в наличии',
-                  type: "error",
+                  text: $cartMessage.html(),
+                  type: type,
                   animation: {
                     open: null, 
                     close: null
