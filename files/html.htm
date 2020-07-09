@@ -1043,7 +1043,7 @@
               <div class="col-center col">
                 <!-- Избранные товары -->
                 {% IFNOT favorites_goods_empty %}
-                <section class="favorites-goods section _no-padding">
+                <section class="favorites-goods section {% IF compare_list_empty %}_no-margin{% ENDIF %}">
                     <div class="section-title__wrap">
                       <h2 class="section-title _no-margin">Избранное</h2>
                       <a href="/user/favorites" class="section__btn-link button _bordered">В избранное</a>
@@ -1106,7 +1106,7 @@
                 {% ENDIF %}
                 <!-- Сравнение -->
                 {% IFNOT compare_list_empty %}
-                <section class="compare-goods section _no-padding">
+                <section class="compare-goods section _no-margin">
                   <div class="section-title__wrap">
                     <h2 class="section-title _no-margin">Сравнение</h2>
                     <a href="/compare" class="section__btn-link button _bordered">В cравнение</a>
@@ -1165,7 +1165,7 @@
                     </div>
                     {% ENDFOR %}
                   </div>
-              </section>
+                </section>
                 {% ENDIF %}
               </div>
               {% ENDIF %}
