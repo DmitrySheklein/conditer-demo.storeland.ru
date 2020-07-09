@@ -2884,7 +2884,7 @@ function SearchFieldInit(obj) {
     // Поле поиска товара
     obj.s_search = obj.f_search.find('.search__input');
     // Обнуление данных в форме поиска
-    obj.s_reset  = obj.f_search.find('.search-reset');
+    obj.s_reset  = obj.f_search.find('.search__form-reset-btn');
     // Проверка на существование функции проверки поля и действий с ним
     if(typeof(obj.SearchFieldCheck) != 'function') {
       console.log('function SearchFieldCheck is not found in object for SearchFieldInit', {status: 'error'});
