@@ -47,7 +47,7 @@
   <!-- /Если нет товаров, выводим сообщение пользователю -->
     
   {% IFNOT goods_empty %}
-  <div class="products">
+      <div class="products">
     <!-- Если нет товаров, либо у пользователя не сработало javascript ограничение на фильтре по товарам и так получилось что их не нашлось, отобразим блок изменяющий отображение данных выдачи товаров -->
     {% IF goods_empty=0 || goods_filters_empty=0 %}
       <!-- Верхний блок, изменяющий отображение данных выдачи товаров -->
@@ -56,7 +56,7 @@
           <div class="toolbar__inner">
             <!-- Если в тарифном плане подключен модуль фильтров по товарам -->
             {% IF SHOW_GOODS_PRICE_FILTERS || SHOW_GOODS_FILTERS && goods_empty != 1 %}
-            <div class="filters">
+            <div class="filters toolbar__filters">
               <button type="button" class="button filters__btn">
                 Фильтр подбора
                 <svg class="icon _filters">
@@ -918,14 +918,14 @@
           </div>
         </noindex>
       </div>
-    {% ENDIF %}
+  {% ENDIF %}
   </div>
   {% ENDIF %}
 {% ENDIF %}
   
 <!-- Вывод всех видов описания категории -->
 {% IF CATEGORY_DESCRIPTION || CATEGORY_SEO_DESCRIPTION_SHORT || CATEGORY_SEO_DESCRIPTION_LARGE %}
-  <div class="DescriptionBlock f-fix"> 
+  <div class="DescriptionBlock"> 
     <div class="htmlDataBlock">
       <!-- Описание категории -->
       {% IF CATEGORY_DESCRIPTION %} 
