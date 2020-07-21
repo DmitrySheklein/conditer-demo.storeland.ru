@@ -58,8 +58,8 @@ const path = require('path');
 const chalk = require('chalk');
 const moment = require('moment'); // require
 const notifier = require('node-notifier');
-// const uuidv4 = require('uuid/v4'); // <== NOW DEPRECATED!
-// uuidv4();
+const uuidv4 = require('uuid/v4'); // <== NOW DEPRECATED!
+uuidv4();
 
 const {SECRET_KEY, SITE} = require('./storeland-uploader-config.json');
 
@@ -118,7 +118,7 @@ function styles() {
 		.pipe(browserSync.stream())
 	} else {
 		return src(paths.styles.src)
-		.pipe(wait(WAIT_TIME))
+		// .pipe(wait(WAIT_TIME))
 		.pipe(browserSync.stream())
 	}
 }
@@ -140,9 +140,9 @@ function startwatch() {
 		watch(baseDir  + '/**/*.scss', { delay: 100 }, styles);
 	}
 	watch(baseDir  + '/**/*.css').on('change', function(event){
-		uploadFile(event);
+		uploadFile(event, styles);
 		if(!preprocessorOn){
-			styles()
+			// styles()
 		}		
 	})	
 	watch(baseDir  + '/**/*.{' + imageswatch + '}')
@@ -163,7 +163,7 @@ function startwatch() {
 	})
 }
 
-function uploadFile(event){
+function uploadFile(event, cb){
 	let file = event;
 	let fileName = path.basename(file)
 	let fileExt =  path.extname(file);	
@@ -198,7 +198,10 @@ function uploadFile(event){
 				console.log(`[${moment().format("HH:mm:ss")}] Файл ${chalk.red(fileName)} успешно отправлен ✔️`);     
 				if(!fileName.includes('css')){
 					browserSync.reload()
-				}           
+				}
+				if(cb){
+					cb()
+				}
 			} else if (json.status == `error`) {
 				console.log(`Ошибка отправки ⛔ ${fileName}`); 
 				console.log(`${json.message}`);                                        
