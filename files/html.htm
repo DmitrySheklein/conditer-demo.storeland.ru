@@ -260,7 +260,7 @@
                     {% ENDIF %}
   							  </div>
   							  
-    							<!-- Поиск -->
+                  <!-- Поиск -->
                   <div class="search">
                     <form id="search_mini_form" class="search__form" action="{QUICK_SEARCH_URL}" method="get" title="Поиск по магазину">
                       <input type="hidden" name="goods_search_field_id" value="0">
@@ -286,9 +286,6 @@
                 <!-- Контакты  -->
                 <div class="header-contacts">
                   <div class="header-contacts__phone-wrap">
-                    <div class="header-phone__icon">
-                      <i class="fal fa-address-book"></i>
-                    </div>
                     <div class="header-phone__list">
       							  <!-- Телефон -->
       							  {% IF SETTINGS_STORE_PHONE_NUMBER1 %}
@@ -847,7 +844,11 @@
     <!-- Основная часть -->
     {% IFNOT index_page %}
       {% IF MOD_LNAME = goods %}
-      <div id="main" class="main">{BODY}</div>
+      <div id="main" class="main">
+        <div class="container">
+          {BODY}
+        </div>
+      </div>
       {% ELSE %}
       <div id="main" class="main">
         <div class="container">

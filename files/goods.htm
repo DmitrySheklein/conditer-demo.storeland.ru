@@ -1,7 +1,7 @@
 <div class="product-wrap">
   <!-- Форма карточки товара -->
   <div class="product-view" itemscope itemtype="https://schema.org/Product">
-    <div class="container">
+    <div class="">
       <div class="product-view__wrap">
         <!-- Изображение товара -->
         <div class="product-view__img">
@@ -566,7 +566,7 @@
 <!-- Сопутствующие товары -->
 {% IFNOT related_goods_empty %}
 <section class="section pdt-related products-container">
-  <div class="container">
+  <div class="">
     <h2 class="section-title">Сопутствующие товары</h2>
     <div class="products-grid owl-carousel">
       {% FOR related_goods %}
@@ -878,7 +878,7 @@
 <!-- С этим товаром смотрят -->
 {% IFNOT related_views_goods_empty %}
 <section class="section pdt-related-views products-container">
-  <div class="container">
+  <div class="">
     <h2 class="section-title">С этим товаром смотрят</h2>
     <div class="products-grid owl-carousel">
       {% FOR related_views_goods %}
