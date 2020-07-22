@@ -720,12 +720,28 @@ function mainFunctions() {
     parent: '.wrapper',
     sticky_class: '_sticky'
   });*/
-  // Кнопка меню на мобильном
-  var $headerNavButtons = $('.header .header-mobile__button, .header .header-content__button-close, .header-content .header-content__overlay');
-  $headerNavButtons.click(function(e){
+
+  // Кнопки открывающие меню
+  $('.header .header-mobile__button, .catalog-button').click(function(e){
     e.preventDefault();
-    $('.header-content').toggleClass('_active');
-    $('body').toggleClass('modal-open')
+    $('.header-content').addClass('_active');
+    $('body').addClass('modal-open');
+
+    var id = $(this).data('target');
+    if (id){
+      console.log($('#' + id));
+      
+      $('#' + id).addClass('_visible');
+      $('.header-content__button[data-target="' + id +'"]').addClass('_active')
+    }
+  })
+// Кнопки закрывающие меню
+  $('.header .header-content__button-close, .header-content .header-content__overlay').click(function(e){
+    e.preventDefault();
+    $('.header-content').removeClass('_active');
+    $('body').removeClass('modal-open');
+    $('.header-content__item').removeClass('_visible');
+    $('.header-content__button').removeClass('_active');
   })
   $('.header-content__nav').on('click', '.header-content__button', function(){
     var $btn = $(this);

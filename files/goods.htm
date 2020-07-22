@@ -312,7 +312,7 @@
     </div>
     <!-- Основные вкладки описаний товара -->
     <div class="product-tabs">
-      <div class="container">
+      <div class="">
           <div class="product-tabs__wrapper">
             <ul id="tabs-list" class="tabs-list">
               {% IF GOODS_DESCRIPTION_LARGE || GOODS_SEO_DESCRIPTION_SHORT || GOODS_SEO_DESCRIPTION_LARGE %}<li class="tabs-list__item"><a href="javascript:tabSwitch(1);" id="tab_1" class="tabs-list__item-link">Описание</a></li>{% ENDIF %}
@@ -434,11 +434,13 @@
                             {ANTISPAM_CODE}
                             <div class="goods-opinion-form__body">
                               <div class="goods-opinion-form__header">
-                                <h3 class="goods-opinion-form__title title-styled">Оставить отзыв</h3>
+                                <h3 class="goods-opinion-form__title title-styled">
+                                  Оставить отзыв
+                                </h3>
                               </div>
                               <div class="goods-opinion-form__inputs">
                                 <div class="goods-opinion-form__input-wrap _title">
-                                  <label class="goods-opinion-form__label">Оцените товар</label>
+                                  <label class="goods-opinion-form__label _title">Оцените товар</label>
                                   <div class="goods-opinion-form__rating">
                                     <input name="form[{ANTISPAM_FORM_FIELD_NAME_GOODS_OPINION_RATING}]" type="radio" value="2" {% IF FORM_GOODS_OPINION_RATING=2 %}checked="checked"{% ENDIF %} title="Ужасно"/>
                                     <input name="form[{ANTISPAM_FORM_FIELD_NAME_GOODS_OPINION_RATING}]" type="radio" value="4" {% IF FORM_GOODS_OPINION_RATING=4 %}checked="checked"{% ENDIF %} title="Плохо"/>
@@ -639,7 +641,7 @@
             <div class="product__shop">
               <meta itemprop="name" content="{related_goods.NAME}">
               <meta itemprop="description" content="{% IF related_goods.DESCRIPTION_SHORT %}{related_goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
-              <div class="product__name"><a href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" class="quickview" title="{related_goods.NAME}" itemprop="url">{related_goods.NAME}</a></div>
+              <div class="product__name"><a href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" class="" title="{related_goods.NAME}" itemprop="url">{related_goods.NAME}</a></div>
               <div class="product__actions">
                 <div class="product__price-box {% IF related_goods.COUNT_MODIFICATION > 1 %}_with-mods{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                   <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
@@ -951,7 +953,7 @@
             <div class="product__shop">
               <meta itemprop="name" content="{related_views_goods.NAME}">
               <meta itemprop="description" content="{% IF related_views_goods.DESCRIPTION_SHORT %}{related_views_goods.DESCRIPTION_SHORT}{% ELSE %}Описание отсутствует{% ENDIF %}">
-              <div class="product__name"><a href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}" class="quickview" title="{related_views_goods.NAME}" itemprop="url">{related_views_goods.NAME}</a></div>
+              <div class="product__name"><a href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}" class="" title="{related_views_goods.NAME}" itemprop="url">{related_views_goods.NAME}</a></div>
               <div class="product__actions">
                 <div class="product__price-box {% IF related_views_goods.COUNT_MODIFICATION > 1 %}_with-mods{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                   <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
