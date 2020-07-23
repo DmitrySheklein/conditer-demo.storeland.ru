@@ -1701,7 +1701,7 @@ function cartDeleteItem(){
         var $data = $(data);
         var count = 0;
         
-        $data.find('.qty__input.qty--cart').each(function(){
+        $data.find('.qty__input').each(function(){
           count += Number($(this).val())
         })
         // Если корзина пуста
