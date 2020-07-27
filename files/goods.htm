@@ -10,24 +10,21 @@
             <img src="{ASSETS_IMAGES_PATH}no-photo-medium.png" title="{GOODS_NAME}" alt="{GOODS_NAME}" class="goods-image-medium" itemprop="image"/>
           {% ELSE %}
             {% IFNOT goods_images_empty %}
-              <div id="main-image" class="main-image product-view__main-image">
-              {% FOR goods_images %}
-                <a href="{goods_images.LARGE}" data="{goods_images.ID}" data-fancybox="gallery">
-                  <div class="product-view__image-wrap">
-                    <img class="" src="{goods_images.LARGE}" alt="{goods_images.NAME}" />
-                  </div>
+              <div id="main-image" class="main-image product-view__main-image" data-id="{GOODS_IMAGE_ID}">
+                <a href="{GOODS_IMAGE_LARGE}" data="{goods_images.ID}" data-fancybox="images">
+                    <img class="" src="{GOODS_IMAGE_MEDIUM}" alt="{goods_images.NAME}" />
                 </a>
-              {% ENDFOR %}
               </div>
               
               <div id="image-list" class="image-list" style="{% FOR goods_images %}{% IF goods_images.index > 1 %}display:block;{% ENDIF %}{% ENDFOR %}">
               {% FOR goods_images %}
-                  <div class="image-list__img-wrap">
-                    <img class="image-list__img" src="{goods_images.LARGE}" alt="{goods_images.NAME}" />
+                  <div class="image-list__img-wrap" data-id="{goods_images.ID}">
+                    <a class="image-list__img-link" href="{goods_images.LARGE}" data-fancybox="images">
+                      <img class="image-list__img" src="{goods_images.ICON}" alt="{goods_images.NAME}" />
+                    </a>
                   </div>
               {% ENDFOR %}
-              </div>
-              
+              </div>              
             {% ENDIF %}
           {% ENDIF %}
 
@@ -236,6 +233,7 @@
                     <input type="hidden" name="measure_desc" value="{goods_modifications.MEASURE_DESC}" />
                     <input type="hidden" name="measure_precision" value="{goods_modifications.MEASURE_PRECISION}" />
                     <input type="hidden" name="is_has_in_compare_list" value="{goods_modifications.IS_HAS_IN_COMPARE_LIST}" />
+                    <input type="hidden" name="goods_mod_image_id" value="{goods_modifications.GOODS_MOD_IMAGE_ID}" />
                     <div class="description" style="display:none" itemprop="description">{goods_modifications.DESCRIPTION}</div>
                   </div>
                 {% ENDFOR %}
