@@ -28,7 +28,7 @@ $.fancybox.defaults.buttons = [
 ]
 // Noty default
 Noty.overrideDefaults({
-  layout: "bottomRight",
+  layout: "bottomCenter",
   theme: 'sunset',
   timeout: "3000",
   killer: true,
@@ -218,6 +218,46 @@ function RefreshImageAction(img,num,cnt) {
   num = (num==6)?0:num;
   setTimeout(function(){RefreshImageAction(img, num+1, cnt+1);}, 50);
 }
+// Подгрузка спрайта иконок
+(function (window, document) {
+    'use strict';
+    var file = '/design/sprite.svg', // путь к файлу спрайта на сервере
+        revision = 1; // версия спрайта
+    if (!document.createElementNS || !document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect) return true;
+    var isLocalStorage = 'localStorage' in window && window['localStorage'] !== null,
+        request,
+        data,
+        insertIT = function () {
+            document.body.insertAdjacentHTML('beforeend', data);
+        },
+        insert = function () {
+            if (document.body) insertIT();
+            else document.addEventListener('DOMContentLoaded', insertIT);
+        };
+    if (isLocalStorage && localStorage.getItem('inlineSVGrev') == revision) {
+        data = localStorage.getItem('inlineSVGdata');
+        if (data) {
+            insert();
+            return true;
+        }
+    }
+    try {
+        request = new XMLHttpRequest();
+        request.open('GET', file, true);
+        request.onload = function () {
+            if (request.status >= 200 && request.status < 400) {
+                data = request.responseText;
+                insert();
+                if (isLocalStorage) {
+                    localStorage.setItem('inlineSVGdata', data);
+                    localStorage.setItem('inlineSVGrev', revision);
+                }
+            }
+        }
+        request.send();
+    } catch (e) {}
+}(window, document));
+
 // Добавление в сравнение и избранное
 function addTo() {
   // Добавление/удаление товара на сравнение/избранное через ajax
@@ -347,7 +387,6 @@ function addTo() {
             new Noty({
               text: message,
               type: msgType,
-              layout: "bottomRight",
               timeout: "2000"             
             }).show();                
           }
@@ -490,7 +529,6 @@ function addTo() {
             new Noty({
               text: message,
               type: msgType,
-              layout: "bottomRight",
               timeout: "2000"             
             }).show();                
           }
@@ -715,12 +753,6 @@ function mainFunctions() {
   }).find('input').bind('keypress', function(e){
     if(((e.which==10)||(e.which==13))) { try{$(this.form).submit();} catch(e){} return false; }
   });
-  // Фикс меню
-/*  $(".header .header__menu").stick_in_parent({
-    parent: '.wrapper',
-    sticky_class: '_sticky'
-  });*/
-
   // Кнопки открывающие меню
   $('.header .header-mobile__button, .catalog-button').click(function(e){
     e.preventDefault();
@@ -761,12 +793,87 @@ function mainFunctions() {
       .filter('[id="'+ id +'"]')
       .addClass('_visible')
   })
+  // Дополнительные пункты меню в шапке
+  function headerMenu(){
+    var $menuList = $('.header-nav .header-nav__list');
+    var menuWidth = $menuList.width();
+    var $menuItems = $('.header-nav .header-nav__item');
+    var menuCount = $menuItems.length;
+    var WidthCounter = 0;
+    var containerCreate = false;
+    
+    var $moreItem = $('<li class="header-nav__item dropdown _more-menu"><a class="header-nav__link">Еще...</a></li>');
+    var $moreList = $('<ul>').addClass('dropdown__body');
+
+    $menuItems.each(function(i, item){
+      var $item = $(item);
+      var currentWidth = Math.ceil($item.outerWidth(true));
+      var moreItemsWidth = 45;
+      var nextItemWidth = Math.ceil($item.next().outerWidth(true))
+      
+      WidthCounter += currentWidth;
+      // console.log($item, WidthCounter, currentWidth, menuWidth)
+      if(containerCreate || (WidthCounter + nextItemWidth) > menuWidth) {
+        containerCreate = true;
+        $moreList.append($item.addClass('dropdown__item'));
+      }
+    })
+    $moreItem.append($moreList);
+    $menuList.append($moreItem);
+    $menuList.addClass('_active')
+  }     
+  if(getClientWidth() >= 1200){
+    headerMenu();
+  }  
+  // Основной каталог в шапке
+  function headerCatalog() {
+    var e,
+        $headerCatalog = $(".header-catalog"),
+        $catalogBtn = $(".header-catalogBtn"),
+        $catalogMenu = $(".header-catalog .header-catalogMenu"),
+        $headerSubcatalog = $(".header-subcatalog"),
+        $headerOverlay = $(".header-overlay");                          
+        $headerCloseBtn = $('.header-closeBtn');
+        
+        
+        $catalogItem = $(".header-sectionsItem.parent");
+
+      var $catalogMenu = $(".header-catalog .header-catalog__menu");
+      $catalogMenu.on('click', '._parent .header-catalog__icon', function(evt){
+        if (getClientWidth() <= 1199) {
+          evt.preventDefault()
+          
+          var $arrow = $(this);
+          var $link = $arrow.parent();
+          
+          if($arrow.hasClass('_active')){
+            $arrow.removeClass('_active')
+            $link.removeClass('_active').next('.sub').slideUp();
+          } else {
+            $arrow.addClass('_active')
+            $link.addClass('_active').next('.sub').slideDown();
+          }
+          
+        }                              
+      });
+  }
+  headerCatalog();
+  
+  function removeActiveLinks(){
+    if (getClientWidth() > 992) {
+      var $headerCatalog = $('.header-catalogMenu');
+      
+      $headerCatalog.find('.header-catalogLink, .header-subcatalogTitle, .header-catalogMenu').removeClass('active');
+      $headerCatalog.find('.header-subcatalog-third, .sub').show();
+    }
+  }
+  $(window).on('resize', $.debounce(300, removeActiveLinks))      
   // Аккордеон в подвале
   $('.footer-collapse').on('click', '.footer-collapse__title', function(){
     if(getClientWidth() <= 576){
       $(this).toggleClass('_active').next('.footer-collapse__list').slideToggle();
     }
-  })  
+  })
 }
 
 // Функции для каталога
@@ -1589,6 +1696,26 @@ function ajaxCartQty(){
     );
   })
 }
+// С этим товаром покупают
+function cartRelatedGoods() {
+  $(function () {
+    $(".pdt-cart-related-goods .products-grid").owlCarousel(
+      $.extend(OWL_DEFAULT,
+      {
+        items: 4,
+        responsive: {
+          0:{items:1},
+          320:{items:1},
+          480:{items:1},
+          540:{items:2},
+          768:{items:3},
+          992:{items:4},
+          1200:{items:4, nav: true, margin: 15, autoWidth: false}
+        }
+      }
+      ));    
+  })
+}
 // Корзина
 function cartAjaxQty(){
   $(function(){
@@ -2185,7 +2312,7 @@ function goodspage() {
     $btn.addClass('_active').html('<svg class="icon"><use xlink:href="#minus-icon"></use></svg>')
   })
   
-  // Сопутствующие | С этим товом смотрят
+  // Сопутствующие | С этим товаром смотрят
   $(".pdt-related-views .products-grid,  .pdt-related .products-grid").owlCarousel(
   $.extend(OWL_DEFAULT,
   {
@@ -2731,7 +2858,41 @@ function indexPage() {
     }
   }
   ));
-  
+  // Баннеры на главной
+  $(function(){
+    var $bannersMobile = $('.banners-mobile');
+    $('#banners').find('.banner').each(function(i, el){
+      var $banner = $(el).clone().addClass('_mobile');
+
+      if(i % 2 === 0){
+        var $row = $('<div>').addClass('banners-mobile__row')
+        $bannersMobile.append($row)
+      }
+      $bannersMobile.find('.banners-mobile__row:last').append($banner);
+      $bannersMobile.find('.banner').each(function(){
+        var $bannerLink = $(this).find('a');
+        $bannerLink.attr('data-background-image', $bannerLink.attr('data-mobile-bg'))
+      })
+      lozad().observe();
+    })
+    
+    function bannersSlider() {
+      if(getClientWidth() <= 375){
+        $bannersMobile.addClass('owl-carousel').owlCarousel({
+          items: 1,
+          margin: 15
+        })
+      } else {
+        $bannersMobile.trigger('destroy.owl.carousel')
+      }
+    }
+    bannersSlider();
+    
+    $(window).resize(function(){
+        bannersSlider();
+    })
+  })
+
   // Преимущества
   $(".our-features-list").owlCarousel(
   $.extend(OWL_DEFAULT,

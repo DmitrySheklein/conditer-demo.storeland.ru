@@ -175,7 +175,14 @@ label.invalidInput {color: #E80636;font-size: 90%;}
 .noty_body {font-size: 16px!important;text-align: center!important;zoom: 97%}
 .noty_theme__sunset.noty_type__error {background: #b73e55!important}
 .noty_theme__sunset.noty_type__success {background: #60d35e!important}
-#noty_layout__bottomRight {right: 135px}
+#noty_layout__bottomCenter {
+  left: 5%;
+  right: 0;
+  bottom: 1%;
+  width: 100%;
+  max-width: 90%;
+  transform: none;
+}
 
 @media (max-width:576px) {
   #noty_layout__bottomRight {max-width:100%; width: calc(100% - 30px);right: 15px;left: 15px;}
