@@ -1255,7 +1255,7 @@ function quickOrder(formSelector) {
 			  afterShow: function(){
           var $btn = $('.button._add-cart._loading').removeClass('_loading');
           $btn.removeClass('_added')
-          if(!$btn.hasClass('_product-view-quick')){
+          if(!$btn.hasClass('_product-view-quick') && !$btn.closest('.product._list')){
             $btn.find('span').html('Купить <br> в 1 клик');
           }
           $('.quickform__buttons').show();
@@ -2406,7 +2406,7 @@ function goodsMods(){
         goodsAvailable                = $('.product-view__available'),
         goodsAvailableTrue            = goodsAvailable.find('.product-view__available-item').filter('._available'),
         goodsAvailableFalse           = goodsAvailable.find('.product-view__available-item').filter('._not-available'),
-        goodsAvailableAddCart         = $('.product-view__actions._add-to-form .product-view__add-cart'),
+        goodsAvailableAddCart         = $('.product-view__actions._add-to-form .product-view__add-buttons'),
         goodsArtNumberBlock           = $('.product-view__art-number'),
         goodsArtNumber                = goodsArtNumberBlock.find('span'),
         goodsCompareAddButton         = $('.goodsDataCompareButton.add'),

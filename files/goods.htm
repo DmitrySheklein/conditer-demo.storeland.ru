@@ -245,12 +245,8 @@
                 {% ENDIF %}
               </div>
               <div class="product-view__actions {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}_add-to-form{% ENDIF %}">
-                <!-- Нет в наличии -->
-                {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
-                  <div class="product-view__mod-empty button _grey _disabled" title="Нет в наличии" {% IF GOODS_MOD_REST_VALUE!=0 %}style="display:none;"{% ENDIF %}><span>Нет в наличии</span></div>
-                {% ENDIF %}
                 <!-- Добавление товара в корзину -->
-                <div class="product-view__add-cart" {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && GOODS_MOD_REST_VALUE=0 %}style="display:none;"{% ENDIF %}>
+                <div class="product-view__add-cart">
                   <div class="qty qty--product-view">
                       <div class="qty__wrap">
                         <button class="qty__btn qty__btn--minus" title="Уменьшить">
@@ -284,11 +280,15 @@
                     <span class="price _product-view _center goodsDataMainModificationPriceNow {CURRENCY_CHAR_CODE}" itemprop="price" content="{GOODS_MOD_PRICE_NOW}">{GOODS_MOD_PRICE_NOW | money_format}</span>
                   </div>
                 </div>
-                <div class="product-view__add-buttons">
+                <div class="product-view__add-buttons" {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && GOODS_MOD_REST_VALUE=0 %}style="display:none;"{% ENDIF %}>
                   <button type="submit" class="button _product-view-add-cart _add-cart _full-border" title="Положить &laquo;{GOODS_NAME}&raquo; в корзину"><span>В корзину</span></button>
                   <button type="submit" class="button _product-view-quick _reverse _add-cart _quick" title="Положить &laquo;{GOODS_NAME}&raquo; в корзину"><span>Купить в 1 клик</span></button>
                 </div>
                 <!-- /END Добавление товара в корзину -->
+                <!-- Нет в наличии -->
+                {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
+                  <div class="product-view__mod-empty button _grey _disabled" title="Нет в наличии" {% IF GOODS_MOD_REST_VALUE!=0 %}style="display:none;"{% ENDIF %}><span>Нет в наличии</span></div>
+                {% ENDIF %}                
               </div>
             </form>          
           </div>
