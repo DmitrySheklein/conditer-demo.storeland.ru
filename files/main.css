@@ -2186,9 +2186,12 @@ color: #052f38;
 .goods-opinion-form {position: relative;width: 100%;}
 .review-counter._visible + .goods-opinion-form {padding: 0 30px;border-left: 1px solid #e7e7e8}
 .goods-opinion-form .goods-opinion-form__header {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;margin-bottom: 20px}
-.goods-opinion-form .goods-opinion-form__input-wrap {position: relative;max-width: 100%;margin-bottom: 30px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center}
+.goods-opinion-form .goods-opinion-form__input-field {position: relative;max-width: 100%;margin-bottom: 30px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center}
+.goods-opinion-form__input-wrap {
+  position: relative;  
+  width: 100%;
+}
 .goods-opinion-form .goods-opinion-form__inputs {margin-bottom: 15px}
-.goods-opinion-form .goods-opinion-form__input {}
 .goods-opinion-form .goods-opinion-form__label {padding-right: 15px;font-size: 18px;flex-shrink: 0;min-width: 205px;}
 .goods-opinion-form .goods-opinion-form__input._comment {min-height: 120px}
 .goods-opinion-form__submit-button {position: relative;margin: 0;margin-left: auto;display: block;height: 50px;margin-bottom: 20px;}

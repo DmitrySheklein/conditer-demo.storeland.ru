@@ -59,7 +59,7 @@ var OWL_DEFAULT = {
     margin: 12,
     dots: false,
     nav: false,
-    navText: ['<span class="owl-icon-wrap"><svg class="owl-icon owl-prev-icon icon"><use xlink:href="#arrow"></use></svg></span>', '<span class="owl-icon-wrap"><svg class="owl-icon owl-next-icon icon"><use xlink:href="#arrow"></use></svg></span>'],
+    navText: ['<span class="owl-icon-wrap"><svg class="owl-icon owl-prev-icon icon"><use xlink:href="/design/sprite.svg#arrow"></use></svg></span>', '<span class="owl-icon-wrap"><svg class="owl-icon owl-next-icon icon"><use xlink:href="/design/sprite.svg#arrow"></use></svg></span>'],
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
@@ -2189,7 +2189,7 @@ function quickViewShow(href, $link) {
           },
           afterShow: function() {
             goodsImage();
-            goodsMods();
+            goodsMods(true);
             addCart();
             quantity();
             initTabs();
@@ -2232,7 +2232,7 @@ function quickViewShowMod(href) {
         },
         afterShow: function() {
           goodspage();      
-          goodsMods();
+          goodsMods(true);
           addCart();
           quantity();
         }        
@@ -2386,11 +2386,11 @@ function goodspage() {
     $(this).parent().find('.goods-delivery__content').toggle();
     
     if($btn.hasClass('_active')){
-      $btn.html('<svg class="icon"><use xlink:href="#plus-icon"></use></svg>').removeClass('_active');
+      $btn.html('<svg class="icon"><use xlink:href="/design/sprite.svg#plus-icon"></use></svg>').removeClass('_active');
       return;
     }
     
-    $btn.addClass('_active').html('<svg class="icon"><use xlink:href="#minus-icon"></use></svg>')
+    $btn.addClass('_active').html('<svg class="icon"><use xlink:href="/design/sprite.svg#minus-icon"></use></svg>')
   })
   
   // Сопутствующие | С этим товаром смотрят
@@ -2412,7 +2412,7 @@ function goodspage() {
 }
 
 // Скрипты модификации товара
-function goodsMods(){
+function goodsMods(inFancybox){
   // Функция собирает свойства в строку, для определения модификации товара
   function getSlugFromGoodsDataFormModificationsProperties(obj) {
     var properties = new Array();
@@ -2424,9 +2424,9 @@ function goodsMods(){
    
   var 
     // Запоминаем поля выбора свойств, для ускорения работы со значениями свойств
-    goodsDataProperties = $('form.product-view__form select[name="form[properties][]"]'),
+    goodsDataProperties = (inFancybox) ? $('.fancybox-content form.product-view__form select[name="form[properties][]"]') : $('form.product-view__form select[name="form[properties][]"]'),
     // Запоминаем блоки с информацией по модификациям, для ускорения работы
-    goodsDataModifications = $('div.product-modifications__list');
+    goodsDataModifications = (inFancybox) ? $('.fancybox-content div.product-modifications__list') : $('div.product-modifications__list');
     
   // Обновляет возможность выбора свойств модификации, для отключения возможности выбора по характеристикам модификации которой не существует.
   function updateVisibility (y) {

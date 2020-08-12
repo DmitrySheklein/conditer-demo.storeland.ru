@@ -27,13 +27,13 @@
                 <div class="qty__wrap">
                   <button class="qty__btn qty__btn--minus" title="Уменьшить">
                     <svg class="icon">
-                      <use xlink:href="#minus-icon"></use>
+                      <use xlink:href="/design/sprite.svg#minus-icon"></use>
                     </svg>
                   </button>
                   <input type="number" pattern="\d*" name="form[quantity][{FORM_GOODS_MOD_ID}]" data-goods-mod-id="{FORM_GOODS_MOD_ID}" max="4" value="{cart_items.ORDER_LINE_QUANTITY}" min="1" title="Количество" class="input qty__input cart-ajax-input-qty" onkeypress="return keyPress(this, event);"  autocomplete="off">
                   <button class="qty__btn qty__btn--plus" title="Увеличить">
                     <svg class="icon">
-                      <use xlink:href="#plus-icon"></use>
+                      <use xlink:href="/design/sprite.svg#plus-icon"></use>
                     </svg>                                        
                   </button>
                 </div>
@@ -84,7 +84,7 @@
             rel="nofollow"
           >
             <svg class="icon _favorites">
-              <use xlink:href="#favorites"></use>
+              <use xlink:href="/design/sprite.svg#favorites"></use>
             </svg>
         </a>
       <!-- /END Избранное -->
@@ -128,7 +128,7 @@
             rel="nofollow"
           >
           <svg class="icon _compare">
-            <use xlink:href="#compare"></use>
+            <use xlink:href="/design/sprite.svg#compare"></use>
           </svg>
           </a>
       {% ENDIF %}
@@ -136,14 +136,14 @@
       <button type="submit" class="button cart-ajax__button _return" onclick="$.fancybox.close()">
         <div class="cart-ajax__button-icon">
           <svg class="icon _return">
-            <use xlink:href="#return-back"></use>
+            <use xlink:href="/design/sprite.svg#return-back"></use>
           </svg>
         </div>
         Вернуться к покупкам
       </button>
       <a type="button" class="button cart-ajax__button _to-cart" href="/cart">
         <svg class="icon _cart">
-          <use xlink:href="#cart"></use>
+          <use xlink:href="/design/sprite.svg#cart"></use>
         </svg>
         В корзину
       </a>

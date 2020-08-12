@@ -64,13 +64,13 @@
                               <div class="qty__wrap">
                                 <button class="qty__btn qty__btn--minus" title="Уменьшить">
                                   <svg class="icon">
-                                    <use xlink:href="#minus-icon"></use>
+                                    <use xlink:href="/design/sprite.svg#minus-icon"></use>
                                   </svg>
                                 </button>
                                 <input type="number" pattern="\d*" name="form[quantity][{cart_items.GOODS_MOD_ID}]" value="{cart_items.ORDER_LINE_QUANTITY}" min="1" title="Количество" class="input qty__input" onkeypress="return keyPress(this, event);"  autocomplete="off">
                                 <button class="qty__btn qty__btn--plus" title="Увеличить">
                                   <svg class="icon">
-                                    <use xlink:href="#plus-icon"></use>
+                                    <use xlink:href="/design/sprite.svg#plus-icon"></use>
                                   </svg>                                        
                                 </button>
                               </div>
@@ -83,7 +83,7 @@
                       <div class="cart__table-item -delete">
                         <a class="cart__delete" href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить">
                           <span class="cart__delete-icon">
-                            <svg class="icon _close"><use xlink:href="#close"></use></svg>
+                            <svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg>
                           </span>
                           <span class="cart__delete-title">Удалить</span>
                         </a>
@@ -112,7 +112,7 @@
         <div class="cart _fast">
           <div class="cart__header">
             <span class="cart__header-title">
-              <svg class="icon _cart"><use xlink:href="#cart"></use></svg>
+              <svg class="icon _cart"><use xlink:href="/design/sprite.svg#cart"></use></svg>
               <span class="title-styled">
                 Ваша корзина
               </span>
@@ -138,8 +138,8 @@
                       <label class="coupon__label">Введите код купона</label>
                       <div class="coupon__box input-box">
                           <input type="text" id="quick_form_coupon_code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="input coupon__input _bordered" placeholder="" />                                
-                          <button type="button" class="coupon__clear" title="Очистить купон"><svg class="icon _close"><use xlink:href="#close"></use></svg></button>
-                          <button type="button" class="button coupon__btn"><svg class="icon _check"><use xlink:href="#check"></use></svg></button>
+                          <button type="button" class="coupon__clear" title="Очистить купон"><svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg></button>
+                          <button type="button" class="button coupon__btn"><svg class="icon _check"><use xlink:href="/design/sprite.svg#check"></use></svg></button>
                       </div>
                   </div>
               </div>
@@ -194,14 +194,14 @@
         <!-- Очистить корзину -->
         <a id="cart-clear" class="cart__delete-all" title="Очистить корзину" href="{CART_TRUNCATE_URL}">
           <span class="cart__delete-all-icon">
-            <svg class="icon _close"><use xlink:href="#close"></use></svg>
+            <svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg>
           </span>
           <span>Очистить корзину</span>
         </a>
         <!-- Вернуться к покупке -->
         <a id="closeOrder" class="cart__return" style="display:none" href="/catalog">
           <span class="cart__return-icon">
-            <svg class="icon _return-back"><use xlink:href="#return-back"></use></svg>
+            <svg class="icon _return-back"><use xlink:href="/design/sprite.svg#return-back"></use></svg>
           </span>          
           <span>Вернуться к покупкам</span>
         </a>
@@ -225,12 +225,12 @@
             <div class="product__image">
               
               {% IF cart_related_goods.IS_NEW %}
-                <span class="ico _new"><svg class="icon _new"><use xlink:href="#new"></use></svg>новинка</span>
+                <span class="ico _new"><svg class="icon _new"><use xlink:href="/design/sprite.svg#new"></use></svg>новинка</span>
               {% ELSEIF cart_related_goods.IS_TOP %}
-                <span class="ico _best"><svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>бестселлер</span>
+                <span class="ico _best"><svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>бестселлер</span>
               {% ENDIF %}
               {% IF cart_related_goods.MAX_DISCOUNT %}
-                <span class="ico _sale"><svg class="icon _discount"><use xlink:href="#discount"></use></svg>скидка</span>
+                <span class="ico _sale"><svg class="icon _discount"><use xlink:href="/design/sprite.svg#discount"></use></svg>скидка</span>
               {% ENDIF %}
               
               <!-- Среднее значение по результатам всех отзывов об этом товаре -->
@@ -243,26 +243,26 @@
                     <meta itemprop="ratingValue" content = "{cart_related_goods.OPINION_RATING_VALUE}">
                     <meta itemprop="reviewCount" content = "{cart_related_goods.OPINION_RATING_CNT_ALL}">
                     
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
                     
                     <div class="rating" style="max-width:{cart_related_goods.OPINION_RATING_VALUE}0%" alt="{cart_related_goods.OPINION_RATING_VALUE}" title="Рейтинг товара">
-                      <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                      <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                      <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                      <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                      <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>                                   
+                      <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                      <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                      <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                      <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                      <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>                                   
                     </div>
                   </div>
                   {% ELSE %}
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
-                    <svg class="icon _rating-star"><use xlink:href="#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
+                    <svg class="icon _rating-star"><use xlink:href="/design/sprite.svg#rating-star"></use></svg>
                     
                     <div class="rating" style="max-width:0%" ></div>
                   {% ENDIF %}
@@ -304,13 +304,13 @@
                         <div class="qty__wrap">
                           <button class="qty__btn qty__btn--minus" title="Уменьшить">
                             <svg class="icon">
-                              <use xlink:href="#minus-icon"></use>
+                              <use xlink:href="/design/sprite.svg#minus-icon"></use>
                             </svg>
                           </button>
                           <input type="number" pattern="\d*" name="form[goods_mod_quantity]" max="4" value="1" min="1" title="Количество" class="input qty__input" onkeypress="return keyPress(this, event);"  autocomplete="off">
                           <button class="qty__btn qty__btn--plus" title="Увеличить">
                             <svg class="icon">
-                              <use xlink:href="#plus-icon"></use>
+                              <use xlink:href="/design/sprite.svg#plus-icon"></use>
                             </svg>                                        
                           </button>
                         </div>
@@ -350,7 +350,7 @@
                           rel="nofollow"
                         >
                           <svg class="icon _favorites">
-                            <use xlink:href="#favorites"></use>
+                            <use xlink:href="/design/sprite.svg#favorites"></use>
                           </svg>
                           {% IF cart_related_goods.IS_HAS_IN_FAVORITES_LIST %}
                           <span>Добавлено</span>
@@ -392,7 +392,7 @@
                             rel="nofollow"
                           >
                           <svg class="icon _compare">
-                            <use xlink:href="#compare"></use>
+                            <use xlink:href="/design/sprite.svg#compare"></use>
                           </svg>   
                           {% IF cart_related_goods.IS_HAS_IN_COMPARE_LIST %}
                           <span>Добавлено</span>
@@ -417,7 +417,7 @@
               <!-- Купить в 1 клик -->
               <a class="product__bottom-ico button _add-cart _quick" title="В корзину" data-tooltip="В корзину" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={cart_related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={cart_related_goods.MIN_PRICE_NOW_ID}">
                 <svg class="icon _cart">
-                  <use xlink:href="#cart"></use>
+                  <use xlink:href="/design/sprite.svg#cart"></use>
                 </svg>                                
                 <span>Купить <br> в 1 клик</span>
               </a>
@@ -453,7 +453,7 @@
                   rel="nofollow"
                 >
                   <svg class="icon _favorites">
-                    <use xlink:href="#favorites"></use>
+                    <use xlink:href="/design/sprite.svg#favorites"></use>
                   </svg>
                   {% IF cart_related_goods.IS_HAS_IN_FAVORITES_LIST %}
                   <span>Добавлено</span>
@@ -495,7 +495,7 @@
                     rel="nofollow"
                   >
                   <svg class="icon _compare">
-                    <use xlink:href="#compare"></use>
+                    <use xlink:href="/design/sprite.svg#compare"></use>
                   </svg>   
                   {% IF cart_related_goods.IS_HAS_IN_COMPARE_LIST %}
                   <span>Добавлено</span>
@@ -507,9 +507,9 @@
               <!-- /END Сравнение -->
               <!-- Наличие -->
               {% IF cart_related_goods.MAX_REST_VALUE=0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
-                <div class="product__bottom-ico product-rest _not-available"><svg class="icon _close"><use xlink:href="#close"></use></svg><span>Нет в наличии</span></div>
+                <div class="product__bottom-ico product-rest _not-available"><svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg><span>Нет в наличии</span></div>
               {% ELSE %}
-                <div class="product__bottom-ico product-rest _available"><svg class="icon _check"><use xlink:href="#check"></use></svg><span>В наличии</span></div>
+                <div class="product__bottom-ico product-rest _available"><svg class="icon _check"><use xlink:href="/design/sprite.svg#check"></use></svg><span>В наличии</span></div>
               {% ENDIF %}
               <!-- /END Наличие -->                              
             </div>
