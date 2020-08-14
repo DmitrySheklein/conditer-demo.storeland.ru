@@ -680,14 +680,13 @@ function mainFunctions() {
     return false;
   });  
   // Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
-  $("#order-stage-form, .feedback-form, .subscribe-footer__form, .clientForm").validate();
-  
+  $("#order-stage-form, .feedback-form, .subscribe-footer__form, .clientForm").validate();  
   $('.subscribe .subscribe__form').validate()
   $('.callback-form').validate()
   $('.offer-form').validate()
   // Возврашаем пользователя на страницу с которой был сделан обратный звонок
   $('.callbackredirect').val(document.location.href);
-  // Прокрутка до обартного звонка
+  // Прокрутка до обратного звонка
   $('.callback-link').click(function(e){
      e.preventDefault();
      
@@ -1191,6 +1190,7 @@ function addCart() {
 function startOrder(){
   var globalOrder = $('#globalOrder'); //объект блока куда будет выводиться форма быстрого заказа
   var closeOrder = $('#closeOrder'); // объект кнопки отмены заказа
+  var cartClear = $('#cart-clear'); // объект кнопки отмены заказа
   var cartTable = $('#cart-content'); // объект корзины
   var confirmOrder = $('#confirmOrder'); // объект блока оформления заказа
   var cartFast = $('.cart._fast');
@@ -1201,14 +1201,11 @@ function startOrder(){
     return false;
   }
   // объект кнопки "Заказать"
-  var buttonStartOrder = $('#startOrder');
-  var buttonStartFastOrder = $('#startFastOrder')  // объект кнопки быстрого заказа  
-  //объект блока с ajax анимацией
-  var ajaxLoaderQuickOrder = $('.content-loading');
-  
-  // Скрываем кнопку "Заказать" и "Быстрый заказ"
+  var buttonStartOrder = $('#startOrder');  
+  // Скрываем кнопку "Очистить корзину"
+  cartClear.hide();  
+  // Скрываем кнопку "Заказать"
   buttonStartOrder.hide();
-  buttonStartFastOrder.hide();
   // Скрываем элементы в корзине
   cartTable.hide();
   // Переключаем табы
@@ -1244,7 +1241,7 @@ function startOrder(){
 			quantity()
 			coupons();
 			preloadHide()
-      $('#closeOrder, #closeOrderTab').off('click').on('click',function() {
+      $('#closeOrder, #closeOrderTab').off('click').on('click', function() {
         // Если таб уже активен выходим
         if($(this).hasClass('cart-tab') && !$(this).hasClass('_disabled')){ 
           return;
@@ -1256,7 +1253,7 @@ function startOrder(){
         
         $('.cart-tab').toggleClass('_disabled').toggleClass('_active');
         buttonStartOrder.show(); // Возвращаем кнопку "Заказать"
-        buttonStartFastOrder.show() // Возвращаем кнопку "Быстрый заказ"
+        cartClear.show();
         // Показываем блок корзины
         cartTable.show();
         
@@ -1314,7 +1311,7 @@ function orderScripts(){
     $('.quickform .quickform__select-convenient').styler();
   }
   // Выбор диапазона времени доставки
-  // Для изменения диапазона используйте $('.quickform .quickform__select-convenient._period').val('0-2').trigger('refresh')
+  // Чтобы изменять диапазон со стороны используйте $('.quickform .quickform__select-convenient._period').val('0-2').trigger('refresh')
   $('.quickform .quickform__select-convenient._period').on('change', function(){
     var convenientArr = $(this).val().split('-')
     
@@ -1736,47 +1733,7 @@ function ajaxCartQty(){
     );
   })
 }
-        $(function(){
-          // Боковое меню сохранение открытой вложенности
-          function catalogSidebar() {
-            $('.catalog__item._parent .catalog__icon').click(function(evt){
-                evt.preventDefault()
-                
-                var $arrow = $(this);
-                var $link = $arrow.parent();
-                
-                if($arrow.hasClass('_active')){
-                  $arrow.removeClass('_active')
-                  $link.removeClass('_active').next('.sub').slideUp();
-                } else {
-                  $arrow.addClass('_active')
-                  $link.addClass('_active').next('.sub').slideDown();
-                }
-            });
-          }
-          catalogSidebar()
-          $('.recently-viewed .products-grid').owlCarousel({
-            items:1,
-            lazyLoad: true,
-            margin: 15
-          })
-          // Карусель Избранное / Сравнение
-          $('.favorites-goods .products-grid, .compare-goods .products-grid').owlCarousel(
-          $.extend(OWL_DEFAULT,  {
-            items:6,
-            margin: 9, 
-            lazyLoad: true,
-            responsive: {
-              0:{items:1},
-              320:{items:2},
-              480:{items:3},
-              540:{items:3},
-              768:{items:5},
-              992:{items:5},
-              1200:{items:6, nav: true,margin: 15, autoWidth: false}
-            }            
-          }))
-        })
+
 // С этим товаром покупают
 function cartRelatedGoods() {
   $(function () {
@@ -1902,7 +1859,8 @@ function cartDeleteItem(){
       url: url,
       cache: false,
       beforeSend: function(){
-        preloadShow($('#cart-content .preloader'))
+        // preloadShow($('#cart-content .preloader'))
+        $cartDeleteLink.closest('.cart__table-row').append($('<div class="preloader _opacity"><span class="content-loading"></span></div>'))
       },
       success: function(data){
         // var $data = $(data).find('#cart-content');
@@ -1914,8 +1872,8 @@ function cartDeleteItem(){
         })
         // Если корзина пуста
         if(!count){
-          $('.quick-order, .cart-info .cart').hide();
-          $('#empty-cart').show();
+          $('.quick-order,.cart-info .cart-info__wrap').hide();
+          $('#empty-cart').show();  
         }
         $cartDeleteLink.closest('.cart__table-row').remove();
         $('.header .cart-header .cart-header__counter .num').html(count);
@@ -2069,52 +2027,6 @@ function coupons() {
     ajaxCouponCheck(true)
   })
 }
-  
-// Клик по кнопке корзины в шапке
-/*$(function(){
-  $('.header .cart-header .cart-header__link').click(function(e){
-    
-    e.preventDefault()
-    // Данные которые отправятся на сервер чтобы получить только форму быстрого заказа без нижней части и верхней части сайта
-    var quickFormData = [
-        {name: 'ajax_q', value: 1},
-        {name: 'fast_order', value: 1}
-    ];
-    $.ajax({
-      type: "POST",
-      cache: false,
-      url: '/cart/add',
-      data: quickFormData,
-      beforeSend: function() {
-        startLoadCart();
-      },
-      success: function(data) {
-        $.fancybox.open(data,{
-          baseClass: 'quickOrder',
-          // modal: true,
-          afterShow: function(){
-      			cartAjaxQty()
-      			quantity()
-      			coupons();
-            endLoadCart();
-          }
-        })
-      },
-      error: function(){
-        endLoadCart();
-        $.fancybox.open('К сожалению произошла ошибка, корзина не загружена')
-      }
-    })
-    function startLoadCart(){
-          $('.cart-header .fal').removeClass('fa-shopping-cart').addClass('fa-spin fa-circle-notch')
-          $('.cart-header').addClass('_disabled')    
-    }
-    function endLoadCart(){
-  	  $('.cart-header .fal').removeClass('fa-spin fa-circle-notch').addClass('fa-shopping-cart')
-  		$('.cart-header').removeClass('_disabled')
-    }    
-  })
-})*/
 
 // Получение центральной разметки страницы (для быстрого просмотра)
 $.fn.getColumnContent = function() {
@@ -3080,22 +2992,15 @@ $(function(){
 			$topBtn.addClass('_active');
 		} else {
 			$topBtn.removeClass('_active');
-		}
-		
-	});
-	// scroll body to 0px on click
+		}		
+  });
+  
 	$topBtn.click(function () {
 		$('body, html').animate({
 			scrollTop: 0
 		}, 800);
 		return false;
 	});
-	
-  // $topBtn.stick_in_parent({
-  //     parent: '.wrapper',
-  //     sticky_class: '_sticky',
-  //     offset_top: -62
-  // })	
 });
 // Модальное окно
 $(function(){

@@ -315,7 +315,7 @@
                   <!--<label class="quickform__title --sub" {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}class="required"{% ENDIF %}>Удобное время доставки{% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}<em>*</em>{% ENDIF %}</label>-->
                   <div class="quickform__input-wrap">
                     <!-- Для переключения меняем 0 на 1-->
-                    {% IF DEFAULT_CONVENIRMENT = 0 %}
+                    {% IF DEFAULT_CONVENIRMENT = 1 %}
                     <div class="quickform__select-box -from">
                       <label class="quickform__label">С</label>
                       <select class="quickform__select-convenient _from" name="form[delivery][convenient_time_from]"  {% IF SETTINGS_ORDER_FIELDS_CONVENIENT_TIME=1 %}required{% ENDIF %}>
@@ -341,7 +341,7 @@
                         
                         <label class="quickform__label">Удобное время доставки</label>
                         <select class="quickform__select-convenient _period" >
-                          <option value=""></option>
+                          <option value="">Выбрать</option>
                           <option value="0-2">00:00 - 02:00</option>
                           <option value="2-4">02:00 - 04:00</option>
                           <option value="4-6">04:00 - 06:00</option>
@@ -416,4 +416,85 @@
 </div>
 <div style="display:none;" id="newCartSum">
   {CART_SUM_NOW | money_format}
+</div>
+<div style="display:none;" class="cart _fast" id="cartFast">
+  <div class="cart__header">
+    <span class="cart__header-title">
+      <svg class="icon _cart"><use xlink:href="/design/sprite.svg#cart"></use></svg>
+      <span class="title-styled">
+        Ваша корзина
+      </span>
+    </span>
+  </div>
+  <ul class="cart-list">
+    {% FOR cart_items %}
+    <li class="cart-list__item">
+      <span class="cart-list__num">{cart_items.index}.</span>
+      <div class="cart-list__content">
+        <span class="cart-list__name">
+          {cart_items.GOODS_NAME}
+        </span>
+        <span class="price {CURRENCY_CHAR_CODE} cart-list__price">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
+      </div>
+    </li>
+    {% ENDFOR %}
+  </ul>
+  <!-- Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->
+  {% IF TARIFF_FEATURE_DISCOUNT_COUPONS %}
+      <div class="coupon">
+          <div class="coupon__wrap">
+              <label class="coupon__label">Введите код купона</label>
+              <div class="coupon__box input-box">
+                  <input type="text" id="quick_form_coupon_code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="input coupon__input _bordered" placeholder="" />                                
+                  <button type="button" class="coupon__clear" title="Очистить купон"><svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg></button>
+                  <button type="button" class="button coupon__btn"><svg class="icon _check"><use xlink:href="/design/sprite.svg#check"></use></svg></button>
+              </div>
+          </div>
+      </div>
+  {% ENDIF %}
+  <!-- END Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->
+  <div class="cart__sum">
+          <div class="cart__sum-row cart__sum--order-sum" style="display:none">
+              <span class="cart__sum-label">Общая сумма заказа:</span>
+              <span class="cart__sum-text-price"><span class="price {CURRENCY_CHAR_CODE}">{CART_SUM_NOW | money_format}</span></span>
+          </div>            
+          <!-- Скидки, действующие на заказ -->
+          {% IF CART_SUM_DISCOUNT_PERCENT %}
+            {% FOR cart_discount %}
+              {% IF cart_discount.DISCOUNT_IS_ENABLED %}          
+              <div class="cart__sum-row cart__sum--discount">
+                  <span class="cart__sum-label">Скидка(<span class="discount-type">{% IF cart_discount.DISCOUNT_TYPE= sum %}по сумме заказа{% ELSEIF  cart_discount.DISCOUNT_TYPE= cumulative%}накопительная{% ELSE %}по купону{% ENDIF %}</span>):</span>
+                  <span class="cart__sum-text-price" data-discount-value="{cart_discount.END_PRICE}"><span class="price {CURRENCY_CHAR_CODE}">{% IF cart_discount.IS_PERCENT %}{cart_discount.DISCOUNT_VALUE} %{% ELSE %}{cart_discount.DISCOUNT_VALUE | money_format}{% ENDIF %}</span></span>
+              </div>
+              {% ENDIF %}
+            {% ENDFOR %}
+          {% ELSE %}
+          <div class="cart__sum-row cart__sum--discount" style="display:none">
+              <span class="cart__sum-label">Скидка(<span class="discount-type">{% IF cart_discount.DISCOUNT_TYPE= sum %}по сумме заказа{% ELSEIF  cart_discount.DISCOUNT_TYPE= cumulative%}накопительная{% ELSE %}по купону{% ENDIF %}</span>):</span>
+              <span class="cart__sum-text-price" data-discount-value="0"></span>
+          </div>
+          {% ENDIF %}                
+          <div class="cart__sum-row cart__sum--delivery-sum" style="display:none">
+              <span class="cart__sum-label">Доставка:</span>
+              <span class="cart__sum-text-price"><span class="price {CURRENCY_CHAR_CODE}"><span><span class="num">0</span><span>{CURRENCY_NAME}</span></span></span></span>
+          </div>
+          <div class="cart__sum-row cart__sum--total">
+              <span class="cart__sum-label">Общая сумма заказа:</span>
+              <span class="cart__sum-text-price">
+                  <span class="price total-sum {CURRENCY_CHAR_CODE}" data-total-sum="{CART_SUM_NOW}">
+                      {% FOR cart_sum %}
+                          {cart_sum.NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}
+                      {% ENDFOR %}
+                  </span>                            
+              </span>
+          </div>               
+      </div>
+  <div class="cart__buttons">
+    <button id="startOrder" class="button cart__button cart__start-order _upppercase">Оформить заказ</button>
+  </div>
+  
+  <div class="cart__confirm-order" id="confirmOrder" >
+    <a onclick="$('#quickform').submit()" class="button cart__button _upppercase">Оформить заказ</a>
+    <div class="politics -cart-fast">Нажимая на кнопку Оформить заказ, Вы соглашаетесь с <a class="underline" data-fancybox href="#fancybox-politics">правилами обработки данных</a></div>
+  </div>
 </div>

@@ -183,7 +183,7 @@
               </div>
           <div class="cart__buttons">
             <button id="startOrder" class="button cart__button cart__start-order _upppercase">Оформить заказ</button>
-            <button id="startFastOrder" class="button cart__button cart__start-fast-order _reverse _upppercase">Быстрый заказ</button>
+            <!-- <button id="startFastOrder" class="button cart__button cart__start-fast-order _reverse _upppercase">Быстрый заказ</button> -->
           </div>
           
           <div class="cart__confirm-order" id="confirmOrder" >
@@ -531,32 +531,3 @@
 <div id="cart-message" data-message-type="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}">
   {% IF FORM_NOTICE %}{FORM_NOTICE}{% ENDIF %}
 </div>
-
-<style>
-.cart-info__wrap {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-align: start;-ms-flex-align: start;align-items: flex-start}
-.cart-info__content {width: calc(100% - 295px);padding-right: 15px}
-@media (max-width:768px) {
-.cart-info__content {width: 100%}
-}
-.cart-info__cart {width: 295px;position: -webkit-sticky;position: sticky;top: 0}
-@media (max-width: 769px){
-  .cart-info__cart {width: 100%;}
-}
-
-.cart-info__cart .cart__return {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center}
-.cart-info__cart .cart__return .cart__return-icon {width: 20px;height: 20px;line-height: 16px;border-radius: 50%;border: 1px solid #cacfd7;text-align: center;margin-right: 10px}
-.cart-info__cart .cart__return .cart__return-icon .icon {width: 8px;height: 8px;fill: #cacfd7}
-.cart-info__cart .cart__return:hover .cart__return-icon .icon {fill: #6053c7}
-.cart-info__cart .cart__return:hover .cart__return-icon {border-color: #6053c7}
-/**/
-.cart-info__cart .cart__delete-all {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;margin-bottom: 13px}
-.cart-info__cart .cart__delete-all .cart__delete-all-icon {width: 20px;height: 20px;line-height: 16px;border-radius: 50%;border: 1px solid #cacfd7;text-align: center;margin-right: 10px}
-.cart-info__cart .cart__delete-all .cart__delete-all-icon .icon {width: 8px;height: 8px;fill: #cacfd7}
-.cart-info__cart .cart__delete-all:hover .cart__delete-all-icon .icon {fill: #6053c7}
-.cart-info__cart .cart__delete-all:hover .cart__delete-all-icon {border-color: #6053c7}
-</style>
-<style>
-.show-password {display: flex;position: absolute;z-index: 1;top: 0;right: 0;height: 100%;padding: 0 15px}
-.show-password .icon {fill: #d5daeb;width: 32px;height: 28px}
-.show-password .icon._active {fill: #6053c7}
-</style>

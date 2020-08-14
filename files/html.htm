@@ -24,12 +24,9 @@
   {% ENDIF %}
 
   <!-- Стили магазина -->
-  <!-- <link rel="preload" href="{ASSETS_STYLES_PATH}forall.css" as="style" onload="this.onload=null;this.rel='stylesheet'"> -->
-  <!-- <link rel="preload" href="{ASSETS_STYLES_PATH}main.css?design=conditer" as="style" onload="this.onload=null;this.rel='stylesheet'"> -->
-  <!-- <noscript> -->
-      <link rel="stylesheet" href="{ASSETS_STYLES_PATH}forall.css">
-      <link rel="stylesheet" href="{ASSETS_STYLES_PATH}main.css?design=conditer">
-  <!-- </noscript>      -->
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}forall.css">
+  <link rel="stylesheet" href="{ASSETS_STYLES_PATH}main.css?design=conditer">
+  
 </head>
 <body>
   <main class="wrapper {% IF index_page %}_index{% ENDIF %} nojs">
@@ -144,7 +141,7 @@
                 <div class="login-header__menu">
                   <div class="login-header__body">
                     <div class="login-header__icon-wrap icon-wrap">
-                      <svg class="icon _user">
+                      <svg class="icon _user" width="30px" height="30px">
                         <use xlink:href="/design/sprite.svg#user"></use>
                       </svg>  
                     </div>
@@ -184,7 +181,7 @@
               <div class="compare-header {% IF MOD_LNAME = compare %}_page{% ENDIF %} header-actions__item">
                 <a href="{COMPARE_URL}" title="Перейти к Сравнению" class="compare-header__link">
                   <div class="icon-wrap header-actions__icon-wrap">
-                    <svg class="icon _compare">
+                    <svg class="icon _compare" width="30px" height="30px">
                       <use xlink:href="/design/sprite.svg#compare"></use>
                     </svg>                    
                     <span class="compare-header__counter icon-counter" data-count="{COMPARE_GOODS_COUNT}"><span class="num">{COMPARE_GOODS_COUNT}</span><span></span></span>
@@ -195,7 +192,7 @@
               <div class="favorites-header {% IF MOD_LNAME = user && ACT = favorites %}_page{% ENDIF %} header-actions__item">
                 <a href="{%IF CLIENT_IS_LOGIN%}{USER_FAVORITES_URL}{%ELSE%}{USER_REGISTER_URL}{%ENDIF%}" title="Перейти к Избранному" class="favorites-header__link">
                     <div class="icon-wrap header-actions__icon-wrap">
-                      <svg class="icon _favorites">
+                      <svg class="icon _favorites" width="30px" height="30px">
                         <use xlink:href="/design/sprite.svg#favorites"></use>
                       </svg>                    
                       <span class="favorites-header__counter icon-counter" data-count="{FAVORITES_GOODS_COUNT}"><span class="num">{FAVORITES_GOODS_COUNT}</span><span></span></span>
@@ -207,7 +204,7 @@
                 <a href="{CART_URL}" title="Перейти в Корзину" class="cart-header__link">
                   <div class="cart-header__wrap">
                     <div class="icon-wrap header-actions__icon-wrap _cart">
-                      <svg class="icon _cart">
+                      <svg class="icon _cart" width="30px" height="30px">
                         <use xlink:href="/design/sprite.svg#cart"></use>
                       </svg>                    
                       <span class="cart-header__counter icon-counter" data-count="{CART_COUNT_TOTAL}"><span class="num">{CART_COUNT_TOTAL}</span><span></span></span>
@@ -448,8 +445,7 @@
           {% ENDIF %}
           {% IFNOT cart_count_empty %}
           {% IF MOD_LNAME=cart %}
-              <h1 class="breadcrumbs__title title-styled">Корзина</h1>
-              <p class="breadcrumbs__description">Оформите свой заказ двумя способами: заполните все поля для доставки, <br> либо воспользуйтесь быстрым оформлением, указав лишь контактный телефон.</p>
+              <h1 class="breadcrumbs__title title-styled">Корзина</h1>              
           {% ENDIF %}
           {% ENDIF %}  
           
@@ -2600,8 +2596,7 @@
                     <use xlink:href="/design/sprite.svg#map-pin"></use>
                   </svg>
                 </div>                  
-                <span itemprop="addressLocality">{SETTINGS_STORE_REGION | htmlspecialchars_decode}</span></div>
-              <!--<a data-fancybox href="#map" class="footer-address__link underline">показать на карте</a>-->
+                <span itemprop="addressLocality">{SETTINGS_STORE_REGION | htmlspecialchars_decode}</span></div>              
               {% ENDIF %}
               <div class="social-links _footer">
                 <a class="social-links__item" href="https://whatsapp.com/" title="Whatsapp.com" target="_blank">
@@ -2719,15 +2714,13 @@
     }    
   </style>
 
-  <!-- Подключаемые шрифты -->
-  <link rel="preload" href="/design/fonts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-      <link rel="stylesheet" href="/design/fonts.css">
-  </noscript>   
+  <!-- Подключаемые шрифты -->  
+  <link rel="stylesheet" href="/design/fonts.css">
   
   <!-- Скрипты магазина -->
   <script src="{ASSETS_JS_PATH}forall.js"></script>
   <script src="{ASSETS_JS_PATH}main.js?design=conditer"></script>
+
   {% IF user_agent_ie %}
   <script>
     // Picture element HTML5 shiv
