@@ -90,7 +90,7 @@
                     </select>
                   </div>
                   <div class="quickform__select-box {% FOR order_delivery %}{% IF order_delivery.first %}{% IF order_delivery.zone_list_empty %}_hide-triangle{% ENDIF %}{% ENDIF %}{% ENDFOR %}">
-                    <select name="form[delivery][zone_id]" class="quickform__select delivery-zone-select {% FOR order_delivery %}{% IF order_delivery.first %}{% IF order_delivery.zone_list_empty %}_hide{% ENDIF %}{% ENDIF %}{% ENDFOR %}" data-delivery-id="{order_delivery.ID}">
+                    <select name="form[delivery][zone_id]" class="quickform__select delivery-zone-select {% FOR order_delivery %}{% IF order_delivery.first %}{% IF order_delivery.zone_list_empty %}_hide{% ENDIF %}{% ENDIF %}{% ENDFOR %}" data-delivery-id="{% FOR order_delivery %}{% IF order_delivery.first %}{order_delivery.ID}{% ENDIF %}{% ENDFOR %}">
                     {% FOR order_delivery %}
                       {% IFNOT order_delivery.zone_list_empty %}
                         {% IF order_delivery.first %}                
@@ -233,7 +233,8 @@
                 {% IFNOT country_list_empty %}
                 <div class="quickform__item" {% IF country_list_empty %}style="display:none"{% ENDIF %}>                
                     <div class="quickform__input-wrap">
-                      <select id="quickDeliveryCountry" name="form[delivery][country_id]" class="input"  {% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}required{% ENDIF %}>
+                      <label class="quickform__label">Выберите страну</label>
+                      <select id="quickDeliveryCountry" name="form[delivery][country_id]" class="quickform__country-select"  {% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}required{% ENDIF %}>
                           <option value="">Выберите страну {% IF SETTINGS_ORDER_FIELDS_COUNTRY=1 %}<em>*</em>{% ENDIF %}</option>
                         {% FOR country_list %}
                           <option value="{country_list.ID}" {% IF country_list.ID=ORDER_FORM_DELIVERY_COUNTRY_ID %}selected="selected"{% ENDIF %}>
@@ -346,7 +347,7 @@
                           <option value="2-4">02:00 - 04:00</option>
                           <option value="4-6">04:00 - 06:00</option>
                           <option value="6-8">06:00 - 08:00</option>
-                          <option value="8-10">8:00 - 10:00</option>
+                          <option value="8-10">08:00 - 10:00</option>
                           <option value="10-12">10:00 - 12:00</option>
                           <option value="12-14">12:00 - 14:00</option>
                           <option value="14-16">14:00 - 16:00</option>

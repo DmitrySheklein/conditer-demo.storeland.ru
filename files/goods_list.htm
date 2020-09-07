@@ -105,8 +105,8 @@
                           <ul class="filters__inner {% FOR values %}{% IF filter_attr_list.values.index > 5 %}_crop{break}{% ENDIF %}{% ENDFOR %}" {% IF filter_attr_list.index > 3 %}style="display:none"{% ENDIF %}>
                           {% FOR values %}
                             <li class="filters-inner__item">
-                              <input class="checkbox-hidden" type="checkbox" name="form[filter][attr][{filter_attr_list.ID}][{filter_attr_list.values.ID}]" value="1" id="filterAttrVal{filter_attr_list.values.ID}" {% IF filter_attr_list.values.CHECKED %}checked="checked"{% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %} />
-                              <label class="checkbox-name" for="filterAttrVal{filter_attr_list.values.ID}">{filter_attr_list.values.VALUE} <span class="filters-inner__item-counter">{filter_attr_list.values.NB_GOODS_FILTERED}</span></label>
+                              <input class="checkbox-hidden filters__input" type="checkbox" name="form[filter][attr][{filter_attr_list.ID}][{filter_attr_list.values.ID}]" value="1" id="filterAttrVal{filter_attr_list.values.ID}" {% IF filter_attr_list.values.CHECKED %}checked="checked"{% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %} />
+                              <label class="checkbox-name filters__label" for="filterAttrVal{filter_attr_list.values.ID}">{filter_attr_list.values.VALUE} <span class="filters-inner__item-counter">{filter_attr_list.values.NB_GOODS_FILTERED}</span></label>
                             </li>
                           {% ENDFOR %}
                           </ul>
@@ -125,8 +125,8 @@
                           <ul class="filters__inner {% FOR values %}{% IF filter_prop_list.values.index > 5 %}_crop{break}{% ENDIF %}{% ENDFOR %}" {% IF filter_prop_list.index > 3 %}style="display:none"{% ENDIF %}>
                           {% FOR values %}
                             <li class="filters-inner__item">
-                              <input  class="checkbox-hidden" type="checkbox" name="form[filter][prop][{filter_prop_list.ID}][{filter_prop_list.values.ID}]" value="1" id="filterPropVal{filter_prop_list.values.ID}" {% IF filter_prop_list.values.CHECKED %}checked="checked"{% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %} >
-                              <label class="checkbox-name" for="filterPropVal{filter_prop_list.values.ID}">{filter_prop_list.values.VALUE} <span class="filters-inner__item-counter">{filter_prop_list.values.NB_GOODS_FILTERED}</span></label>
+                              <input  class="checkbox-hidden filters__input" type="checkbox" name="form[filter][prop][{filter_prop_list.ID}][{filter_prop_list.values.ID}]" value="1" id="filterPropVal{filter_prop_list.values.ID}" {% IF filter_prop_list.values.CHECKED %}checked="checked"{% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %} >
+                              <label class="checkbox-name filters__label" for="filterPropVal{filter_prop_list.values.ID}">{filter_prop_list.values.VALUE} <span class="filters-inner__item-counter">{filter_prop_list.values.NB_GOODS_FILTERED}</span></label>
                             </li>
                           {% ENDFOR %}
                           </ul>
@@ -141,10 +141,10 @@
                     </div>
                     <!-- /END Осноные Фильтры -->
                     <div class="filters__bottom col-sm-12">
-                      <div class="filters__results" style="display:none">
-                        <input type="hidden" value="{GOODS_PAGES_RESULTS}" id="godds-filters-results">
+                      <div class="filters__results" style="display:none;{% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}display: flex;{% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}display: flex;{% ENDIF %}{% ENDFOR %}{% ENDFOR %}" >
+                        <input type="hidden" value="{GOODS_PAGES_RESULTS}" id="goods-filters-results">
                         <label class="filters__results-label">Найдено товаров:</label>
-                        <input type="text" value="" class="input _min filters__results-input">
+                        <input type="text" value="{GOODS_PAGES_RESULTS}" class="input _min filters__results-input">
                         <button type="submit" class="filters__results-button button _upppercase" id="filters-show-result">Показать</button>
                       </div>
                       <!-- Активные Фильтры -->
@@ -233,7 +233,7 @@
     <!-- Блок навигации по категориям, вложенным в текущую категорию -->
     {% IFNOT nested_categories_list_empty %}
       <!-- Категории-->
-      <div class="categories">
+      <div class="categories _catalog">
         {% FOR nested_categories_list %}
           <div class="categories__item">
             <a class="categories__image-wrap" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">

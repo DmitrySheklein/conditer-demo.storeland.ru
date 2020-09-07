@@ -229,7 +229,7 @@
               <!-- Логотип -->
               <div class="header__logo">
 									<a href="{INDEX_PAGE_URL}" title="{SETTINGS_STORE_NAME}">
-									  <img class="header__logo-img lozad" src="{ASSETS_IMAGES_PATH}loader-min.gif" data-src="{ASSETS_IMAGES_PATH}logo.png" alt="{SETTINGS_STORE_NAME}">
+									  <img class="header__logo-img" src="{ASSETS_IMAGES_PATH}logo.png" alt="{SETTINGS_STORE_NAME}">
 									 </a>
 							</div>
 							<!-- /Лого -->
@@ -1047,7 +1047,7 @@
                             </h1>
                           </div>
                         {% ELSEIF MOD_LNAME=catalog %}
-                          <!--<div class="block-title"><h1 class="title">{% IF IS_FULL_CATALOG %}Каталог{% ELSE %} {% IF GOODS_PAGES_RESULTS = 0 %} {CATEGORY_NAME} {% ELSE %} {CATEGORY_NAME} {% ENDIF %} {% ENDIF %}</h1>{% IF GOODS_PAGES_RESULTS > 0 %}<h5 class="result">{GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")}</h5>{% ENDIF %}</div>-->
+                          <!-- <div class="block-title"><h1 class="title">{% IF IS_FULL_CATALOG %}Каталог{% ELSE %} {% IF GOODS_PAGES_RESULTS = 0 %} {CATEGORY_NAME} {% ELSE %} {CATEGORY_NAME} {% ENDIF %} {% ENDIF %}</h1>{% IF GOODS_PAGES_RESULTS > 0 %}<h5 class="result">{GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")}</h5>{% ENDIF %}</div> -->
                         {% ENDIF %}            
                     </div>
                     <!-- /END Заголовок страницы -->
@@ -2812,7 +2812,7 @@
   
   <!-- Debug -->
   <div class="container">
-    <!-- {print_r} -->
+    {print_r}
   </div>
 
 </body> 

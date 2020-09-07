@@ -729,6 +729,9 @@ function mainFunctions() {
   $(document).on('click', '.button._add-cart:not(.quickview):not()', function() {
     var $btn  = $(this);
     $btn.addClass('_loading')
+    if($btn.hasClass('_cart-page')) {
+      return true;
+    }
     if(!$btn.hasClass('_quick')) {
       $btn.find('span').html('<span class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>')
     }
@@ -760,9 +763,7 @@ function mainFunctions() {
     $('body').addClass('modal-open');
 
     var id = $(this).data('target');
-    if (id){
-      console.log($('#' + id));
-      
+    if (id){      
       $('#' + id).addClass('_visible');
       $('.header-content__button[data-target="' + id +'"]').addClass('_active')
     }
@@ -839,8 +840,7 @@ function mainFunctions() {
         $catalogItem = $(".header-sectionsItem.parent");
 
       var $catalogMenu = $(".header-catalog .header-catalog__menu");
-      $catalogMenu.on('click', '._parent .header-catalog__icon', function(evt){
-        if (getClientWidth() <= 1199) {
+      $catalogMenu.on('click', '.header-catalog__icon', function(evt){        
           evt.preventDefault()
           
           var $arrow = $(this);
@@ -853,8 +853,7 @@ function mainFunctions() {
             $arrow.addClass('_active')
             $link.addClass('_active').next('.sub').slideDown();
           }
-          
-        }                              
+                           
       });
   }
   headerCatalog();
@@ -968,6 +967,7 @@ function catalogFunctions() {
     var $formData = $('#filters-form').serializeArray();
     // Сообщаем серверу, что мы пришли через ajax запрос
     $formData.push({name: 'ajax_q', value: 1});
+    $formData.push({name: 'only_body', value: 1});
 
     // Аяксом добавляем товар в корзину и вызываем форму быстрого заказа товара
     $.ajax({
@@ -975,11 +975,11 @@ function catalogFunctions() {
       cache: false,
       data: $formData,
       success: function(data) {
-        $resultsInput = $(data).find('#godds-filters-results');
+        var $resultsInput = $(data).find('#goods-filters-results');
         // Если есть результаты
         if($resultsInput.length){
           var value = $resultsInput.val();
-          
+
           $('.filters .filters__results').show();
           $('.filters .filters__results-input').val(value)
         } else {
@@ -989,7 +989,8 @@ function catalogFunctions() {
     })
   }
   // Фильтры по товарам. При нажании на какую либо характеристику или свойство товара происходит фильтрация товаров
-  $('.filters-inner__item input').on('change',function(e){
+  $('.filters-inner__item .filters__input').on('change', function(e){
+    $(this).attr('checked', $(this).is(':checked') ? 'checked' : false);
     e.preventDefault();
     onFiltersChange();
   });
@@ -1076,31 +1077,29 @@ function catalogFunctions() {
     });
   }); 
 
-    // Боковое меню сохранение открытой вложенности
-    function catalogSidebar() {
-      $('.catalog__item._parent .catalog__icon').click(function(evt){
-          evt.preventDefault()
-          
-          var $arrow = $(this);
-          var $link = $arrow.parent();
-          
-          if($arrow.hasClass('_active')){
-            $arrow.removeClass('_active')
-            $link.removeClass('_active').next('.sub').slideUp();
-          } else {
-            $arrow.addClass('_active')
-            $link.addClass('_active').next('.sub').slideDown();
-          }
-      });
-    }
-    catalogSidebar()
-    $('.recently-viewed .products-grid').owlCarousel({
-      items:1,
-      lazyLoad: true,
-      margin: 15
-    })
-    // Карусель Избранное / Сравнение
-    $('.favorites-goods .products-grid, .compare-goods .products-grid').owlCarousel(
+  // Боковое меню сохранение открытой вложенности
+  $('.catalog__item._parent .catalog__icon').click(function(evt){
+      evt.preventDefault()
+      
+      var $arrow = $(this);
+      var $link = $arrow.parent();
+      
+      if($arrow.hasClass('_active')){
+        $arrow.removeClass('_active')
+        $link.removeClass('_active').next('.sub').slideUp();
+      } else {
+        $arrow.addClass('_active')
+        $link.addClass('_active').next('.sub').slideDown();
+      }
+  });
+  // Вы смотрели
+  $('.recently-viewed .products-grid').owlCarousel({
+    items:1,
+    lazyLoad: true,
+    margin: 15
+  })
+  // Карусель Избранное / Сравнение
+  $('.favorites-goods .products-grid, .compare-goods .products-grid').owlCarousel(
     $.extend(OWL_DEFAULT,  {
       items:6,
       margin: 9, 
@@ -1114,7 +1113,8 @@ function catalogFunctions() {
         992:{items:5},
         1200:{items:6, nav: true,margin: 15, autoWidth: false}
       }            
-    }))
+    })
+  )
 }
 
 // Добавление товара в корзину
@@ -1308,6 +1308,7 @@ function quickOrder(formSelector) {
 function orderScripts(){
   // Кастом селект  
   if($.fn.styler){
+    $('#quickDeliveryCountry').styler();
     $('.quickform .quickform__select-convenient').styler();
   }
   // Выбор диапазона времени доставки
@@ -1397,13 +1398,12 @@ function orderScripts(){
       success: function(data) {
         // Если заказ был успешно создан
         if( data.status == 'ok' ) {
-          console.log('okkk');
+          alert('okkk');
           return;
           window.location = data.location;
         } else if( data.status == 'error' ) {
           new Noty({
             timeout: "7000",
-            layout: 'center',
             text: data.message,
             type: "error",
             animation: {
@@ -1582,8 +1582,7 @@ function orderScripts(){
         var $currentPaymentBlock = $('.quickform-payment').filter('[data-delivery-id="'+ deliveryId +'"]');
         
         $currentPaymentBlock.show().siblings('.quickform-payment').hide();
-        $currentPaymentBlock.find('[name="form[payment][id]"]:first').prop('checked', true)
-        console.log($currentPaymentBlock.find('[name="form[payment][id]"]:first'))
+        $currentPaymentBlock.find('[name="form[payment][id]"]:first').prop('checked', true)        
       } else {
         $('.quickform-payment').hide().find('[name="form[payment][id]"]').prop('checked', false)
       }
@@ -1594,7 +1593,7 @@ function orderScripts(){
     var currentPriceWithoutChange = Number($('.cart__sum .total-sum').data('total-sum'));
     var deliveryPrice = Number(getCurrentDeliveryPrice());
     var discountPrice = Number($('.cart__sum .cart__sum--discount .cart__sum-text-price').data('discount-value'));
-    console.log(currentPriceWithoutChange,deliveryPrice,discountPrice)
+    // console.log(currentPriceWithoutChange,deliveryPrice,discountPrice)
     // Заполняем стоимость доставки
     $('.cart__sum .cart__sum--delivery-sum .num').text(addSpaces(deliveryPrice));
     $('.delivery__descr .delivery__price .num').text(addSpaces(deliveryPrice));
@@ -1626,7 +1625,7 @@ function orderScripts(){
   
       return deliveryPrice;
     }
-    console.log(CURRENT_DELIVERY)
+    // console.log(CURRENT_DELIVERY)
     if (typeof CURRENT_DELIVERY == "undefined") {
       return '0';
     }
@@ -1650,12 +1649,12 @@ function orderScripts(){
       if($('.delivery-zone-radio:checked').length){
         zoneId = $('.delivery-zone-radio:checked').val();
       }
-      console.log(CURRENT_DELIVERY.zoneList)
+      //console.log(CURRENT_DELIVERY.zoneList)
       var zoneList = $.grep(CURRENT_DELIVERY.zoneList, function(item, i) {
         return item.zoneId == zoneId
       })[0];
       
-      console.log(zoneList)
+      // console.log(zoneList)
       // Если у этой зоны нет правил
       if (zoneList.zoneRuleListEmpty) {
         return zoneList.price
@@ -1663,7 +1662,7 @@ function orderScripts(){
         // Берём подходящую стоимость из массива правил иначе стандартную цену для зоны
         var priceFromArray = getPriceFromArray(zoneList.zoneRuleList);
         var deliveryPrice = (priceFromArray !== null) ? priceFromArray : zoneList.price;
-          console.log('deliveryPrice',deliveryPrice)
+          // console.log('deliveryPrice',deliveryPrice)
         return deliveryPrice;
       }
     }
@@ -3377,7 +3376,7 @@ $(function() {
          if(i == data.goods.length - 1){
           $("#search-result .search__result-inner #show-wrap").remove();
           
-          var $showAllBtn = $('<a>').text('Все результаты').addClass('show-all').click(function(){$('.search-form').submit();})
+          var $showAllBtn = $('<a>').text('Все результаты').addClass('show-all').click(function(){$('.search__form').submit();})
           var $showAllWrap = $('<div>').attr('id', 'show-wrap').addClass('result-item').append($showAllBtn)
           
           $("#search-result .search__result-inner .result-goods").append($showAllWrap)
