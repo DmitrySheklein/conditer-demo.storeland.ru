@@ -133,7 +133,7 @@
                 <span class="cart-list__name">
                   {cart_items.GOODS_NAME}
                 </span>
-                <span class="price {CURRENCY_CHAR_CODE} cart-list__price">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</span>            
+                <span class="price {CURRENCY_CHAR_CODE} cart-list__price">{cart_items.ORDER_LINE_PRICE_NOW | money_format}<span class="cart-list__price-count">x {cart_items.ORDER_LINE_QUANTITY}</span></span>     
               </div>
             </li>
             {% ENDFOR %}
@@ -144,7 +144,7 @@
                   <div class="coupon__wrap">
                       <label class="coupon__label">Введите код купона</label>
                       <div class="coupon__box input-box">
-                          <input type="text" id="quick_form_coupon_code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="input coupon__input _bordered" placeholder="" />                                
+                          <input type="text" id="quick_form_coupon_code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="input coupon__input _bordered" placeholder="" autocomplete="off"/>                                
                           <button type="button" class="coupon__clear" title="Очистить купон"><svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg></button>
                           <button type="button" class="button coupon__btn"><svg class="icon _check"><use xlink:href="/design/sprite.svg#check"></use></svg></button>
                       </div>
@@ -154,7 +154,7 @@
           <!-- END Если в тарифном плане подключен модуль скидок по купонам и суммам заказов -->
           <div class="cart__sum">
                   <div class="cart__sum-row cart__sum--order-sum" style="display:none">
-                      <span class="cart__sum-label">Общая сумма заказа:</span>
+                      <span class="cart__sum-label">Товары:</span>
                       <span class="cart__sum-text-price"><span class="price {CURRENCY_CHAR_CODE}">{CART_SUM_NOW | money_format}</span></span>
                   </div>            
                   <!-- Скидки, действующие на заказ -->

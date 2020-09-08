@@ -37,11 +37,7 @@ Noty.overrideDefaults({
     open: 'animated slideInUp', 
     close: 'animated slideOutDownNew'
   }
-});  
-// Hover карусель изображений
-$(function(){
-  $(".mouseHoverImgCarousel").HoverMouseCarousel();
-})
+});
 // jQuery Validation Plugin
 $(function(){
   $.validator.setDefaults({
@@ -1232,7 +1228,9 @@ function startOrder(){
       // Вставляем форму быстрого заказа
       globalOrder.html($(data).html());
       $('html, body').delay(400).animate({scrollTop : jQuery('#globalOrder').offset().top - 100}, 800);
+      $('.coupon-hidden-input').val($('#quick_form_coupon_code').val())
       cartFast.find('.cart__sum-row.cart__sum--delivery-sum').show();
+      cartFast.find('.cart__sum-row.cart__sum--order-sum').show();
       confirmOrder.show();
       closeOrder.show();
       // Включаем возможность клика по неактивной кнопке
@@ -1246,7 +1244,8 @@ function startOrder(){
         if($(this).hasClass('cart-tab') && !$(this).hasClass('_disabled')){ 
           return;
         }
-        cartFast.find('.cart__sum-row.cart__sum--delivery-sum').hide(); // Скрываем пункт "Стоимость доставки"
+        cartFast.find('.cart__sum-row.cart__sum--order-sum').hide(); // Скрываем пункт "Сумма заказа"
+        //cartFast.find('.cart__sum-row.cart__sum--delivery-sum').hide(); // Скрываем пункт "Стоимость доставки"
         confirmOrder.hide(); // Скрываем блок "Оформить заказ"
         globalOrder.hide(); // Скрываем блок оформления заказа
         closeOrder.hide(); // Скрываем кнопку "Отменить"
@@ -1398,8 +1397,6 @@ function orderScripts(){
       success: function(data) {
         // Если заказ был успешно создан
         if( data.status == 'ok' ) {
-          alert('okkk');
-          return;
           window.location = data.location;
         } else if( data.status == 'error' ) {
           new Noty({
@@ -1593,7 +1590,7 @@ function orderScripts(){
     var currentPriceWithoutChange = Number($('.cart__sum .total-sum').data('total-sum'));
     var deliveryPrice = Number(getCurrentDeliveryPrice());
     var discountPrice = Number($('.cart__sum .cart__sum--discount .cart__sum-text-price').data('discount-value'));
-    // console.log(currentPriceWithoutChange,deliveryPrice,discountPrice)
+    console.log(currentPriceWithoutChange,deliveryPrice,discountPrice)
     // Заполняем стоимость доставки
     $('.cart__sum .cart__sum--delivery-sum .num').text(addSpaces(deliveryPrice));
     $('.delivery__descr .delivery__price .num').text(addSpaces(deliveryPrice));
@@ -1804,7 +1801,7 @@ function cartAjaxQty(){
             DeliveryModule.changeCartSum();
             
             var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input').val();
-    
+            $('.cart__sum-row.cart__sum--delivery-sum').show();
             if(qtyInputVal > newQtyInputVal){
               var $cartMessage = $data.filter('#cart-message');
               var type = $cartMessage.data('message-type');
@@ -1827,7 +1824,19 @@ function cartAjaxQty(){
     )
   })
 }
-
+// Фиксация корзины
+function cartFix() {
+  $(function(){
+    // $('.cart._fast').sticky({topSpacing:0})
+    // $('.cart-info__cart').sticky({topSpacing:0})
+    // new Sticky('.cart-info__cart');
+/*     $('.cart-info__cart').airStickyBlock({
+      debug: false, // Режим отладки, по умолчанию false
+      stopBlock: '.airSticky_stop-block', // Класса контейнера, в котором находится сетка, по умолчанию .airSticky_stop-block
+      offsetTop: 0 // отступ сверху
+    });     */
+  })  
+}
 // Очистить корзину
 function cartClear() {
  $(function(){
@@ -1927,7 +1936,8 @@ function coupons() {
       data: formData,
       beforeSend: function(){
         $submitBtn.find('.coupon__btn-icon').remove();
-        $submitBtn.addClass('_loading').append('<span class="coupon__btn-icon"><i class="fal fa-circle-notch fa-spin"></i></span>')  
+        $submitBtn.addClass('_loading').append('<span class="coupon__btn-icon"><i class="fal fa-circle-notch fa-spin"></i></span>');
+        $cuponInput.attr("placeholder", "")
       },
       success: function(data) {
         var $discountBlock = $(data).closest('#order-stage-form').find('tr.discount');
@@ -1969,37 +1979,45 @@ function coupons() {
         
         $('.cart__sum-row.cart__sum--discount .cart__sum-text-price').data('discount-value', discountRub);
         
-        if(discountRub > 0){
+        if(discountRub > 0) {
           $('.cart__sum-row.cart__sum--discount').show();
           if(discountType === 'coupon'){
             $submitBtn.addClass('_added').find('.coupon__btn-icon').html('<i class="fal fa-check-circle"></i>');
+            $cuponInput.removeClass('error')
           } else {
             // Это не клик по кнопке reset
             if(!isResetBtn){
               $submitBtn.addClass('_not-add').find('.coupon__btn-icon').html('<i class="fal fa-times-circle"></i>');
+              $cuponInput.addClass('error');
+
+              return;
             }
             notAddBtn();
           }
           $cuponInput.parent().addClass('_active')
+          $submitBtn.removeClass('_loading')
         } else {
           $('.cart__sum-row.cart__sum--discount').hide();
           // Это не клик по кнопке reset
           if(!isResetBtn){
             $submitBtn.addClass('_not-add').find('.coupon__btn-icon').html('<i class="fal fa-times-circle"></i>');
+            $cuponInput.addClass('error');
+
+            return;
           }          
           notAddBtn();
         }
         function notAddBtn(){
-          setTimeout(function(){
-            $submitBtn.removeClass('_loading');
-            $submitBtn.find('.coupon__btn-icon').remove();
-            $cuponInput.parent().removeClass('_active')
-          }, 1000)
+          $submitBtn.removeClass('_loading _added');
+          $submitBtn.find('.coupon__btn-icon').remove();
+          $cuponInput.parent().removeClass('_active');
+          $cuponInput.attr("placeholder", "Купон очищен");
+          $cuponInput.removeClass('error')
         }
         // Пересчитываем итоговую сумму заказа
         DeliveryModule.changeCartSum();
       },
-      error: function(data){
+      error: function(){
         console.log("Возникла ошибка: Невозможно отправить форму купона.");
       }
     });
@@ -2107,7 +2125,6 @@ function quickViewShow(href, $link) {
             goodspage();
             addTo();
             lozad().observe();
-            $('.products-grid._related_goods, .products-grid._related_views').find(".mouseHoverImgCarousel").HoverMouseCarousel();
           }        
         })    
     }
@@ -2246,7 +2263,7 @@ function goodspage() {
         url: $form.attr('action'),
         data: formData,
         beforeSend: function(){
-          $btn.addClass('_loading').append('<span class="lds-ellipsis pink"><span></span><span></span><span></span><span></span></span>'); 
+          $btn.addClass('_loading').html('<span class="lds-ellipsis pink"><span></span><span></span><span></span><span></span></span>'); 
         },
         success: function(data) {
           var REVIEWS_INDEX = 5;
@@ -2267,11 +2284,12 @@ function goodspage() {
             $('.goods-opinion-form__captcha-refresh-button').trigger('click');
           }
           new Noty({
+            timeout: "7000",
             text: '<div class="noty_content">' + $noticeBlock.text() +'</div>',
             type: $noticeBlock.data('opinion-type')
           }).show()
           
-          $btn.removeClass('_loading').find('.lds-ellipsis').remove();
+          $btn.removeClass('_loading').html($btn.data('default-text'));
         }
       });
     

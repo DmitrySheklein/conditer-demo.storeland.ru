@@ -396,8 +396,8 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
     background-color: #cfd5e9;  
 }
 
-.paymentFormSubmitLink, .paymentFormTbodySubmitButton {display: inline-block;overflow: visible;font-size: 18px;line-height: 40px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;filter: alpha(opacity=100);text-transform: uppercase;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;border-radius: 25px;}
-.paymentFormSubmitLink:hover, .paymentFormTbodySubmitButton:hover {background-color: #02c1f5;color: #fff;}
+.paymentFormSubmitLink, .paymentFormTbodySubmitButton {display: inline-block;overflow: visible;font-size: 18px;line-height: 35px;padding: 0 25px;border: 0;background-color: #f962ad;color: #fff;opacity: 1;text-align: center;white-space: nowrap;margin: 0;outline: 0;cursor: pointer;border-radius: 5px;}
+.paymentFormSubmitLink:hover, .paymentFormTbodySubmitButton:hover {background-color: #6053c7;color: #fff;}
 
 .button._add-cart {max-width: 150px;width: 100%;flex-shrink: 1;text-transform: uppercase;padding: 0;}
 .button._add-cart:hover {background-color: #6053c7;}
@@ -411,26 +411,10 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
   }
 }
 
-.button._add-cart._added:not(.quick) {background-color: #02c1f5}
-.button._add-cart._added:not(.quick):hover {background-color: #02c1f5;color: #fff}
+.button._add-cart._added:not(.quick) {background-color: #6053c7}
+.button._add-cart._added:not(.quick):hover {background-color: #6053c7;color: #fff}
 .button._add-cart.quickview {border-radius: 25px}
 
-/*.button._add-cart._quick {
-    text-transform: none;
-    background: none;
-    color: #052f38;
-    font-size: 15px;
-    line-height: 1;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 195px;
-}
-@media all and (max-width: 1199px){
-  .button._add-cart._quick {
-    margin-left: 0px;
-  }
-}*/
 .button._full-border {border-radius: 5px}
 
 .button._product-view-add-cart, 
@@ -442,7 +426,7 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
 .button._product-view-quick {height: 50px;}
 }
 .button._transparent {background: 0 0;color: #052f38}
-.button._transparent._active {background: #02c1f5;color: #fff}
+.button._transparent._active {background: #6053c7;color: #fff}
 .button._transparent:not(._active):hover {background: #e7e7e8}
 
 .button._bordered {background: 0 0;color: #052f38;
@@ -805,7 +789,7 @@ border: 1px solid #f962ad;
 /* Выпадающее меню */
 .dropdown {position: relative}
 .dropdown:hover .dropdown__body {opacity: 1;visibility: visible}
-.dropdown .dropdown__body {position: absolute;top: 140%;z-index: 2;width: 100%;border-radius: 4px;-webkit-box-shadow: 0 0 12px 1px rgba(44,55,71,.1);box-shadow: 0 0 12px 1px rgba(44,55,71,.1);background-color: #fff;opacity: 0;visibility: hidden;-webkit-transition: all .3s ease;transition: all .3s ease;padding: 0}
+.dropdown .dropdown__body {position: absolute;top: calc(100% + 15px);z-index: 2;width: 100%;border-radius: 4px;-webkit-box-shadow: 0 0 12px 1px rgba(44,55,71,.1);box-shadow: 0 0 12px 1px rgba(44,55,71,.1);background-color: #fff;opacity: 0;visibility: hidden;-webkit-transition: all .3s ease;transition: all .3s ease;padding: 0}
 .dropdown .dropdown__body:before {content: '';display: block;height: 20px;width: 100%;background: 0 0;position: absolute;bottom: 100%}
 .dropdown .dropdown__body:after {content: '';width: 0;height: 0;border-style: solid;border-width: 0 7px 8px 7px;border-color: transparent transparent #fff transparent;position: absolute;bottom: 100%;left: 50%;margin-left: -8px}
 .dropdown._more-menu .dropdown__body {min-width: 150px;right: -55px}
@@ -1068,7 +1052,6 @@ body.modal-open {overflow: hidden}
 .slideshow .slideshow__item._overlay._dark:before {background: #052f38;opacity: .25}
 .slideshow .slideshow__item {height: 460px;background-size: cover;background-repeat: no-repeat;background-position: center}
 .slideshow .slideshow__item .slideshow__image {display: none}
-.slideshow .slideshow__item .slideshow__item-content {}
 .slideshow .slideshow__item .slideshow__item-content {display:block;width: auto;max-width: 580px;box-sizing: content-box;position: absolute;z-index: 1;top: 0;left: 0;right: 0;bottom: 0;text-align: left;padding: 6.83%;}
 .slideshow .slideshow__item .slideshow__item-content-title {position: relative;color: #fff;font-size: 44px;text-transform: none;font-weight: 700;margin-bottom: 30px;letter-spacing: 1px;}
 .slideshow .slideshow__item .slideshow__item-button {color: #fff;}
@@ -1106,10 +1089,10 @@ body.modal-open {overflow: hidden}
 .subscribe {position: relative}
 .subscribe .subscribe__wrapper {max-width: 895px;width: 100%;margin: 0 auto;border-radius: 3px;}
 .subscribe .subscribe__input-wrapper {position: relative}
-.subscribe .subscribe__email {height: 55px;border: 1px solid #02c1f5;background-color: #fff;padding: 20px;width: 100%;border-radius: 30px;color: #333;}
+.subscribe .subscribe__email {height: 55px;border: 1px solid #6053c7;background-color: #fff;padding: 20px;width: 100%;border-radius: 30px;color: #333;}
 .subscribe .subscribe__email + label.error {right: auto;left: 20px}
 .subscribe .subscribe__email.error {padding-left: 50px}
-.subscribe .subscribe__button {position: absolute;z-index:1;top: 0;right: 0;height: 100%;background: 0 0;padding: 0px 30px;color: #ffffff;background-color: #02c1f5;font-size: 18px;font-weight: 400;text-transform: uppercase;border-bottom-right-radius: 25px;border-top-right-radius: 25px;border-top-left-radius: 0;border-bottom-left-radius: 0;border: none;}
+.subscribe .subscribe__button {position: absolute;z-index:1;top: 0;right: 0;height: 100%;background: 0 0;padding: 0px 30px;color: #ffffff;background-color: #6053c7;font-size: 18px;font-weight: 400;text-transform: uppercase;border-bottom-right-radius: 25px;border-top-right-radius: 25px;border-top-left-radius: 0;border-bottom-left-radius: 0;border: none;}
 .subscribe .subscribe__input-wrapper:hover .subscribe__button {background-color: #f962ad;color: #fff}
 .subscribe .subscribe__input-wrapper:hover .subscribe__email {border-color: #f962ad;}
 .politics._subscribe__politics {padding-top: 10px;color: #4c4c4c;font-size: 16px;font-weight: 400;}
@@ -1604,7 +1587,7 @@ color: #052f38;
 .pdt-nav .pdt-nav__item:focus {background: #f962ad;color: #fff}
 .pdt-nav__item span {margin: auto}
 .owl-nav .pdt-nav {width: 25px;height: 25px;line-height: 25px;background-color: #e7e7e8;border-radius: 50%;color: #a8a8a8;}
-.owl-nav .pdt-nav:hover {background: #02c1f5;color: #fff}
+.owl-nav .pdt-nav:hover {background: #6053c7;color: #fff}
 .pdt-nav .owl-nav button.disabled {display: none}
 @media all and (max-width: 481px){
   .pdt-nav .pdt-nav__list:not(.owl-loaded) {overflow: auto;}
@@ -2077,7 +2060,7 @@ color: #052f38;
 }
 /* Блок скидки в товаре */
 .discount-block {display: -webkit-box;display: -ms-flexbox;display: flex;height: 27px;border: 1px solid #6ac0f3;border-radius: 25px}
-.discount-block .discount-block__percent {height: 100%;line-height: 24px;border-radius: 25px;border: 1px solid #02c1f5;background-color: #02c1f5;color: #fff;padding: 0 10px;}
+.discount-block .discount-block__percent {height: 100%;line-height: 24px;border-radius: 25px;border: 1px solid #6053c7;background-color: #6053c7;color: #fff;padding: 0 10px;}
 .discount-block .discount-block__text {line-height: 23px;padding: 0 10px}
 .discount-block .discount-block__price-num:after {display: inline-block;font-family: FontAwesome;font-weight: 300;font-size: 12px;margin-left: 1px;content: "\f158"}
 @media all and (max-width: 768px) {
@@ -2197,8 +2180,7 @@ color: #052f38;
 .goods-opinion-form .goods-opinion-form__inputs {margin-bottom: 15px}
 .goods-opinion-form .goods-opinion-form__label {padding-right: 15px;font-size: 18px;flex-shrink: 0;min-width: 205px;}
 .goods-opinion-form .goods-opinion-form__input._comment {min-height: 120px}
-.goods-opinion-form__submit-button {position: relative;margin: 0;margin-left: auto;display: block;height: 50px;margin-bottom: 20px;}
-.goods-opinion-form__submit-button._loading span {visibility: hidden}
+.goods-opinion-form__submit-button {max-width: 170px;width: 100%;position: relative;margin: 0;margin-left: auto;display: block;height: 50px;margin-bottom: 20px;}
 .goods-opinion-form__submit-button._loading .fal {position: absolute;top: 50%;left: 50%;z-index: 1;margin-top: -15px;margin-left: -15px;font-size: 30px}
 .goods-opinion-form__captcha {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-bottom: 15px;align-items: center;    justify-content: flex-end;}
 .goods-opinion-form__input-captcha {width: auto}
@@ -2829,6 +2811,7 @@ color: #052f38;
 .cart-list .cart-list__item {display: -webkit-box;display: -ms-flexbox;display: flex;margin-bottom: 25px}
 .cart-list .cart-list__num {width: auto;margin-right: 10px}
 .cart-list .cart-list__price {margin-top: 15px;font-weight: 400;font-size: 18px;font-weight: 400}
+.cart-list .cart-list__price-count {margin-left: 5px;}
 .cart .cart__confirm-order {display: none}
 .cart .cart__button {max-width: 200px;width: 100%;margin: 0 auto;display: block;height: 45px;line-height: 45px}
 .cart .cart__start-order {margin-bottom: 12px}
@@ -2856,7 +2839,9 @@ color: #052f38;
 @media (max-width:768px) {
   .cart-info__content {width: 100%}
 }
-.cart-info__cart {width: 295px;position: -webkit-sticky;position: sticky;top: 0}
+.cart-info__cart {width: 295px;
+  /* position: -webkit-sticky;position: sticky;top: 0 */
+}
 @media (max-width: 769px){
   .cart-info__cart {width: 100%;}
 }
@@ -2877,11 +2862,15 @@ color: #052f38;
 .coupon {position: relative;    margin-bottom: 30px;}
 .coupon .coupon__clear {position: absolute;display: flex;align-items: center;z-index: 1;font-size: 26px;top: 0;right: 40px;height: 100%;padding: 0 10px;cursor: pointer;opacity: 0;visibility: hidden;-webkit-transition: all .3s;transition: all .3s;color: #898989;}
 .coupon .coupon__clear._active {opacity: 1;visibility: visible}
+.coupon .coupon__clear._active:hover .icon {
+  fill: #f962ad;
+}
 .coupon .coupon__clear .icon {width: 13px;height: 13px}
 .coupon .coupon__box {display: block;position: relative;max-width: 315px;}
 .coupon .coupon__input {max-width: 100%;height: 40px;padding-left: 10px;padding-right: 70px}
 .coupon .coupon__label {display: block;margin-bottom: 15px;font-size: 16px}
 .coupon .coupon__btn {position: absolute;z-index: 1;top: 0;right: 0;width: 40px;height: 100%;padding: 0;background: #f962ad;color: #fff;font-size: 18px;font-weight: 400;text-transform: uppercase;border: none;border-top-left-radius: 0;border-bottom-left-radius: 0;display: -webkit-box;display: -ms-flexbox;display: flex}
+.coupon .coupon__btn._added,
 .coupon .coupon__btn:hover {background-color: #6053c7;color: #fff}
 .coupon .coupon__btn .icon {fill: #fff;width: 18px;margin: auto}
 
@@ -3228,6 +3217,17 @@ font-weight: 700;
 @media all and (min-width: 1200px) {.CompareGoodsTableTbody.table-box {table-layout: fixed;}}
 @media all and (max-width: 768px) {.CompareGoodsTableFilter .button {margin-bottom: 5px;margin-left: 0;}}
 @media all and (max-width: 481px) {.CompareGoodsTable {-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}}
+
+@media all and (max-width: 641px) {
+  .CompareGoodsTableFilter {line-height: 1;}
+  .CompareGoodsTableFilter span {margin-bottom: 10px;}
+  .CompareGoodsTable .CompareNavigation {float: none;text-align: center;}
+}
+@media all and (max-width: 481px) {
+  .CompareGoodsTableFilter {float: left;}
+  .CompareGoodsTableFilter span {float: left;width: 100%;}
+}
+
 /*** Новости ***/
 .news-box  a {text-decoration: underline;}
 .news-box .news {border-bottom: 1px solid #dce4e9;margin-bottom: 20px;}
@@ -3237,13 +3237,13 @@ font-weight: 700;
 .news-box .news-time {text-align: right;margin-bottom: 10px;}
 
 /*** Фиксированная кнопка Обратный звонок ***/
-.callback-button {display: block;background: #02c1f5;border: 2px solid #02c1f5;border-radius: 50%;-webkit-box-shadow: 0 8px 10px rgba(56,163,253,.3);box-shadow: 0 8px 10px rgba(56,163,253,.3);cursor: pointer;height: 68px;text-align: center;width: 68px;position: fixed;right: 47px;bottom: 10%;z-index: 999;-webkit-transition: .3s;transition: .3s;-webkit-animation: hoverWave linear 1s infinite;animation: hoverWave linear 1s infinite;-webkit-appearance: none;}
+.callback-button {display: block;background: #6053c7;border: 2px solid #6053c7;border-radius: 50%;-webkit-box-shadow: 0 8px 10px rgba(56,163,253,.3);box-shadow: 0 8px 10px rgba(56,163,253,.3);cursor: pointer;height: 68px;text-align: center;width: 68px;position: fixed;right: 47px;bottom: 10%;z-index: 999;-webkit-transition: .3s;transition: .3s;-webkit-animation: hoverWave linear 1s infinite;animation: hoverWave linear 1s infinite;-webkit-appearance: none;}
 .callback-button .callback-button__content {height: 68px;width: 68px;border-radius: 50%;position: relative;overflow: hidden}
-.callback-button .callback-button__content span {text-align: center;color: #02c1f5;opacity: 0;font-size: 0;position: absolute;left: 8px;top: 22px;line-height: 14px;font-weight: 600;text-transform: uppercase;-webkit-transition: opacity .3s linear;transition: opacity .3s linear;font-family: Gilroy;}
+.callback-button .callback-button__content span {text-align: center;color: #6053c7;opacity: 0;font-size: 0;position: absolute;left: 8px;top: 22px;line-height: 14px;font-weight: 600;text-transform: uppercase;-webkit-transition: opacity .3s linear;transition: opacity .3s linear;font-family: Gilroy;}
 .callback-button .callback-button__content:hover span {opacity: 1;font-size: 11px}
 .callback-button:hover i {display: none}
 .callback-button:hover {z-index: 1;background: #fff;color: transparent;-webkit-transition: .3s;transition: .3s}
-.callback-button:hover i {color: #02c1f5;font-size: 40px;-webkit-transition: .3s;transition: .3s}
+.callback-button:hover i {color: #6053c7;font-size: 40px;-webkit-transition: .3s;transition: .3s}
 .callback-button i {color: #fff;font-size: 34px;-webkit-transition: .3s;transition: .3s;line-height: 66px;-webkit-transition: .5s ease-in-out;transition: .5s ease-in-out}
 .callback-button i {animation: 1.2s ease 0s normal none 1 running shake;animation-iteration-count: infinite;-webkit-animation: 1.2s ease 0s normal none 1 running shake;-webkit-animation-iteration-count: infinite}
 @-webkit-keyframes hoverWave {0% {-webkit-box-shadow: 0 8px 10px rgba(56,163,253,.3),0 0 0 0 rgba(56,163,253,.2),0 0 0 0 rgba(56,163,253,.2);box-shadow: 0 8px 10px rgba(56,163,253,.3),0 0 0 0 rgba(56,163,253,.2),0 0 0 0 rgba(56,163,253,.2)}
@@ -3389,9 +3389,6 @@ font-weight: 700;
 
 @media all and (max-width: 641px) {
   .scroll {overflow-x: scroll;}
-  .CompareGoodsTableFilter {line-height: 1;}
-  .CompareGoodsTableFilter span {margin-bottom: 10px;}
-  .CompareGoodsTable .CompareNavigation {float: none;text-align: center;}
 }
 
 @media all and (max-width: 481px) {
@@ -3400,29 +3397,12 @@ font-weight: 700;
   .toolbar .compare, .show-by label {display: inline-block;}
   .toolbar.bottom .pages {-webkit-box-ordinal-group: 2;-ms-flex-order: 1;order: 1;margin: auto;padding: 0;}
   
-  .CompareGoodsTableFilter {float: left;}
-  .CompareGoodsTableFilter span {float: left;width: 100%;}
+
   body.active .wrapper {overflow: hidden;z-index: 1;display: none;}
 }
-
-
 /******************************************************************************
-  Hover карусель
+  Окно js ошибки
 *******************************************************************************/
-.hover-img-add:after {content: "";display: table;clear: both}
-.hover-img-add {position: relative}
-.hover-img-add img {position: relative;display: none;top: 0;left: 0;margin-bottom: 10px}
-.hover-img-add img:first-child {display: block}
-.tmb-wrap {position: absolute;z-index: 2;top: 0;left: 0;right: 0;bottom: 0;width: 100%;height: 100%}
-.tmb-wrap .tmb-wrap-table {display: table;height: 100%;width: 100%}
-.tmb-wrap-table div {display: table-cell;-webkit-transition: all .3s ease;transition: all .3s ease;-webkit-transition: all .25s ease;transition: all .25s ease;position: relative;border: 1px solid transparent;opacity: 1}
-.tmb-wrap-table div:after {content: "";height: 4px;width: 100%;position: absolute;background-color: #e7e7e8;bottom: 3px;left: 0;border-radius: 3px;}
-.tmb-wrap-table div.active:after {background-color: #02c1f5;}
-.tmb-wrap .tmb-wrap-table:hover div {opacity: 1}
-.tmb-wrap-table div:first-child:last-child.active:after {background-color: transparent}
-.image-wrap {display: -webkit-box;display: -ms-flexbox;display: flex;height: 100%;width: 100%}
-
-
 #bug_hunting_messages_toggle.bug_hunting__block {
     background: #f32718;
     border: none;
