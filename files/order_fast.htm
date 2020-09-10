@@ -117,6 +117,7 @@
                   <div class="quickform-delivery__item" data-rel="{order_delivery.ID}">
                       <div class="quickform-delivery__radio-wrap radio">
                         <input type="radio" id="deliveryId{order_delivery.ID}" name="form[delivery][id]" value="{order_delivery.ID}" class="delivery-radio radio-hidden"
+                        data-name="{order_delivery.NAME}"
                         {% IFNOT ORDER_FORM_DELIVERY_ID %}
                           {% IF order_delivery.first %}
                             checked="checked"
@@ -141,7 +142,8 @@
                           <div class="radio">
                             <input 
                               type="radio" class="delivery-zone-radio radio-hidden"  id="deliveryZoneId{order_delivery.zone_list.ID}" name="form[delivery][zone_id]" value="{order_delivery.zone_list.ID}"
-  
+                              data-name="{order_delivery.zone_list.NAME}"
+                              data-parent-name="{order_delivery.NAME}"
                             {% IF order_delivery.zone_list.ID = ORDER_FORM_DELIVERY_ZONE_ID %}
                               checked="checked"
                             {% ENDIF %}
@@ -250,8 +252,8 @@
               {% IF SETTINGS_ORDER_FIELDS_REGION < 3 %}
                 <div class="quickform__item">
                   <div class="quickform__input-wrap">
-                    <label class="quickform__label">Область</label>
-                    <input placeholder="{% IF SETTINGS_ORDER_FIELDS_REGION=1 %}*{% ENDIF %}" type="text" id="quickDeliveryRegion" name="form[delivery][region]" value="{ORDER_FORM_DELIVERY_REGION}" maxlength="255" class="input" {% IF SETTINGS_ORDER_FIELDS_REGION=1 %}required{% ENDIF %}/>
+                    <label class="quickform__label">Область {% IF SETTINGS_ORDER_FIELDS_REGION=1 %}*{% ENDIF %}</label>
+                    <input placeholder="" type="text" id="quickDeliveryRegion" name="form[delivery][region]" value="{ORDER_FORM_DELIVERY_REGION}" maxlength="255" class="input" {% IF SETTINGS_ORDER_FIELDS_REGION=1 %}required{% ENDIF %}/>
                   </div>
                 </div>
               {% ENDIF %}
@@ -259,8 +261,8 @@
               {% IF SETTINGS_ORDER_FIELDS_CITY < 3 %}
                 <div class="quickform__item">
                   <div class="quickform__input-wrap">
-                    <label class="quickform__label">Город</label>
-                    <input placeholder="{% IF SETTINGS_ORDER_FIELDS_CITY=1 %}*{% ENDIF %}" type="text" id="quickDeliveryCity" name="form[delivery][city]" value="{ORDER_FORM_DELIVERY_CITY}" class="input" maxlength="255"  {% IF SETTINGS_ORDER_FIELDS_CITY=1 %}required{% ENDIF %}/>
+                    <label class="quickform__label">Город {% IF SETTINGS_ORDER_FIELDS_CITY=1 %}*{% ENDIF %}</label>
+                    <input placeholder="" type="text" id="quickDeliveryCity" name="form[delivery][city]" value="{ORDER_FORM_DELIVERY_CITY}" class="input" maxlength="255"  {% IF SETTINGS_ORDER_FIELDS_CITY=1 %}required{% ENDIF %}/>
                   </div>
                 </div>
               {% ENDIF %}
@@ -269,22 +271,22 @@
                 <!-- Улица -->
                 <div class="quickform__item">
                   <div class="quickform__input-wrap">
-                    <label class="quickform__label">Улица</label>
-                    <input placeholder="{% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}*{% ENDIF %}" type="text" id="quickDeliveryAddressStreet" name="form[delivery][address_street]" value="" maxlength="500" class="input" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}/>
+                    <label class="quickform__label">Улица {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}*{% ENDIF %}</label>
+                    <input placeholder="" type="text" id="quickDeliveryAddressStreet" name="form[delivery][address_street]" value="" maxlength="500" class="input" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}/>
                   </div>
                 </div>
                 <!-- Поле Дом/Корпус -->
                 <div class="quickform__item -small -first">
                   <div class="quickform__input-wrap">
-                    <label class="quickform__label">Дом</label>
-                    <input placeholder=" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}*{% ENDIF %}" type="text" id="quickDeliveryAddressHome" name="form[delivery][address_home]" value="" maxlength="50" class="input" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}/>
+                    <label class="quickform__label">Дом {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}*{% ENDIF %}</label>
+                    <input placeholder="" type="text" id="quickDeliveryAddressHome" name="form[delivery][address_home]" value="" maxlength="50" class="input" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}/>
                   </div>
                 </div>
                 <!-- Поле Квартира -->
                 <div class="quickform__item -small -second">
                   <div class="quickform__input-wrap">
-                    <label class="quickform__label">Квартира</label>
-                    <input placeholder="{% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}*{% ENDIF %}" type="text" id="quickDeliveryAddressFlat" name="form[delivery][address_flat]" value="" maxlength="50" class="input" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}/>
+                    <label class="quickform__label">Квартира {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}*{% ENDIF %}</label>
+                    <input placeholder="" type="text" id="quickDeliveryAddressFlat" name="form[delivery][address_flat]" value="" maxlength="50" class="input" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}/>
                   </div>
                 </div>
               {% ENDIF %}
@@ -292,13 +294,13 @@
               {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE < 3 %}
                 <div class="quickform__item -small -third">
                   <div class="quickform__input-wrap">
-                    <label class="quickform__label">Индекс</label>
-                    <input placeholder="{% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}*{% ENDIF %}" type="text" id="quickDeliveryZipCode" name="form[delivery][zip_code]" value="{ORDER_FORM_DELIVERY_ZIP_CODE}" minlength="5" maxlength="6" class="input digits" {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}required{% ENDIF %} />
+                    <label class="quickform__label">Индекс {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}*{% ENDIF %}</label>
+                    <input placeholder="" type="text" id="quickDeliveryZipCode" name="form[delivery][zip_code]" value="{ORDER_FORM_DELIVERY_ZIP_CODE}" minlength="5" maxlength="6" class="input digits" {% IF SETTINGS_ORDER_FIELDS_ZIP_CODE=1 %}required{% ENDIF %} />
                   </div>
                 </div>
               {% ENDIF %}
               {% IF SETTINGS_ORDER_FIELDS_ADDRESS < 3 %}
-                <input placeholder="{% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}*{% ENDIF %}" type="hidden" id="quickDeliveryAddress" name="form[delivery][address]" value="{ORDER_FORM_DELIVERY_ADDRESS}" maxlength="500" class="input" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}/>
+                <input placeholder="" type="hidden" id="quickDeliveryAddress" name="form[delivery][address]" value="{ORDER_FORM_DELIVERY_ADDRESS}" maxlength="500" class="input" {% IF SETTINGS_ORDER_FIELDS_ADDRESS=1 %}required{% ENDIF %}/>
               {% ENDIF %}                
             </div>
             {% ENDIF %}

@@ -217,7 +217,7 @@
   {% ENDIF %}
 </div>
 <!-- С этим товаром покупают -->
-{% IFNOT cart_related_goods_empty %}
+{% IF cart_related_goods_empty !=1 && cart_count_empty !=1 %}
 <section class="section pdt-cart-related-goods products-container">
   <div class="">
     <h2 class="section-title">С этим товаром покупают</h2>
@@ -535,6 +535,6 @@
 <div style="display:none;" id="newCartSum">
   {CART_SUM_NOW | money_format}
 </div>
-<div id="cart-message" data-message-type="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}">
+<div style="display:none;" id="cart-message" data-message-type="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}">
   {% IF FORM_NOTICE %}{FORM_NOTICE}{% ENDIF %}
 </div>

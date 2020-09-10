@@ -1072,6 +1072,7 @@
                     </div>
                     <div class="products-grid owl-carousel">
                       {% FOR favorites_goods %}
+                      {% IF favorites_goods.index > 6 %}{break}{% ENDIF %}
                       <div class="product _min-card">
                         <div class="product__inner" itemscope itemtype="https://schema.org/Product">
                           <a data-action-delete-url="{FAVORITES_DELETE_URL}" href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}" class="product__remove-btn _favorites" title="Удалить из Избранного"><svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg></a>
@@ -1139,6 +1140,7 @@
                   </div>
                   <div class="products-grid owl-carousel">
                     {% FOR compare_goods %}
+                    {% IF compare_goods.index > 6 %}{break}{% ENDIF %}
                     <div class="product _min-card">
                       <div class="product__inner" itemscope itemtype="https://schema.org/Product">
                         <a data-action-delete-url="{COMPARE_DELETE_URL}" href="{COMPARE_DELETE_URL}?id={compare_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}" class="product__remove-btn _compare" title="Удалить из Сравнения"><svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg></a>

@@ -1233,6 +1233,7 @@ function startOrder(){
       cartFast.find('.cart__sum-row.cart__sum--order-sum').show();
       confirmOrder.show();
       closeOrder.show();
+      $('.pdt-cart-related-goods').hide();
       // Включаем возможность клика по неактивной кнопке
       $('.cart-tab._disabled').prop('disabled', false)
 			cartAjaxQty()
@@ -1249,7 +1250,7 @@ function startOrder(){
         confirmOrder.hide(); // Скрываем блок "Оформить заказ"
         globalOrder.hide(); // Скрываем блок оформления заказа
         closeOrder.hide(); // Скрываем кнопку "Отменить"
-        
+        $('.pdt-cart-related-goods').show();
         $('.cart-tab').toggleClass('_disabled').toggleClass('_active');
         buttonStartOrder.show(); // Возвращаем кнопку "Заказать"
         cartClear.show();
@@ -1471,9 +1472,19 @@ function orderScripts(){
       });
     }
     if(DELIVERY_TYPE === 'radio'){
+      function hideDeliveryBlock(name) {
+        var deliveryName = name;
+        // Настройка Самовывоза
+        if(deliveryName === 'Самовывоз' || deliveryName.indexOf('Самовывоз') != -1){
+          $('.quickform__row.-adress').hide();
+        } else {
+          $('.quickform__row.-adress').show();
+        }
+      }
       $('.delivery-radio').change(function(){
         var deliveryId = $(this).val();
-        
+        var deliveryName = $(this).data('name');
+
         CURRENT_DELIVERY = getCurrentDelivery(deliveryId);
         
         // Если нет зон у текущего варианта доставки
@@ -1488,13 +1499,14 @@ function orderScripts(){
           changePaymentRadio(deliveryId);
         } else {
           changePaymentRadio();
-        }        
-        
+        }
+        hideDeliveryBlock(deliveryName);
         changeCartSum();
       })
       $('.delivery-zone-radio').change(function(){
         var deliveryId = $(this).data('delivery-id');
-        
+        var deliveryParentName = $(this).data('parent-name');
+        hideDeliveryBlock(deliveryParentName);
         CURRENT_DELIVERY = getCurrentDelivery(deliveryId);
         $(this).closest('.quickform-delivery__item').siblings().find('.delivery-radio').prop('checked', false)
         $(this).closest('.quickform-delivery__item').find('.delivery-radio').prop('checked', true)
@@ -1590,7 +1602,7 @@ function orderScripts(){
     var currentPriceWithoutChange = Number($('.cart__sum .total-sum').data('total-sum'));
     var deliveryPrice = Number(getCurrentDeliveryPrice());
     var discountPrice = Number($('.cart__sum .cart__sum--discount .cart__sum-text-price').data('discount-value'));
-    console.log(currentPriceWithoutChange,deliveryPrice,discountPrice)
+    // console.log(currentPriceWithoutChange,deliveryPrice,discountPrice)
     // Заполняем стоимость доставки
     $('.cart__sum .cart__sum--delivery-sum .num').text(addSpaces(deliveryPrice));
     $('.delivery__descr .delivery__price .num').text(addSpaces(deliveryPrice));

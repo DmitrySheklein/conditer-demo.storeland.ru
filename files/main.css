@@ -2221,7 +2221,10 @@ color: #052f38;
 }
 /* Список отзывов */
 .goods-opinion .goods-opinion__body-title {text-transform: none;font-size: 24px;margin-bottom: 40px}
-.opinion-item {margin-bottom: 40px}
+.opinion-item {background-color: #f5f4fd;padding: 15px;margin-bottom: 10px;border-radius: 5px;}
+.opinion-item:nth-child(even) {
+  background-color: #fef8ff;
+}
 .opinion-item:nth-child(5) ~ .opinion-item {display: none}
 .opinion-item .opinion-item__row {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap}
 .opinion-item .opinion-item__col {width: 100%}
@@ -2229,6 +2232,7 @@ color: #052f38;
 .opinion-item .opinion-item__col._right {width: 70%}
 .opinion-item .opinion-item__title {margin-bottom: 20px}
 .opinion-item .opinion-item__desc {margin-bottom: 20px}
+.opinion-item .opinion-item__desc:last-child {margin-bottom: 0;}
 .opinion-item .opinion-item__date {color: #052f38;opacity: .7;font-size: 18px}
 .opinion-item .opinion-item {padding-top: 20px;border-top: 1px solid #ecebf2;margin-bottom: 20px}
 .opinion-item .opinion-item__client-name {font-size: 20px;color: #6256c8;margin-right: auto}
@@ -2979,6 +2983,9 @@ color: #052f38;
 }
 .quickform-delivery .quickform-delivery__radio-wrap {
   margin-bottom: 20px;
+}
+.quickform-delivery__label {
+  user-select: none;
 }
 .quickform-delivery .quickform-delivery__price-default {
 color: #f962ad;
