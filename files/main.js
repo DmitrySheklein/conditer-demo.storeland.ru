@@ -1491,7 +1491,7 @@ function orderScripts(){
         if (CURRENT_DELIVERY.zoneListEmpty) {
           $(this).closest('.quickform-delivery__item').siblings().find('.delivery-zone-radio').prop('checked', false);
         } else {
-          $(this).closest('.quickform-delivery__item').find('.delivery-zone-radio:first').prop('checked', true)
+          $(this).closest('.quickform-delivery__item').find('.delivery-zone-radio:first').prop('checked', true).trigger('change')
         }
         
         // Если есть варианты оплаты для текущей доставки
@@ -1705,6 +1705,9 @@ function ajaxCartQty(){
           url: '/cart',
           data: formData,
           cache: false,
+          beforeSend: function(){
+            preloadShow($('.cart-ajax__product .preloader'))
+          },
           success: function(data) {
             var $data = $(data);
             var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input').val();
@@ -1734,7 +1737,9 @@ function ajaxCartQty(){
             $('.header .cart-header .cart-header__cart-sum').html($data.filter('#newCartSum').html());               
             /**/
             var newPrice = $data.find('[data-id="' + id + '"]').find('.cart__product-ajax-price').html();
-            $('#cart-ajax-form').find('.cart-ajax__product-price').html(newPrice)
+            $('#cart-ajax-form').find('.cart-ajax__product-price').html(newPrice);
+            /**/
+            preloadHide($('.cart-ajax__product .preloader'))
           }
         })
       })
@@ -1879,11 +1884,9 @@ function cartDeleteItem(){
       url: url,
       cache: false,
       beforeSend: function(){
-        // preloadShow($('#cart-content .preloader'))
         $cartDeleteLink.closest('.cart__table-row').append($('<div class="preloader _opacity"><span class="content-loading"></span></div>'))
       },
       success: function(data){
-        // var $data = $(data).find('#cart-content');
         var $data = $(data);
         var count = 0;
         
@@ -1908,7 +1911,7 @@ function cartDeleteItem(){
         }
         
         DeliveryModule.changeCartSum();
-        preloadHide($('#cart-content .preloader'),true)      
+        preloadHide($('#cart-content .preloader'), true)      
        }      
     })
   })
