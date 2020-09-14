@@ -885,7 +885,7 @@
             {% IFNOT ONLY_BODY && goods_empty=0 %}
               <!-- Страницы -->
               {% IF show_pages %}
-                {% IF PER_PAGE < GOODS_PAGES_RESULT %}
+                {% IF PER_PAGE < GOODS_PAGES_RESULTS %}
                 <div class="pages _bottom">
                   <ol class="pages__list">
                     {% FOR goods_pages %}

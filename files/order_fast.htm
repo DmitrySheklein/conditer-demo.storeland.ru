@@ -164,7 +164,9 @@
                       <span class="quickform-delivery__price-zone" {% IF order_delivery.ZONE_ID<1 %}style="display:none;"{% ENDIF%}>{order_delivery.ZONE_END_PRICE | money_format}</span>
                     </div>
                     <!-- Описание доставки -->
-                    <p class="quickform-delivery__descr">{order_delivery.DESC}</p>
+                    {% IF order_delivery.DESC %}
+                      <p class="quickform-delivery__descr">{order_delivery.DESC}</p>                    
+                    {% ENDIF %}
                   </div>
                 {% ENDFOR %}
                 {% ENDIF %}
@@ -211,7 +213,7 @@
                     <div class="quickform-payment__item">
                       <div class="radio">
                         <input type="radio" id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" name="form[payment][id]" value="{order_delivery.available_payment_list.ID}"  class="radio-hidden" {% IF order_delivery.first%} {% IF order_delivery.available_payment_list.first %}checked="checked"{% ENDIF %}{% ENDIF %}/>
-                        <label class="radio-name" for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}">{order_delivery.available_payment_list.NAME}</label>
+                        <label class="radio-name quickform-payment__radio" for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}">{order_delivery.available_payment_list.NAME}</label>
                       </div>
                       <!-- Сообщение для пользователя -->
                       {% IF order_delivery.available_payment_list.MESSAGE %}

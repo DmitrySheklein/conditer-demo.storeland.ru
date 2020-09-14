@@ -31,6 +31,7 @@
   {% IFNOT cart_count_empty %}
   <div class="cart-info__wrap">
     <div class="cart-info__content">
+      <div class="cart-info__content-wrap">
         <!-- Шаги корзины-->
         <div class="cart-tabs">
             <button type="button" class="cart-tab _active" id="closeOrderTab">
@@ -114,14 +115,18 @@
         
         <!-- Сюда грузится форма оформления быстрого заказа -->
         <div id="globalOrder" style="display: none"></div>
+      </div>
     </div>
     <div class="cart-info__cart">
+      <div class="cart-info__cart-wrap">
         <div class="cart _fast">
           <div class="cart__header">
             <span class="cart__header-title">
               <svg class="icon _cart"><use xlink:href="/design/sprite.svg#cart"></use></svg>
-              <span class="title-styled">
-                Ваша корзина
+              <span class="cart__header-title-name title-styled">
+                <span class="title-styled__word">
+                  Ваша корзина
+                </span>
               </span>
             </span>
           </div>
@@ -212,6 +217,7 @@
           </span>          
           <span>Вернуться к покупкам</span>
         </a>
+      </div>
     </div>
   </div>
   {% ENDIF %}
