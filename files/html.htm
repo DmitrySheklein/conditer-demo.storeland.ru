@@ -29,7 +29,7 @@
   
 </head>
 <body>
-  <main class="wrapper {% IF index_page %}_index{% ENDIF %} nojs">
+  <main class="wrapper {% IF index_page %}_index{% ENDIF %} {% IF MOD_LNAME= cart %}_cart{% ENDIF %} nojs">
     <!-- Сообщение для инвалидов -->
     <noscript>
       <div class="noscript"> 

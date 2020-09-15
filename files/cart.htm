@@ -1,14 +1,6 @@
 <div class="cart-info">
   {% IF FORM_NOTICE %}
     <div class="{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>
-    <script>
-      $(function () {
-        new Noty({
-          text: '<div class="noty_content">{FORM_NOTICE | nl2br}</div>',
-          type: '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}error{% ENDIF %}'
-        }).show()         
-      });      
-    </script>
   {% ENDIF %}
   <div id="empty-cart" class="empty-cart _cart-page" style="{% IFNOT cart_count_empty %}display:none{% ENDIF %}">
      <div class="empty-cart__content">
@@ -118,7 +110,7 @@
       </div>
     </div>
     <div class="cart-info__cart">
-      <div class="cart-info__cart-wrap">
+
         <div class="cart _fast">
           <div class="cart__header">
             <span class="cart__header-title">
@@ -217,7 +209,7 @@
           </span>          
           <span>Вернуться к покупкам</span>
         </a>
-      </div>
+
     </div>
   </div>
   {% ENDIF %}

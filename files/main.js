@@ -1866,6 +1866,7 @@ function cartClear() {
 	    $('.header .cart-header .cart-header__counter .num').text("0");
 	    
       $('.quick-order,.cart-info .cart-info__wrap').hide();
+      $('.pdt-cart-related-goods').hide();
       $('#empty-cart').show();  			    
 	  });
 	})   
@@ -3115,8 +3116,10 @@ function SearchFieldInit(obj) {
       // Если в поле текста есть вбитые данные
       if(obj.s_search.val().length) {
         obj.f_search.addClass('search__filled');
+        $('.catalog-button').addClass('search__filled');
       } else {
         obj.f_search.removeClass('search__filled');
+        $('.catalog-button').removeClass('search__filled');
       }
       // При нажатии клавиши данных внутри поля ещё нет, так что проверки вернут информацию что менять поле не нужно, хотя как только операция будет завершена данные в поле появятся. Поэтому произведём вторую проверку спустя 2 сотых секунды.
       if(typeof( isAfter ) == "undefined" || !isAfter) {
@@ -3354,7 +3357,7 @@ $(function() {
           // Убираем информацию о том что запрос грузится.
           searchBlock.f_search.removeClass("search__loading");
           searchBlock.find('.search-submit .header-searchIcon').html('<i class="fal fa-search"></i>')
-          console.log('andAJAX')
+          // console.log('andAJAX')
         }
       });
     }else{
