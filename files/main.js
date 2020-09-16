@@ -1156,13 +1156,28 @@ function addCart() {
             // $btn.addClass('_added').find('span').html('<i class="fal fa-check-circle"></i>');
             
             $.fancybox.close()
-            $.fancybox.open(data,{
-              afterShow: function(){
-                addTo();
-                ajaxCartQty();
-                quantity();
-              }
-            })
+            // Включить выключить показ окна по кнопке "В корзину"
+            var fancyboxOn = false;
+
+            if(fancyboxOn){
+              $.fancybox.open(data,{
+                afterShow: function(){
+                  addTo();
+                  ajaxCartQty();
+                  quantity();
+                }
+              })
+            } else {
+              new Noty({
+                timeout: "3000",
+                text: $cartMessage.html(),
+                type: type,
+                animation: {
+                  open: null, 
+                  close: null
+                }            
+              }).show();
+            }
             $('.header .cart-header .cart-header__counter .num').html($(data).filter('#newCartCount').html());
             $('.header .cart-header .cart-header__cart-sum').html($(data).filter('#newCartSum').html());            
           } else {
