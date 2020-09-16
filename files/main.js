@@ -258,7 +258,7 @@ function RefreshImageAction(img,num,cnt) {
 // Добавление в сравнение и избранное
 function addTo() {
   // Добавление/удаление товара на сравнение/избранное через ajax
-  $('.add-compare').off('click').click(function(){
+  $('.add-compare').off('click').on('click',function(){
     // Объект ссылки, по которой кликнули
     var 
       a = $(this)
@@ -395,7 +395,7 @@ function addTo() {
   });
 
   // Добавление/удаление товара на сравнение/избранное через ajax
-  $('.add-wishlist').off('click').click(function(){
+  $('.add-wishlist').off('click').on('click',function(){
     // Объект ссылки, по которой кликнули
     var 
       a = $(this)
@@ -539,7 +539,7 @@ function addTo() {
 // Сравнение товаров
 function comparePage(){
   // Сравнение товаров. Инвертирование свойств для сравнения товара
-  $('.CompareCheckbox.invert').click(function(){
+  $('.CompareCheckbox.invert').on('click',function(){
     var checked = true,
     checkboxes = $('.CompareCheckbox:not(.invert)');
     checkboxes.each(function(){
@@ -555,7 +555,7 @@ function comparePage(){
   });
   
   // Сравнение товаров. Скрытие характеристик товара, которые выделил пользователь
-  $('.CompareGoodsHideSelected').click(function(){
+  $('.CompareGoodsHideSelected').on('click',function(){
     $('.CompareGoodsTableTbodyComparisonLine').each(function(){
       var CheckedCheckbox = $(this).find('.CompareCheckbox:checked:not(.invert)');
       if(CheckedCheckbox.length>0) {
@@ -568,7 +568,7 @@ function comparePage(){
   });
   
   // Сравнение товаров. Скрытие характеристик товара, которые выделил пользователь
-  $('.CompareGoodsHideSelected').click(function(){
+  $('.CompareGoodsHideSelected').on('click',function(){
     $('.CompareGoodsShowAll').show();
     $('.CompareGoodsTableTbodyComparisonLine').each(function(){
       var CheckedCheckbox = $(this).find('.CompareCheckbox:checked:not(.invert)');
@@ -582,14 +582,14 @@ function comparePage(){
   });
   
   // Сравнение товаров. Отображение скрытых характеристик товара
-  $('.CompareGoodsShowAll').click(function(){
+  $('.CompareGoodsShowAll').on('click',function(){
     $(this).hide();
     $('.CompareGoodsTableTbodyComparisonLine:hidden').show();
     return false;
   });
   
   // Сравнение товаров. Верхняя навигация изменение фильтра на отображение всех характеристик товаров
-  $('.CompareGoodsTableFilterShowAll').click(function(){
+  $('.CompareGoodsTableFilterShowAll').on('click',function(){
     $('.CompareGoodsTableFilterSelected').removeClass('CompareGoodsTableFilterSelected');
     $('.CompareGoodsTableTbodyComparisonLine:hidden').show();
     $(this).addClass('CompareGoodsTableFilterSelected');
@@ -597,7 +597,7 @@ function comparePage(){
   });
 
   // Сравнение товаров. Фильтр в верхней навигации. Отображение только различающихся характеристик товара
-  $('.CompareGoodsTableFilterShowOnlyDifferent').click(function(){
+  $('.CompareGoodsTableFilterShowOnlyDifferent').on('click',function(){
     $('.CompareGoodsTableFilterSelected').removeClass('CompareGoodsTableFilterSelected');
     $('.CompareGoodsTableTbodyComparisonLine:not(.same)').show();
     $('.CompareGoodsTableTbodyComparisonLine.same').hide();
@@ -606,7 +606,7 @@ function comparePage(){
   });
   
   // При клике по строке выделяем свойство
-  $('.CompareGoodsTableTbodyComparisonLine td:not(.cell)').click(function(){
+  $('.CompareGoodsTableTbodyComparisonLine td:not(.cell)').on('click',function(){
     var CompareCheckbox = $(this).parent().find('.CompareCheckbox');
     if(CompareCheckbox.attr('checked')) {
       CompareCheckbox.attr('checked', false);
@@ -624,7 +624,7 @@ function comparePage(){
   }
   
   // Прокрутка списка сравнения вправо
-  $('.CompareGoodsTableNext').click(function(){
+  $('.CompareGoodsTableNext').on('click',function(){
     // Определяем используемые поля
     var data = compareGetVars(); 
     // Изменяем их если это возможно.
@@ -642,7 +642,7 @@ function comparePage(){
   });
   
   // Прокрутка списка сравнения влево
-  $('.CompareGoodsTablePrev').click(function(){
+  $('.CompareGoodsTablePrev').on('click',function(){
     // Определяем используемые поля
     var data = compareGetVars(); 
     // Изменяем их если это возможно.
@@ -662,7 +662,7 @@ function comparePage(){
 
 // Показать пароль 
 $(function(){
-  $('.showPass').click(function(){
+  $('.showPass').on('click',function(){
     ChangePasswordFieldType(this, $('#sites_client_pass'));
     return false;
   });
@@ -683,7 +683,7 @@ function mainFunctions() {
   // Возврашаем пользователя на страницу с которой был сделан обратный звонок
   $('.callbackredirect').val(document.location.href);
   // Прокрутка до обратного звонка
-  $('.callback-link').click(function(e){
+  $('.callback-link').on('click',function(e){
      e.preventDefault();
      
      $scrollBlock = $('#offer');
@@ -722,13 +722,13 @@ function mainFunctions() {
     
   })
   // Добавление товара в корзину
-  $(document).on('click', '.button._add-cart:not(.quickview):not()', function() {
+  $(document).on('click', '.button._add-cart:not(.quickview)', function() {
     var $btn  = $(this);
     $btn.addClass('_loading')
     if($btn.hasClass('_cart-page')) {
       return true;
     }
-    if(!$btn.hasClass('_quick')) {
+    if(!$btn.hasClass('_quick') || $btn.hasClass('_product-view-quick')) {
       $btn.find('span').html('<span class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>')
     }
     
@@ -753,10 +753,10 @@ function mainFunctions() {
     if(((e.which==10)||(e.which==13))) { try{$(this.form).submit();} catch(e){} return false; }
   });
   // Кнопки открывающие меню
-  $('.header .header-mobile__button, .catalog-button').click(function(e){
+  $('.header .header-mobile__button, .catalog-button').on('click',function(e){
     e.preventDefault();
     $('.header-content').addClass('_active');
-    $('body').addClass('modal-open');
+    // $('body').addClass('modal-open');
 
     var id = $(this).data('target');
     if (id){      
@@ -765,10 +765,10 @@ function mainFunctions() {
     }
   })
 // Кнопки закрывающие меню
-  $('.header .header-content__button-close, .header-content .header-content__overlay').click(function(e){
+  $('.header .header-content__button-close, .header-content .header-content__overlay').on('click',function(e){
     e.preventDefault();
     $('.header-content').removeClass('_active');
-    $('body').removeClass('modal-open');
+    // $('body').removeClass('modal-open');
     $('.header-content__item').removeClass('_visible');
     $('.header-content__button').removeClass('_active');
   })
@@ -1074,7 +1074,7 @@ function catalogFunctions() {
   }); 
 
   // Боковое меню сохранение открытой вложенности
-  $('.catalog__item._parent .catalog__icon').click(function(evt){
+  $('.catalog__item._parent .catalog__icon').on('click', function(evt){
       evt.preventDefault()
       
       var $arrow = $(this);
@@ -1115,12 +1115,15 @@ function catalogFunctions() {
 
 // Добавление товара в корзину
 function addCart() {
-  $('.product-view__form, .product__form, .goodsToCartFromCompareForm, .goodsListForm').off('submit').submit(function() {
+  $('.product-view__form, .product__form, .goodsToCartFromCompareForm, .goodsListForm').off('submit').on('submit', function() {
     // Выносим функции из шаблонов
     if ($(this).attr('rel') === 'quick') {
       quickOrder(this);
       return (false);
-    }    
+    }
+    if($(this).hasClass('_in-cart')){
+      return (true)
+    }
     // Находим форму, которую отправляем на сервер, для добавления товара в корзину
     var formBlock = $($(this).get(0));
     
@@ -1151,6 +1154,7 @@ function addCart() {
           // Если товар добавлен
           if(type === 'success'){
             // $btn.addClass('_added').find('span').html('<i class="fal fa-check-circle"></i>');
+            
             $.fancybox.close()
             $.fancybox.open(data,{
               afterShow: function(){
@@ -1222,11 +1226,12 @@ function startOrder(){
       globalOrder.show()
       // показываем прелоадер
       globalOrder.css('position', 'relative')
+      globalOrder.css('minHeight', '30px')
       globalOrder.html('<div class="preloader"><span class="content-loading"></span></div>')
     },
     success: function(data) {
       // Вставляем форму быстрого заказа
-      globalOrder.html($(data).html());
+      globalOrder.html($(data).filter('#order-template').html());
       $('html, body').delay(400).animate({scrollTop : jQuery('#globalOrder').offset().top - 100}, 800);
       $('.coupon-hidden-input').val($('#quick_form_coupon_code').val())
       cartFast.find('.cart__sum-row.cart__sum--delivery-sum').show();
@@ -1281,27 +1286,40 @@ function quickOrder(formSelector) {
   // Аяксом добавляем товар в корзину и вызываем форму быстрого заказа товара
   $.ajax({
     type    : "POST",
-		cache	  : false,
-		url		  : formBlock.attr('action'),
-		data		: formData,
-		success: function(data) {
+    cache	  : false,
+    url		  : formBlock.attr('action'),
+    data		: formData,
+    success: function(data) {
       $.fancybox.close();
       
-			$.fancybox.open(data,{
-			  baseClass: "quickOrder",
-			  afterShow: function(){
+      var $fancyContent = $('<div>')
+      $fancyContent
+        .append($(data).filter('#order-template'))
+        .append($(data).filter('#cartFast'))
+
+      $.fancybox.open($fancyContent ,{
+        baseClass: "quickOrder",
+        afterShow: function(){
           var $btn = $('.button._add-cart._loading').removeClass('_loading');
           $btn.removeClass('_added')
-          if(!$btn.hasClass('_product-view-quick') && !$btn.closest('.product._list')){
+          if($btn.hasClass('_product-view-quick')){
+            $btn.find('span').html('Купить в 1 клик');
+          }
+          else if(!$btn.closest('.product._list')){
             $btn.find('span').html('Купить <br> в 1 клик');
           }
-          $('.quickform__buttons').show();
-          $('.header .cart-header .cart-header__counter .num').html($(data).filter('#newCartCount').html());
-          $('.header .cart-header .cart-header__cart-sum').html($(data).filter('#newCartSum').html());             
-			  }
-			});
-		}
-	});
+          // Показываем блок итоговой суммы
+          $('#cartFast').show();
+          // Купон
+          coupons();
+          // Обновляем счётчики
+          $('.header .cart-header .cart-header__counter .num').html($(data).find('#newCartCount').html());
+          $('.header .cart-header .cart-header__cart-sum').html($(data).find('#newCartSum').html());             
+        }
+      });
+    }
+  });    
+
   return false;
 }
 // Cкрипты для быстрого заказа
@@ -1322,11 +1340,11 @@ function orderScripts(){
     }
   })
   // Форма регистрации нового пользователя, при оформлении заказа
-  $('.show-password').click(function(){
+  $('.show-password').on('click', function(){
     ChangePasswordFieldType(this, $('#contactPassWord'));
   });
   // При оформлении заказа дадим возможность зарегистрироваться пользователю
-  $('#contactWantRegister').change(function(){
+  $('#contactWantRegister').on('change', function(){
     if($(this).prop("checked")) {
       $('.quickform__item._password').show();
       $('#contactEmail, #contactPassWord').addClass('required');
@@ -1359,7 +1377,7 @@ function orderScripts(){
     
   }) */ 
   // Разделение поле адрес на Улица, Дом, Квартира
-  $('#quickform .button').click(function(){
+  $('#quickform .button').on('click', function(){
     var $quickDeliveryAddress = $('#quickDeliveryAddress'),
         quickDeliveryAddressStreetValue = $('#quickDeliveryAddressStreet').val(),
         quickDeliveryAddressHomeValue = $('#quickDeliveryAddressHome').val(),
@@ -1433,7 +1451,7 @@ function orderScripts(){
     changeCartSum();
     
     if(DELIVERY_TYPE === 'select') {
-      $('.delivery-select').change(function() {
+      $('.delivery-select').on('change', function() {
         var deliveryId = $(this).val();
         
         CURRENT_DELIVERY = getCurrentDelivery(deliveryId);
@@ -1453,7 +1471,7 @@ function orderScripts(){
   
         changeCartSum();
       });
-      $('.delivery-zone-select').change(function() {
+      $('.delivery-zone-select').on('change',function() {
         var deliveryId = $(this).data('delivery-id');
         var zoneId = $(this).val();
         
@@ -1461,7 +1479,7 @@ function orderScripts(){
   
         changeCartSum();
       })
-      $('.payment-select').change(function() {
+      $('.payment-select').on('change',function() {
         var deliveryId = $(this).data('delivery-id');
         var paymentId = $(this).val();
         CURRENT_DELIVERY = getCurrentDelivery(deliveryId);
@@ -1481,7 +1499,7 @@ function orderScripts(){
           $('.quickform__row.-adress').show();
         }
       }
-      $('.delivery-radio').change(function(){
+      $('.delivery-radio').on('change',function(){
         var deliveryId = $(this).val();
         var deliveryName = $(this).data('name');
 
@@ -1503,7 +1521,7 @@ function orderScripts(){
         hideDeliveryBlock(deliveryName);
         changeCartSum();
       })
-      $('.delivery-zone-radio').change(function(){
+      $('.delivery-zone-radio').on('change',function(){
         var deliveryId = $(this).data('delivery-id');
         var deliveryParentName = $(this).data('parent-name');
         hideDeliveryBlock(deliveryParentName);
@@ -1689,7 +1707,7 @@ function orderScripts(){
 // Мини корзина в окне AJAX добавления товара
 function ajaxCartQty(){
   $(function(){
-    $('.cart-ajax-input-qty').off('change').change(
+    $('.cart-ajax-input-qty').off('change').on('change',
       $.debounce(300, function(){
         var $qtyInput = $(this);
         var id = $qtyInput.data('goods-mod-id');
@@ -1770,7 +1788,7 @@ function cartRelatedGoods() {
 // Корзина
 function cartAjaxQty(){
   $(function(){
-    $('.qty__input').off('change').change(
+    $('.qty__input').off('change').on('change',
       $.debounce(300, function(){
         var $qtyInput = $(this);
         var id = $qtyInput.closest('.cart__table-row').data('id');
@@ -1857,7 +1875,7 @@ function cartFix() {
 // Очистить корзину
 function cartClear() {
  $(function(){
-	$('#cart-clear').click(function(e){
+	$('#cart-clear').on('click',function(e){
 	  e.preventDefault();
     preloadShow($('#cart-content .preloader'));
 	  
@@ -1925,7 +1943,7 @@ function coupons() {
   var $cuponInput = $('#quick_form_coupon_code');
   var $resetBtn = $('.coupon .coupon__clear');
 
-  $submitBtn.click(function(){
+  $submitBtn.on('click',function(){
     var val = $cuponInput.val();
     if(!val){
       return;
@@ -2152,13 +2170,13 @@ function quickViewMod() {
     $(document).on('click', 'a._quickviewmod', function() {
       var href = $(this).attr('href');
       href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
-      quickViewShowMod(href);
+      quickViewShowMod(href, $(this));
       return false;
     });
   });
 }
 // Быстрый просмотр товара с модификацией
-function quickViewShowMod(href) {
+function quickViewShowMod(href,  $el) {
   $.get(href, function(content) {
     $.fancybox.close();
     fancyboxShow($(content).find('.product-view__order-wrap'))
@@ -2173,8 +2191,12 @@ function quickViewShowMod(href) {
       $.fancybox.open(content, {
         baseClass: 'quickViewMod product-view',
         beforeShow: function(){
+
         },
         afterShow: function() {
+          if ($el.hasClass('_cart-page')) {
+            $('.product-view__form').addClass('_in-cart')            
+          }
           goodspage();      
           goodsMods(true);
           addCart();
@@ -2186,7 +2208,7 @@ function quickViewShowMod(href) {
 
 // Функция + - для товаров
 function quantity() {
-  $('.qty__btn.qty__btn--plus').off('click').click(function(){
+  $('.qty__btn.qty__btn--plus').off('click').on('click',function(){
     var 
       quantity = $(this).parent().find('.qty__input'),
       currentVal = parseInt(quantity.val());
@@ -2196,7 +2218,7 @@ function quantity() {
     }
     return false;
   });
-  $('.qty__btn.qty__btn--minus').off('click').click(function(){
+  $('.qty__btn.qty__btn--minus').off('click').on('click',function(){
     var 
       quantity = $(this).parent().find('.qty__input'),
       currentVal = parseInt(quantity.val());
@@ -2207,7 +2229,7 @@ function quantity() {
     return false;
   });
   // Если вводят 0 то заменяем на 1
-  $('.qty .qty__input').off('change').change(function(){
+  $('.qty .qty__input').off('change').on('change',function(){
     if($(this).val() < 1){
       $(this).val(1); 
     }
@@ -2255,14 +2277,14 @@ function goodspage() {
   }
 
   // Иконка для обновления изображение капчи
-  $('.goods-opinion-form__captcha-refresh-button').click(function(){
+  $('.goods-opinion-form__captcha-refresh-button').on('click',function(){
     RefreshImageAction(this,1,1);
     $('.goods-opinion-form__captcha-img').attr('src',$('.goods-opinion-form__captcha-img').attr('src') + '&rand' + Math.random(0,10000));
     return false;
   });
 
   // AJAX отправка отзыва
-  $('.goods-opinion-form__submit-button').click(function(){
+  $('.goods-opinion-form__submit-button').on('click',function(){
     var $btn = $(this);
     // Находим форму, которую отправляем на сервер, для добавления товара в корзину
     var $form =  $('.goods-opinion-form');
@@ -2313,7 +2335,7 @@ function goodspage() {
     }
   })
   // Показать больше отзывов
-  $('#goods-opinion__more-button').click(function(){
+  $('#goods-opinion__more-button').on('click',function(){
     var REVIEWS_INDEX = 5;
     var opinionsCount = $('.opinion-item').length;
     $('.opinion-item').not(':visible').slice(0, REVIEWS_INDEX).show();
@@ -2325,7 +2347,7 @@ function goodspage() {
     return false;
   })
   // Доставка кнопка "Подробнее"
-  $('.goods-delivery .goods-delivery__title').click(function(){
+  $('.goods-delivery .goods-delivery__title').on('click',function(){
     var $btn = $(this).find('.goods-delivery__more-btn');
     
     $(this).parent().find('.goods-delivery__content').toggle();
@@ -2409,7 +2431,7 @@ function goodsMods(inFancybox){
 
   // Изменение цены товара при изменении у товара свойства для модификации
   goodsDataProperties.each(function(){
-    $(this).change(function(){
+    $(this).on('change', function(){
       var slug = getSlugFromGoodsDataFormModificationsProperties(goodsDataProperties),
         modificationBlock             = $('.product-modifications__list[rel="'+slug+'"]'),
         modificationId                = parseInt(modificationBlock.find('[name="id"]').val()),
@@ -3028,7 +3050,7 @@ $(function(){
 		}		
   });
   
-	$topBtn.click(function () {
+	$topBtn.on('click',function () {
 		$('body, html').animate({
 			scrollTop: 0
 		}, 800);
@@ -3412,7 +3434,7 @@ $(function() {
          if(i == data.goods.length - 1){
           $("#search-result .search__result-inner #show-wrap").remove();
           
-          var $showAllBtn = $('<a>').text('Все результаты').addClass('show-all').click(function(){$('.search__form').submit();})
+          var $showAllBtn = $('<a>').text('Все результаты').addClass('show-all').on('click', function(){$('.search__form').submit();})
           var $showAllWrap = $('<div>').attr('id', 'show-wrap').addClass('result-item').append($showAllBtn)
           
           $("#search-result .search__result-inner .result-goods").append($showAllWrap)

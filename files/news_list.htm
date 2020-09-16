@@ -9,8 +9,8 @@
     {% FOR news_list %}
     <div class="news"> 
       <h5 class="title"><a href="{news_list.URL}" title="Перейти к странице новости">{news_list.TITLE}</a></h5>
-      {% IF news_list.TEXT_SHORT %}<div class="news-content"><p class="text-italic">{news_list.TEXT_SHORT}</p></div>{% ENDIF %} 
-      {% IF news_list.SHOW_TIME %}<div class="news-time text-italic">{news_list.TIME | date("d.m.Y")}</div>{% ENDIF %} 
+      {% IF news_list.TEXT_SHORT %}<div class="news-content"><p>{news_list.TEXT_SHORT}</p></div>{% ENDIF %} 
+      {% IF news_list.SHOW_TIME %}<div class="news-time">{news_list.TIME | date("d.m.Y")}</div>{% ENDIF %} 
     </div>
     {% ENDFOR %}
     

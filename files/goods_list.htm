@@ -48,6 +48,27 @@
     
   {% IFNOT goods_empty %}
       <div class="products">
+
+    <!-- Вывод всех видов описания категории -->
+    {% IF CATEGORY_DESCRIPTION || CATEGORY_SEO_DESCRIPTION_SHORT || CATEGORY_SEO_DESCRIPTION_LARGE %}
+    <div class="products__description">
+      <div class="DescriptionBlock"> 
+        <div class="htmlDataBlock">
+          <!-- Описание категории -->
+          {% IF CATEGORY_DESCRIPTION %} 
+            <p>{CATEGORY_DESCRIPTION}</p>
+          {% ENDIF %}
+
+          <!-- Полное SEO описание категории -->
+          {% IF CATEGORY_SEO_DESCRIPTION_LARGE %}
+            <p>{CATEGORY_SEO_DESCRIPTION_LARGE}</p>
+          {% ENDIF %}
+        </div>
+      </div>
+    </div>
+    {% ENDIF %}
+    <!-- /END Вывод всех видов описания категории -->
+
     <!-- Если нет товаров, либо у пользователя не сработало javascript ограничение на фильтре по товарам и так получилось что их не нашлось, отобразим блок изменяющий отображение данных выдачи товаров -->
     {% IF goods_empty=0 || goods_filters_empty=0 %}
       <!-- Верхний блок, изменяющий отображение данных выдачи товаров -->
@@ -168,7 +189,7 @@
             </div>
             {% ENDIF %}
             <!-- /END Если в тарифном плане подключен модуль фильтров по товарам -->  
-            <form action="" class="toolbar__form">
+            <form action="" class="toolbar__form {% IF SHOW_GOODS_PRICE_FILTERS || SHOW_GOODS_FILTERS && goods_empty != 1 %}_filters-active{% ENDIF %}">
               <!-- Список фильтров, которые сейчас действуют на результаты поиска -->
               {% FOR goods_filters %}
                 <input type="hidden" name="{goods_filters.NAME}" value="{goods_filters.VALUE}" />
@@ -246,7 +267,7 @@
         {% ENDFOR %}
       </div>
     {% ENDIF %}
-    
+
     <!-- Вывод товаров -->
     <div class="products-container">
       <div class="products-ajax">
@@ -922,21 +943,3 @@
   </div>
   {% ENDIF %}
 {% ENDIF %}
-  
-<!-- Вывод всех видов описания категории -->
-{% IF CATEGORY_DESCRIPTION || CATEGORY_SEO_DESCRIPTION_SHORT || CATEGORY_SEO_DESCRIPTION_LARGE %}
-  <div class="DescriptionBlock"> 
-    <div class="htmlDataBlock">
-      <!-- Описание категории -->
-      {% IF CATEGORY_DESCRIPTION %} 
-        <p>{CATEGORY_DESCRIPTION}</p>
-      {% ENDIF %}
-
-      <!-- Полное SEO описание категории -->
-      {% IF CATEGORY_SEO_DESCRIPTION_LARGE %}
-        <p>{CATEGORY_SEO_DESCRIPTION_LARGE}</p>
-      {% ENDIF %}
-    </div>
-  </div>
-{% ENDIF %}
-<!-- /END Вывод всех видов описания категории -->

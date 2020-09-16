@@ -100,15 +100,16 @@
           <td class="cell2">{ORDER_DELIVERY_TRACKING_NUMBER | nl2br}</td>
         </tr>
       {% ENDIF %}
-    </tbody>
-    
+    </tbody>  
+  </table>
+  <table class="table-box">
     <!-- Методы методы оплаты онлайн -->
     <!-- Если заказ не оплачен и выбранный метод оплаты позволяет оплатить его онлайн, покажем форму с оплатой заказа через сайт -->
     {% IF ORDER_PAYMENT_STEP_ENABLE %}
       <!-- Здесь появляются дополнительные данные, необходимые для заполнения клиентом -->
       {PAYMENT_FORM_TBODY}
     {% ENDIF %}
-    <!-- END методы методы оплаты онлайн -->
+    <!-- END методы методы оплаты онлайн -->    
   </table>
   
 {% IFNOT order_lines_empty %}

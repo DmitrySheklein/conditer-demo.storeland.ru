@@ -885,37 +885,35 @@
                   </div>
                 {% ENDIF %}
                 <!-- /END Меню пользователя ЛК -->
-                {% IF MOD_LNAME = catalog %}
-                  <!-- Каталог -->
-                  {% IFNOT catalog_full_empty %}
-                  <div class="page-sidebar__block catalog _sidebar">
-                    <div class="catalog__wrapper">
-                      <ul class="catalog__list {% IF IS_FULL_CATALOG %}_full {% ENDIF %}">
-                        {% FOR catalog_full %}
-                          {% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}<ul class="catalog__sub {% IF catalog_full.LEVEL = 1 %}_lvl-1{% ENDIF %}">{% ENDIF %}{% ENDIF %}
-                          <li {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %} class="catalog__item {% IF catalog_full.LEVEL = 0 %}_lvl-1{% ENDIF %} {% IF catalog_full.ISSET_VISIBLE_SUB %}_parent{% ENDIF %} {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}_current{% ENDIF %}" title="{catalog_full.NAME}">
-                            <a href="{catalog_full.URL}" class="catalog__link {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}_active{% ENDIF %} {% IF catalog_full.LEVEL = 0 %}_lvl-1{% ENDIF %}">
-                              {% IF catalog_full.IMAGE_ICON %}<img src="{catalog_full.IMAGE_ICON}" class="catalog__image"/>{% ENDIF %}
-                              {% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__icon {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}_active{% ENDIF %}">
-                                <svg class="icon _plus">
-                                  <use xlink:href="/design/sprite.svg#plus-icon"></use>
-                                </svg>
-                                <svg class="icon _minus">
-                                  <use xlink:href="/design/sprite.svg#minus-icon"></use>
-                                </svg>                                 
-                              </span>{% ENDIF %}
-                              {catalog_full.NAME}
-                              <!-- Отображение количества товаров в категории -->
-                              {% IF catalog_full.GOODS_COUNT>0 %} <span class="catalog__items-count">({catalog_full.GOODS_COUNT})</span>{% ELSEIF catalog_full.BRANCH_GOODS_COUNT>0 %}<span class="catalog__items-count">({catalog_full.BRANCH_GOODS_COUNT})</span>{% ENDIF %}
-                            </a>
-                          {% IF catalog_full.ISSET_SUB=0 %}</li>{% ENDIF %}
-                          {% IF catalog_full.LAST %}{%FOR out%}</ul>{%IFNOT catalog_full.out.LAST%}</li>{%ENDIF%}{%ENDFOR%}{% ENDIF %}
-                        {% ENDFOR %}
-                      </ul>
-                    </div>
+                <!-- Каталог -->
+                {% IFNOT catalog_full_empty %}
+                <div class="page-sidebar__block catalog _sidebar">
+                  <div class="catalog__wrapper">
+                    <ul class="catalog__list {% IF IS_FULL_CATALOG %}_full {% ENDIF %}">
+                      {% FOR catalog_full %}
+                        {% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}<ul class="catalog__sub {% IF catalog_full.LEVEL = 1 %}_lvl-1{% ENDIF %}">{% ENDIF %}{% ENDIF %}
+                        <li {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %} class="catalog__item {% IF catalog_full.LEVEL = 0 %}_lvl-1{% ENDIF %} {% IF catalog_full.ISSET_VISIBLE_SUB %}_parent{% ENDIF %} {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}_current{% ENDIF %}" title="{catalog_full.NAME}">
+                          <a href="{catalog_full.URL}" class="catalog__link {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}_active{% ENDIF %} {% IF catalog_full.LEVEL = 0 %}_lvl-1{% ENDIF %}">
+                            {% IF catalog_full.IMAGE_ICON %}<img src="{catalog_full.IMAGE_ICON}" class="catalog__image"/>{% ENDIF %}
+                            {% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__icon {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}_active{% ENDIF %}">
+                              <svg class="icon _plus">
+                                <use xlink:href="/design/sprite.svg#plus-icon"></use>
+                              </svg>
+                              <svg class="icon _minus">
+                                <use xlink:href="/design/sprite.svg#minus-icon"></use>
+                              </svg>                                 
+                            </span>{% ENDIF %}
+                            {catalog_full.NAME}
+                            <!-- Отображение количества товаров в категории -->
+                            {% IF catalog_full.GOODS_COUNT>0 %} <span class="catalog__items-count">({catalog_full.GOODS_COUNT})</span>{% ELSEIF catalog_full.BRANCH_GOODS_COUNT>0 %}<span class="catalog__items-count">({catalog_full.BRANCH_GOODS_COUNT})</span>{% ENDIF %}
+                          </a>
+                        {% IF catalog_full.ISSET_SUB=0 %}</li>{% ENDIF %}
+                        {% IF catalog_full.LAST %}{%FOR out%}</ul>{%IFNOT catalog_full.out.LAST%}</li>{%ENDIF%}{%ENDFOR%}{% ENDIF %}
+                      {% ENDFOR %}
+                    </ul>
                   </div>
-                  <!-- /END Каталог -->
-                  {% ENDIF %}
+                </div>
+                <!-- /END Каталог -->
                 {% ENDIF %}
                 <!-- Вы смотрели -->
                 {% IFNOT recently_viewed_goods_empty %}
