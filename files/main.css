@@ -2065,7 +2065,7 @@ color: #052f38;
 .product-modifications .product-modifications__label {display: block;margin-bottom: 0;margin-right: 30px;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;font-size: 18px;}
 .product-modifications .product-modifications__property {margin-bottom: 15px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;max-width: 420px}
 .product-modifications .product-modifications__input-wrap {position: relative;width: 100%;max-width: 300px}
-.product-modifications .product-modifications__input {    height: auto;border-radius: 5px;}
+.product-modifications .product-modifications__input {border-radius: 5px;}
 
 @media all and (max-width: 768px){
   .product-modifications .product-modifications__input .jq-selectbox__select {
@@ -2647,6 +2647,12 @@ color: #052f38;
   max-width: 100%;
   margin-right: 0;
 }
+.quickViewMod._showed .product-modifications select[id^="select-mod"] {
+  visibility: visible;
+}
+.quickViewMod .product-modifications select[id^="select-mod"] {
+  visibility: hidden;
+}
 /* Быстрый просмотр */
 .quickView .product-wrap {max-width: 1020px;width: 100%}
 .quickView .fancybox-inner .container {max-width: 100%;width: 100%;padding: 0}
@@ -2949,6 +2955,7 @@ color: #052f38;
 }
 /**/
 .cart._fast._quickform {
+  max-width: 1020px;  
   margin-top: 30px;
   margin-bottom: 0;
 }

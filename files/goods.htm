@@ -11,8 +11,8 @@
           {% ELSE %}
             {% IFNOT goods_images_empty %}
               <div id="main-image" class="main-image product-view__main-image" data-id="{GOODS_IMAGE_ID}">
-                <a href="{GOODS_IMAGE_LARGE}" data="{goods_images.ID}" data-fancybox="images">
-                    <img class="" src="{GOODS_IMAGE_MEDIUM}" alt="{goods_images.NAME}" />
+                <a href="{GOODS_IMAGE_LARGE}" data="{GOODS_IMAGE_ID}" data-fancybox="images">
+                    <img class="" src="{GOODS_IMAGE_MEDIUM}" alt="{GOODS_NAME}" />
                 </a>
               </div>
               
@@ -41,7 +41,7 @@
                   data-action-add-title="Добавить &laquo;{GOODS_NAME}&raquo; в избранное"
                   data-action-delete-title="Убрать &laquo;{GOODS_NAME}&raquo; из избранного"
                   data-prodname="{GOODS_NAME}"
-                  data-prodimage="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}"
+                  data-prodimage="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}"
                   data-produrl="{GOODS_URL}"
                   data-id="{GOODS_ID}"
                   data-mod-id="{GOODS_MOD_ID}" 
@@ -50,10 +50,10 @@
                   data-del-tooltip="Убрать из избранного"
                   data-tooltip="Убрать из избранного"
                   {% IF GOODS_MOD_IS_HAS_IN_FAVORITES_LIST %}
-                  title="Убрать &laquo;{goods.NAME}&raquo; из избранного"
+                  title="Убрать &laquo;{GOODS_NAME}&raquo; из избранного"
                   href="{FAVORITES_DELETE_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
                   {% ELSE %}
-                  title="Добавить &laquo;{goods.NAME}&raquo; в избранное"
+                  title="Добавить &laquo;{GOODS_NAME}&raquo; в избранное"
                   href="{FAVORITES_ADD_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"                                  
                   {% ENDIF %}
                   data-default-text="В избранное"
@@ -80,10 +80,10 @@
                     {% ENDIF %}
                     data-action-add-url="{COMPARE_ADD_URL}"
                     data-action-delete-url="{COMPARE_DELETE_URL}"
-                    data-action-add-title="Добавить &laquo;{goods.NAME}&raquo; в список сравнения с другими товарами"
-                    data-action-delete-title="Убрать &laquo;{goods.NAME}&raquo; из списка сравнения с другими товарами"
+                    data-action-add-title="Добавить &laquo;{GOODS_NAME}&raquo; в список сравнения с другими товарами"
+                    data-action-delete-title="Убрать &laquo;{GOODS_NAME}&raquo; из списка сравнения с другими товарами"
                     data-prodname="{GOODS_NAME}"
-                    data-prodimage="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}"
+                    data-prodimage="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-small.png?design=conditer{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}"
                     data-produrl="{GOODS_URL}"
                     data-id="{GOODS_ID}"
                     data-mod-id="{GOODS_MOD_ID}"
@@ -92,10 +92,10 @@
                     data-del-tooltip="Убрать из сравнения"
                     data-tooltip="Убрать из сравнения"
                     {% IF GOODS_MOD_IS_HAS_IN_COMPARE_LIST %}
-                      title="Убрать &laquo;{goods.NAME}&raquo; из списка сравнения с другими товарами"
+                      title="Убрать &laquo;{GOODS_NAME}&raquo; из списка сравнения с другими товарами"
                       href="{COMPARE_DELETE_URL}?id={GOODS_MOD_ID}&amp;from={GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"
                     {% ELSE %}
-                      title="Добавить &laquo;{goods.NAME}&raquo; в список сравнения с другими товарами" 
+                      title="Добавить &laquo;{GOODS_NAME}&raquo; в список сравнения с другими товарами" 
                       href="{COMPARE_ADD_URL}?id={GOODS_MOD_ID}&amp;from={GOODS_FROM}&amp;return_to={CURRENT_URL | urlencode}"   
                     {% ENDIF %}
                     data-default-text="Сравнить"

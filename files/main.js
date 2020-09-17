@@ -1414,7 +1414,7 @@ function orderScripts(){
     }
   });
   // Валидация формы на странице оформления заказа
-  $("#quickform").submit(function(){
+  $("#quickform").on('submit', function(){
     // Если форма невалидна не отправляем её на сервер
     if(!$(this).valid()) {
       return false;
@@ -1430,6 +1430,9 @@ function orderScripts(){
       cache    : false,
       url  	  : $(this).attr('action'),
       data		: formData,
+      beforeSend: function () {        
+        preloadButton($('#confirmOrder .button'));
+      }, 
       success: function(data) {
         // Если заказ был успешно создан
         if( data.status == 'ok' ) {
@@ -1447,6 +1450,7 @@ function orderScripts(){
         } else {
           alert('Во время оформления заказа возникла неизвестная ошибка. Пожалуйста, обратитесь в службу технической поддержки.');
         }
+        $('#confirmOrder .button').html('Оформить заказ')
       }
     });
     return false;      
@@ -2189,6 +2193,7 @@ function quickViewMod() {
       if ($(this).closest('.product._min-card').length){
         $(this).addClass('_animated')
       }
+      $(this).find('span').html('<span class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>')      
       var href = $(this).attr('href');
       href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
       quickViewShowMod(href, $(this));
@@ -2206,15 +2211,16 @@ function quickViewShowMod(href,  $el) {
     alert("Не удалось загрузить выбор модификаций");
   })
   .always(function(){
-    $el.removeClass('_animated')
+    $el.removeClass('_animated').find('span').html('В корзину')
   })
   function fancyboxShow(content){
       $.fancybox.open(content, {
         baseClass: 'quickViewMod product-view',
         beforeShow: function(){
-
+          $('.product-modifications select[id^="select-mod"]').hide();  
         },
         afterShow: function() {
+          $('.quickViewMod').addClass('_showed')
           if ($el.hasClass('_cart-page')) {
             $('.product-view__form').addClass('_in-cart')            
           }
@@ -3032,7 +3038,9 @@ function preloadShow(currentPreloader) {
   $spinner.show();
   $preloader.show();
 }
-
+function preloadButton($button) {
+  $button.html('<span class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>')
+}
 
 // Загрузка основных функций шаблона
 $(function(){
