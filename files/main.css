@@ -3070,6 +3070,10 @@ color: #052f38;
   .coupon .coupon__clear {right:55px;}
 }
 
+/*** Caps lock ***/
+.caps-lock {
+  margin-top: 15px;
+}
 /*** Показать пароль ***/
 .show-password {display: flex;position: absolute;z-index: 1;top: 0;right: 0;height: 100%;padding: 0 15px}
 .show-password .icon {fill: #d5daeb;width: 32px;height: 28px;margin: auto;}

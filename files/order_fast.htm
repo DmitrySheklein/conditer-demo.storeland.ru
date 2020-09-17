@@ -62,13 +62,9 @@
                         </button>
                       {% ENDIF %}                       
                     </div>
-                  </div>
-                  <div class="contactRegisterNeedElement" {% IFNOT ORDER_FORM_CONTACT_WANT_REGISTER %}style="display:none;"{% ENDIF %}>
-  
-                    <div id="caps_lock"> 
-                      <span class="fal fa-warning"></span>
+                    <div id="caps_lock" class="caps-lock" {% IFNOT ORDER_FORM_CONTACT_WANT_REGISTER %}style="display:none;"{% ENDIF %}>                       
                       <strong>Caps Lock включен.</strong>
-                    </div>
+                    </div>                    
                   </div>
                 {% ENDIF %}
               {% ENDIF %}
