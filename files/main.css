@@ -408,6 +408,13 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
 .button._quickviewmod {max-width: 100%;width: 100%;flex-shrink: 1;text-transform: uppercase;padding: 0;}
 .button._quickviewmod:hover {background-color: #6053c7;}
 
+@media(max-width: 768px){
+  .button._quickviewmod._animated {
+    animation: heartBeat;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+}
 @media(max-width: 576px){
   .button._quickviewmod {
     margin-top: 15px;
@@ -920,7 +927,7 @@ border: 1px solid #f962ad;
 .header-content._active .header-content__nav {display: -webkit-box;display: -ms-flexbox;display: flex}
 .header-content._active .header-content__overlay {visibility: visible}
 .header-content__overlay {position: absolute;top: 0;left: 100%;right: auto;bottom: 0;width: 1000%;background: #000;opacity: .3;visibility: hidden}
-.header .header-content__item {display: none;padding-top: 15px;}
+.header .header-content__item {display: none;}
 .header .header-content__item._visible {display: block}
 
 @media(min-width: 1200px){
@@ -974,20 +981,20 @@ border: 1px solid #f962ad;
   .header .header__menu {background: #f962ad;position:relative;top:0;}
   .header .header-nav {padding: 0}
   .header .header-nav__item._active {color: #fff}
-  
-
-  
-  .header .header-nav__list {display: block;/* visibility: hidden; */}
+  .header .header-nav__list {display: block;}
   .header .header-nav__list._active {visibility: visible;opacity: 1}
   
-  .header .header-nav__item._active,.header .header-nav__item:hover {background: #f962ad}  
+  .header .header-nav__item._active {background: #f962ad}
   .header .header-nav__link {line-height: 1;color: #fff;padding: 12px 15px;justify-content: flex-start;}
+  .header .header-content._active .header-nav__item  .header-nav__link:first-child {
+    padding-top: 15px;
+  }
   .header .header-nav__link:before,
   .header .header-nav__item._active .header-nav__link:before {display: none}
 }
 @media all and (max-width: 576px){
   .header .header-nav__item .header-nav__link {
-    font-size:14px;
+    font-size: 15px;
   }
 }
 .header-overlay {position: fixed;z-index: -2;top: 0;left: 0;right:0;bottom:0;background-color: #2e2e2e;opacity: 0;visibility: hidden;-webkit-transition: opacity .15s ease-in-out;transition: opacity .15s ease-in-out;cursor: pointer}
@@ -1003,7 +1010,7 @@ body.modal-open {overflow: hidden}
 .header-closeBtn {position: absolute;top: 0;right: 5px;font-size: 25px;line-height: 47px;height: 47px;width: 45px;text-align: center}
 .header-catalog__menu .sub {display: none}
 .header-catalog__menu li._active > ul.sub {display: block}
-.header-catalog__menu .header-subcatalog {display: none;list-style: none;padding-left: 30px;background-color: #f6f8fa}
+.header-catalog__menu .header-subcatalog {display: none;list-style: none;padding-left: 15px;background-color: #f6f8fa}
 .header-catalog__sub-title {display: block;position: relative;padding: 10px 15px 10px 0;font-size: 14px;margin-bottom: 0}
 .header-catalog__link._active {color: #f962ad}
 .header-catalog__link .header-catalog__icon {padding: 15px 15px;position: absolute;top: 0;right: 0;z-index: 2;}
@@ -1804,6 +1811,11 @@ color: #052f38;
 .product._min-card .button._quickviewmod {width: 26px;height: 26px}
 .product._min-card .product__remove-btn {width: 20px;height: 20px;line-height: 18px;top: 12px;right: 12px}
 .product._min-card .product__remove-btn .icon {width: 8px;height: 8px}
+.product._min-card .button._add-cart._animated {
+  animation: heartBeat;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
 }
 @media all and (max-width: 576px){
   .product._min-card {
@@ -1965,6 +1977,9 @@ color: #052f38;
 }
 .quickOrder .politics.-cart-fast {
   max-width: 100%;
+}
+.quickOrder .cart__sum-row.cart__sum--delivery-sum {
+  display: block!important;
 }
 /*** Избранное/ Сравнение ***/
 .add-compare,.add-wishlist {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center}
@@ -3211,10 +3226,11 @@ color: #052f38;
 .quickform-delivery__label {
   user-select: none;
 }
-.quickform-delivery .quickform-delivery__price-default {
-color: #f962ad;
-font-size: 18px;
-font-weight: 700;
+.quickform-delivery .quickform-delivery__price-default,
+.quickform-delivery .quickform-delivery__price-zone {
+  color: #f962ad;
+  font-size: 18px;
+  font-weight: 700;
 }
 .quickform-delivery .quickform__select-box:nth-child(2) {margin-top: 15px;}
 .delivery__descr,.payment__desc {margin: 10px auto 0;padding: 5px;overflow: hidden;font-size: 16px}

@@ -731,7 +731,9 @@ function mainFunctions() {
     if(!$btn.hasClass('_quick') || $btn.hasClass('_product-view-quick')) {
       $btn.find('span').html('<span class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>')
     }
-    
+    if($btn.closest('._min-card').length){
+      $btn.addClass('_animated')
+    }
     var form = $(this).closest('form');
     if ($(this).hasClass('_quick')) {
       form.attr('rel', 'quick');
@@ -1146,7 +1148,7 @@ function addCart() {
       url: formBlock.attr('action'),
       data: formData,
       success: function(data) {
-          var $btn = $('.button._add-cart._loading').removeClass('_loading');
+          var $btn = $('.button._add-cart._loading').removeClass('_loading _animated');
           
           var $cartMessage = $(data).filter('#cart-message');
           var type = $cartMessage.data('message-type');
@@ -1157,7 +1159,7 @@ function addCart() {
             
             $.fancybox.close()
             // Включить выключить показ окна по кнопке "В корзину"
-            var fancyboxOn = false;
+            var fancyboxOn = true;
 
             if(fancyboxOn){
               $.fancybox.open(data,{
@@ -1544,6 +1546,7 @@ function orderScripts(){
         $(this).closest('.quickform-delivery__item').siblings().find('.delivery-radio').prop('checked', false)
         $(this).closest('.quickform-delivery__item').find('.delivery-radio').prop('checked', true)
         $(this).closest('.quickform-delivery__item').find('.quickform-delivery__price-default .num').text(addSpaces(getCurrentDeliveryPrice()))
+        $(this).closest('.quickform-delivery__item').find('.quickform-delivery__price-zone .num').text(addSpaces(getCurrentDeliveryPrice()))
         changePaymentRadio(deliveryId);
         changeCartSum();
       })
@@ -2183,6 +2186,9 @@ function quickViewMod() {
   // Действие при нажатии на кнопку в корзину товара c модификацией
   $(document).ready(function() {
     $(document).on('click', 'a._quickviewmod', function() {
+      if ($(this).closest('.product._min-card').length){
+        $(this).addClass('_animated')
+      }
       var href = $(this).attr('href');
       href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
       quickViewShowMod(href, $(this));
@@ -2200,7 +2206,7 @@ function quickViewShowMod(href,  $el) {
     alert("Не удалось загрузить выбор модификаций");
   })
   .always(function(){
-    
+    $el.removeClass('_animated')
   })
   function fancyboxShow(content){
       $.fancybox.open(content, {

@@ -144,6 +144,9 @@
                               type="radio" class="delivery-zone-radio radio-hidden"  id="deliveryZoneId{order_delivery.zone_list.ID}" name="form[delivery][zone_id]" value="{order_delivery.zone_list.ID}"
                               data-name="{order_delivery.zone_list.NAME}"
                               data-parent-name="{order_delivery.NAME}"
+                            {% IF order_delivery.first && order_delivery.zone_list.first %}
+                              checked="checked"
+                            {% ENDIF %}
                             {% IF order_delivery.zone_list.ID = ORDER_FORM_DELIVERY_ZONE_ID %}
                               checked="checked"
                             {% ENDIF %}
@@ -160,8 +163,8 @@
                     <!-- Стоимость доставки -->
                     <div class="quickform-delivery__price">
                       <span>Стоимость доставки: </span>
-                      <span class="quickform-delivery__price-default" {% IF order_delivery.ZONE_ID>0 %}style="display:none;"{% ENDIF%}>{order_delivery.END_PRICE | money_format}</span>
-                      <span class="quickform-delivery__price-zone" {% IF order_delivery.ZONE_ID<1 %}style="display:none;"{% ENDIF%}>{order_delivery.ZONE_END_PRICE | money_format}</span>
+                      <span class="quickform-delivery__price-default" {% IFNOT order_delivery.zone_list_empty %}style="display:none;"{% ENDIF%}>{order_delivery.END_PRICE | money_format}</span>
+                      <span class="quickform-delivery__price-zone" {% IF order_delivery.zone_list_empty %}style="display:none;"{% ENDIF%}>{% FOR zone_list %}{% IF order_delivery.zone_list.index=1 %}{order_delivery.zone_list.END_PRICE | money_format}{% ENDIF%}{% ENDFOR %}</span>
                     </div>
                     <!-- Описание доставки -->
                     {% IF order_delivery.DESC %}

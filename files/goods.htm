@@ -287,7 +287,7 @@
                 <!-- /END Добавление товара в корзину -->
                 <!-- Нет в наличии -->
                 {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
-                  <div class="product-view__mod-empty button _grey _disabled" title="Нет в наличии" {% IF GOODS_MOD_REST_VALUE!=0 %}style="display:none;"{% ENDIF %}><span>Нет в наличии</span></div>
+                  <div class="product-view__mod-empty button _disabled" title="Нет в наличии" {% IF GOODS_MOD_REST_VALUE!=0 %}style="display:none;"{% ENDIF %}><span>Нет в наличии</span></div>
                 {% ENDIF %}                
               </div>
             </form>          
