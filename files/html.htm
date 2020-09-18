@@ -1054,9 +1054,9 @@
                 {BODY}
               </div>
               
-              {% IFNOT MOD_LNAME = cart %}
+              
               <!-- Центральный блок-->
-              <div class="col-center col">
+              <div class="col-center col" {% IF MOD_LNAME = cart || MOD_LNAME=compare || MOD_LNAME=user || MOD_LNAME= feedback || MOD_LNAME = page %}style="display:none"{% ENDIF %}>
                 <!-- Избранные товары -->
                 {% IFNOT favorites_goods_empty %}
                 <section class="favorites-goods section {% IF compare_list_empty %}_no-margin{% ENDIF %}">
@@ -1194,7 +1194,7 @@
                 </section>
                 {% ENDIF %}
               </div>
-              {% ENDIF %}
+              
               
             </div>
           </div>

@@ -691,7 +691,11 @@ function mainFunctions() {
      if($scrollBlock.length){
       var offsetTop = $scrollBlock.offset().top
       
-      $('html, body').animate({scrollTop: offsetTop})
+      $('html, body').animate({scrollTop: offsetTop}, 500, function () {
+        setTimeout(function() {
+          $('#offerForm_person').focus();
+        }, 0)
+      })
      }
   })
   // AJAX обратные звонки
@@ -2892,7 +2896,6 @@ function indexPage() {
   $categories.owlCarousel(
   $.extend(OWL_DEFAULT,  
   {
-    items: 6,
     animateOut: 'fadeOut',
     onInitialized: function(event){
       var colorsArray = ['#bceac0', '#fae0fc', '#f7efca', '#f7dfca','#d2caf7','#caeef7']
