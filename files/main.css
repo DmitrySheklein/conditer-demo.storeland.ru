@@ -1071,13 +1071,12 @@ body.modal-open {overflow: hidden}
     border-radius: 4px;
     overflow: hidden;
 }
-.slideshow .slideshow__item {position: relative;}
 .slideshow .slideshow__item:not(:first-child) {display:none;}
 .slideshow .slideshow__item .slideshow__item-content {display:none;}
 .slideshow .owl-loaded .slideshow__item {display:block;}
 .slideshow .slideshow__item._overlay:before {content: '';position: absolute;z-index: 1;top: 0;left: 0;right: 0;bottom: 0}
 .slideshow .slideshow__item._overlay._dark:before {background: #052f38;opacity: .25}
-.slideshow .slideshow__item {height: 460px;background-size: cover;background-repeat: no-repeat;background-position: center}
+.slideshow .slideshow__item {position: relative;height: 460px;background-size: cover;background-repeat: no-repeat;background-position: center;background: #152228;}
 .slideshow .slideshow__item .slideshow__image {display: none}
 .slideshow .slideshow__item .slideshow__item-content {display:block;width: auto;max-width: 580px;box-sizing: content-box;position: absolute;z-index: 1;top: 0;left: 0;right: 0;bottom: 0;text-align: left;padding: 6.83%;}
 .slideshow .slideshow__item .slideshow__item-content-title {position: relative;color: #fff;font-size: 44px;text-transform: none;font-weight: 700;margin-bottom: 30px;letter-spacing: 1px;}
@@ -3575,8 +3574,20 @@ color: #052f38;
 .CompareGoodsTableFilter .button.CompareGoodsTableFilterSelected {color: #fff}
 .CompareGoodsTable .CompareNavigation {float: left;margin: 0;padding: 0;list-style: none;list-style-position: inside}
 .CompareGoodsTable .CompareNavigation li {display: inline-block;vertical-align: middle}
+.CompareGoodsTable .CompareNavigation li .icon {
+  width: 18px;
+  height: 20px;
+  fill: #fff;
+}
 .CompareGoodsTable .CompareNavigation .next,
-.CompareGoodsTable .CompareNavigation .prev {font-size: 30px;vertical-align: middle;}
+.CompareGoodsTable .CompareNavigation .prev {width: 34px;height: 34px;line-height: 29px;vertical-align: middle;border-radius: 50%;    background-color: #f962ad; user-select: none;}
+.CompareGoodsTable .CompareNavigation .prev .icon {
+  transform: rotate(180deg);
+}
+.CompareGoodsTable .CompareNavigation .next.disable,
+.CompareGoodsTable .CompareNavigation .prev.disable {
+  background-color: #cfd5e9;
+}
 .CompareGoodsTableTbody tbody tr td.cell {text-align: left;width: 200px}
 .CompareGoodsTableTbody tbody tr td.vtop {vertical-align: top;overflow: auto}
 .CompareGoodsTableTbody .CompareCheckbox {margin: 0;vertical-align: middle}

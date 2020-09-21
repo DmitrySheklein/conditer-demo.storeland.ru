@@ -632,10 +632,10 @@ function comparePage(){
       $('.compare-td-' + data[1]).hide();
       $('.compare-td-' + (data[2] + 1)).show();
       if((data[2] + 1) >= data[0]) {
-        $(this).find('a').addClass('disable');
+        $(this).addClass('disable');
       }
       if(data[1] + 1 != 1) {
-        $('.CompareGoodsTablePrev a').removeClass('disable');
+        $('.CompareGoodsTablePrev').removeClass('disable');
       }
     }
     return false;
@@ -650,10 +650,10 @@ function comparePage(){
       $('.compare-td-' + (data[1] - 1)).show();
       $('.compare-td-' + data[2]).hide();
       if((data[1] - 1) <= 1) {
-        $(this).find('a').addClass('disable');
+        $(this).addClass('disable');
       }
       if(data[2] - 1 != data[0]) {
-        $('.CompareGoodsTableNext a').removeClass('disable');
+        $('.CompareGoodsTableNext').removeClass('disable');
       }
     }
     return false;
