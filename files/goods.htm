@@ -28,7 +28,7 @@
             {% ENDIF %}
           {% ENDIF %}
 
-          <div class="product-view__action-buttons">
+          <div class="product-view__action-buttons {% FOR goods_images %}{% IF goods_images.index > 1 %}_with-imgs{% ENDIF %}{% ENDFOR %}">
               <!-- Избранное -->
                 <a class="product-view__action-button add-wishlist {% IF GOODS_MOD_IS_HAS_IN_FAVORITES_LIST%}_added{% ENDIF %}"
                   {% IF GOODS_MOD_IS_HAS_IN_FAVORITES_LIST %}

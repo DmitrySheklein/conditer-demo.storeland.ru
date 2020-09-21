@@ -18,11 +18,11 @@
             <legend class="form__legend">Форма связи</legend>
             <div class="form__field">
               <label for="feedback_name" class="form__label required">Представьтесь, пожалуйста: <em>*</em></label>
-              <input id="feedback_name" placeholder="Представьтесь, пожалуйста" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_NAME}]"  value="{FORM_FEEDBACK_NAME}" maxlength="50"  class="input required">
+              <input id="feedback_name" placeholder="Представьтесь, пожалуйста" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_NAME}]"  value="{FORM_FEEDBACK_NAME}" maxlength="50"  class="input required" required>
             </div>
             <div class="form__field">
               <label for="feedback_email" class="form__label required">Электронная почта: <em>*</em></label>
-              <input id="feedback_email" placeholder="Электронная почта" type="text"  name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_EMAIL}]"  value="{FORM_FEEDBACK_EMAIL}" maxlength="255" class="input required email">
+              <input id="feedback_email" placeholder="Электронная почта" type="text"  name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_EMAIL}]"  value="{FORM_FEEDBACK_EMAIL}" maxlength="255" class="input required email" required>
             </div>
             <div class="form__field">
               <label for="feedback_phone" class="form__label required">Телефон: </label>
@@ -30,7 +30,7 @@
             </div>
             <div class="form__field">
               <label for="feedback_message" class="form__label required">Текст сообщения: <em>*</em></label>
-              <textarea id="feedback_message" placeholder="Текст сообщения" rows="4" name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_MESSAGE}]" class="input textarea required">{FORM_FEEDBACK_MESSAGE}</textarea>
+              <textarea id="feedback_message" placeholder="Текст сообщения" rows="4" name="form[{ANTISPAM_FORM_FIELD_NAME_FEEDBACK_MESSAGE}]" class="input textarea required" required>{FORM_FEEDBACK_MESSAGE}</textarea>
             </div>
             <div class="form__field">
               <label class="form__label" for="feedback_file">Прикрепить файл</label>

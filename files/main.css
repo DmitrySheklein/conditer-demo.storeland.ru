@@ -1518,7 +1518,7 @@ body.modal-open {overflow: hidden}
 .main-contacts .main-contacts__phone a {line-height: 30px;font-size: 18px;font-weight: 500;}
 .main-contacts__item {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;font-size: 18px;font-weight: 400;line-height: 24px;margin-bottom: 10px}
 .main-contacts__icon-wrap {display: -webkit-box;display: -ms-flexbox;display: flex;width: 18px;height: 18px;margin-right: 10px;border-radius: 50%;background-color: #cfd5e9;-ms-flex-negative: 0;flex-shrink: 0}
-.main-contacts__item .icon {fill: #fff;width: 9px;height: 9px;margin: auto}
+.main-contacts__item .icon {fill: #fff;height: 9px;margin: auto}
 .main-contacts__item .icon._email {-webkit-transform: translateX(.5px);transform: translateX(.5px)}
 @media all and (max-width: 1199px) {
 .main-contacts__item {font-size: 16px}
@@ -1574,8 +1574,8 @@ color: #052f38;
     border: 0;
     margin: 0;
 }
-.form__label {    display: block;margin-bottom: 5px;}
-.form__field {position: relative;margin-bottom: 10px;}
+.form__label {display: block;margin-bottom: 10px;}
+.form__field {position: relative;margin-bottom: 20px;}
 .form__input-wrap {position: relative;}
 .form__politics {
   text-align: left;
@@ -2027,10 +2027,16 @@ color: #052f38;
 /* Избранное Сравнение */
 .product-view__action-buttons {
   display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-ms-flex-wrap: wrap;flex-wrap: wrap;width: 100%;margin-top: 15px;
-  width: calc(100% - 115px);
+  width: 100%;
   margin-left: auto;
 }
+.product-view__action-buttons._with-imgs {
+  width: calc(100% - 115px);
+}
 @media (max-width: 768px){
+  .product-view__action-buttons._with-imgs {
+    width: calc(100% - 55px);
+  }
   .product-view__action-buttons {
     width: 100%;
   }
@@ -2084,6 +2090,12 @@ color: #052f38;
 .product-view .product-view__price-list {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-align: center;-ms-flex-align: center;align-items: center;}
 
 .product-modifications {margin-bottom: 40px}
+.product-modifications select[id^="select-mod"] {
+  visibility: hidden;
+}
+.product-modifications select[id^="select-mod"]._visible {
+  visibility: visible;
+}
 .product-modifications .product-modifications__label {display: block;margin-bottom: 0;margin-right: 30px;-webkit-box-flex: 1;-ms-flex-positive: 1;flex-grow: 1;font-size: 18px;}
 .product-modifications .product-modifications__property {margin-bottom: 15px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;max-width: 420px}
 .product-modifications .product-modifications__input-wrap {position: relative;width: 100%;max-width: 300px}
@@ -2102,6 +2114,7 @@ color: #052f38;
   .product-modifications .product-modifications__label {
     margin-right: 0;
     margin-bottom: 15px;
+    width: 100%;
   }
   .product-modifications .product-modifications__property {
     flex-wrap: wrap;
@@ -3248,7 +3261,7 @@ color: #052f38;
 }
 @media(max-width: 576px){
   .quickform .quickform__row.-account .quickform__item._contactWantRegister {
-    margin-top: 15px;
+    margin-top: 20px;
   }
 }
 .quickform .quickform__row.-account .quickform__item {
@@ -3367,9 +3380,22 @@ color: #052f38;
 .showPassBlock .showPass,
 .showPassBlock .OrderShowPass{display: block;padding: 11px 15px}
 /*** Личный кабинет (Страницы) ***/
+.account-block._settings .account-block__col {margin-bottom: 30px;}
 .account-block__title {margin-bottom:15px;text-transform: none;}
 .account-block__subtitle {margin-top:0;    margin-bottom: 15px;}
-.account-block._settings .account-block__col {margin-bottom: 30px;}
+.account-block__buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+.account-block__buttons .button {
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+@media(max-width: 768px){
+  .account-block .row > div:first-child .account-block__col {
+    padding-bottom: 30px;
+  }
+}
 /*** Личный кабинет (Избранное) ***/
 .account.cart-info .buttons .button {margin-right: 11px;margin-bottom:5px;}
 

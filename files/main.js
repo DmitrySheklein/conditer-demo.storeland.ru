@@ -660,12 +660,12 @@ function comparePage(){
   });
 }
 
-// Показать пароль 
+// Показать/скрыть пароль
 $(function(){
-  $('.showPass').on('click',function(){
+  $('.show-password').on('click', function(){
     ChangePasswordFieldType(this, $('#sites_client_pass'));
     return false;
-  });
+  });   
 });
 
 // Основные функции
@@ -674,9 +674,9 @@ function mainFunctions() {
   $('#startOrder, #startOrderTab').on('click', function() {
     startOrder();
     return false;
-  });  
+  });
   // Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
-  $("#order-stage-form, .feedback-form, .subscribe-footer__form, .clientForm").validate();  
+  $("#order-stage-form, .feedback-form, .subscribe-footer__form, .clientForm, .form").validate();  
   $('.subscribe .subscribe__form').validate()
   $('.callback-form').validate()
   $('.offer-form').validate()
@@ -2295,7 +2295,11 @@ function calcDiscount(){
 /* Скрипты для карточки товара */
 function goodspage() {
   // Модификация селектов  
-  $('.product-modifications select[id^="select-mod"]').styler();  
+  $('.product-modifications select[id^="select-mod"]').styler({
+    onFormStyled: function () {      
+      $('.product-modifications select[id^="select-mod"]').addClass('_visible')
+    }
+  });  
   // Валидация отзывов
   $('.goods-opinion-form').validate();
 
