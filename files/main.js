@@ -1854,16 +1854,23 @@ function cartAjaxQty(){
             $('.cart-list').html($data.find('.cart-list').html());
 
             var cartSum = $data.find('.total-sum').data('total-sum') || "0";
-            $('.cart-header .cart-header__cart-sum .num').text(addSpaces(cartSum));  
-            if($('#quick_form_coupon_code').val()){
+            $('.cart-header .cart-header__cart-sum .num').text(addSpaces(cartSum));
+
+            if ($('#quick_form_coupon_code').val()){
               $('#quick_form_coupon_code, .coupon-hidden-input').trigger('change')
             }
             
             DeliveryModule.changeCartSum();
+
+            var $deliveryPriceBlock = $('.cart__sum-row.cart__sum--delivery-sum');
+            var deliveryPrice = Number($deliveryPriceBlock.find('.num').text());
+            
+            if (deliveryPrice != 0){
+              $('.cart__sum-row.cart__sum--delivery-sum').show();
+            }
             
             var newQtyInputVal = $data.find('[data-id="' + id + '"] .qty__input').val();
-            $('.cart__sum-row.cart__sum--delivery-sum').show();
-            if(qtyInputVal > newQtyInputVal){
+            if(Number(qtyInputVal) > Number(newQtyInputVal)){
               var $cartMessage = $data.filter('#cart-message');
               var type = $cartMessage.data('message-type');
 

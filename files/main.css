@@ -1657,7 +1657,8 @@ color: #052f38;
 }
 /* Плитка товара */
 .product {position: relative}
-.product._carousel {height: 100%}
+.product._carousel {width: 100%;max-width: 285px;}
+.owl-loaded .product._carousel {height: 100%;}
 .product .product__inner {position: relative;height: 100%;border-radius: 5px;padding: 15px;padding-bottom: 0px;z-index: 101}
 .product .product__form {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;height: 100%}
 .product .product__image {position: relative;background: #fff;overflow: hidden;z-index: 0;padding: 0;border: 0;border-radius: 0;text-align: center;margin-bottom: 15px;}
