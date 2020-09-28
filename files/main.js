@@ -1659,7 +1659,7 @@ function orderScripts(){
     if (priceNow < 0) {
         priceNow = 0;
     }
-    $('.cart__sum .total-sum').find('.num').text(addSpaces(priceNow));
+    $('.cart__sum .total-sum').find('.num').text(addSpaces(Math.ceil(priceNow)));
   }
 
   function getCurrentDeliveryPrice() {

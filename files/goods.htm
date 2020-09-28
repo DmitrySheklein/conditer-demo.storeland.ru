@@ -125,8 +125,16 @@
               <h1 class="product-view__name" itemprop="name">{GOODS_NAME}</h1>
               <!-- Доступность товара -->
               <div class="product-view__available">
-                <div class="product-view__available-item _available" {% IF GOODS_MOD_REST_VALUE=0 %}style="display:none;"{% ENDIF %}><svg class="icon _check"><use xlink:href="/design/sprite.svg#check"></use></svg><span>В наличии</span></div>
-                <div class="product-view__available-item _not-available" {% IF GOODS_MOD_REST_VALUE>0 %}style="display:none;"{% ENDIF %}><svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg><span>Нет в наличии</span></div>
+                <div class="product-view__available-item _available" {% IF GOODS_MOD_REST_VALUE > 0 || SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE = 0 %}style="display:block;"{% ENDIF %}>
+                  <div class="product-view__available-wrap">
+                    <svg class="icon _check"><use xlink:href="/design/sprite.svg#check"></use></svg><span>В наличии</span>
+                  </div>
+                </div>
+                <div class="product-view__available-item _not-available" {% IF GOODS_MOD_REST_VALUE = 0 && SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE = 1 %}style="display:block;"{% ENDIF %}>
+                  <div class="product-view__available-wrap">
+                    <svg class="icon _close"><use xlink:href="/design/sprite.svg#close"></use></svg><span>Нет в наличии</span>
+                  </div>
+                </div>
               </div>              
           </div>     
           <div class="product-view__sub-header">
@@ -285,14 +293,45 @@
                   <button type="submit" class="button _product-view-quick _reverse _add-cart _quick" title="Положить &laquo;{GOODS_NAME}&raquo; в корзину"><span>Купить в 1 клик</span></button>
                 </div>
                 <!-- /END Добавление товара в корзину -->
-                <!-- Нет в наличии -->
-                {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}
-                  <div class="product-view__mod-empty button _disabled" title="Нет в наличии" {% IF GOODS_MOD_REST_VALUE!=0 %}style="display:none;"{% ENDIF %}><span>Нет в наличии</span></div>
-                {% ENDIF %}                
+                <!-- Уведомить о поступлении -->
+                {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}           
+                <a href="#" class="button product-view__mod-empty" data-fancybox="" data-src="#product-notify" {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && GOODS_MOD_REST_VALUE=0 %}style="display:block;"{% ENDIF %}>Уведомить</a>
+                {% ENDIF %}
               </div>
             </form>          
           </div>
+          <!-- Уведомить о поступлении -->
+          <div id="product-notify" style="display: none;">
+            <form method="post" action="{CALLBACK_URL}" class="form _fancybox" enctype="multipart/form-data">
+              <input type="hidden" name="hash" value="{HASH}" />
+              <input type="hidden" name="return_to" value="{CALLBACK_URL}" class="callbackredirect" />
+              <input type="hidden" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="Уведомить -- {GOODS_NAME}" />
+              <input type="hidden" name="form[Имя_Товара]" value="{GOODS_NAME}"/>
+              <input type="hidden" name="form[Артикул]" value="{GOODS_MOD_ART_NUMBER}"/>
           
+              <!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
+              {ANTISPAM_CODE}
+              <fieldset class="form__group">
+                <legend class="form__legend">Уведомить о поступлении</legend>
+                <div class="form__field">
+                  <label for="callback_name" class="form__label required">Представьтесь, пожалуйста: <em>*</em></label>
+                  <input id="callback_name" placeholder="Представьтесь, пожалуйста" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]"  value="{FORM_CALLBACK_NAME}" maxlength="50"  class="input required" required>
+                </div>
+                <div class="form__field">
+                  <label for="callback_email" class="form__label required">Электронная почта: <em>*</em></label>
+                  <input id="callback_email" placeholder="Электронная почта" type="text"  name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_EMAIL}]"  value="{FORM_CALLBACK_EMAIL}" maxlength="255" class="input required email" required>
+                </div>
+                <div class="form__field">
+                  <label for="callback_phone" class="form__label required">Телефон: </label>
+                  <input id="callback_phone" placeholder="Телефон" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]"  value="{FORM_CALLBACK_PHONE}" maxlength="50"  class="input" required>
+                </div>
+              </fieldset>
+              <div class="form__buttons">
+                <div class="politics form__politics">Нажимая на кнопку Отправить, <br/>Вы соглашаетесь с <a data-fancybox href="#fancybox-politics">правилами обработки данных</a></div>
+                <button type="submit" title="Отправить" class="button"><span>Отправить</span></button>
+              </div>
+            </form>
+          </div>
           <!-- Основная информация о товаре -->
           {% IF GOODS_DESCRIPTION_SHORT %}
           <div class="product-view__info">
