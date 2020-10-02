@@ -13,7 +13,7 @@
               <fieldset class="form__group">
                 <div class="form__field">
                   <label for="email" class="form__label required">E-mail: <em>*</em></label>
-                  <input type="text" name="form[sites_client_mail]" value="{FORM_SITES_CLIENT_MAIL}" id="email"  maxlength="255" class="input form__input" required />
+                  <input type="email" name="form[sites_client_mail]" value="{FORM_SITES_CLIENT_MAIL}" id="email"  maxlength="255" class="input form__input" pattern="([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})" required />
                 </div>
                 
                 <div class="form__field">
