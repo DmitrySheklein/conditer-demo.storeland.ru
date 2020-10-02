@@ -690,6 +690,7 @@
               <div class="product__actions">
                 <div class="product__price-box {% IF related_goods.COUNT_MODIFICATION > 1 %}_with-mods{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                   <meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}"/>
+                  <meta itemprop="priceValidUntil" content="2029-12-31"/>
                     {% IF related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_goods.MIN_PRICE_NOW %}
                       <span class="price old-price {CURRENCY_CHAR_CODE}">{related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
                     {% ELSEIF related_goods.MIN_PRICE_OLD>related_goods.MIN_PRICE_NOW %}
