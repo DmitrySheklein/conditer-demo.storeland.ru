@@ -1334,8 +1334,8 @@ function quickOrder(formSelector) {
           // Купон
           coupons();
           // Обновляем счётчики
-          $('.header .cart-header .cart-header__counter .num').html($(data).find('#newCartCount').html());
-          $('.header .cart-header .cart-header__cart-sum').html($(data).find('#newCartSum').html());             
+          $('.header .cart-header .cart-header__counter .num').html($(data).filter('#newCartCount').html());
+          $('.header .cart-header .cart-header__cart-sum').html($(data).filter('#newCartSum').html());             
         }
       });
     }
