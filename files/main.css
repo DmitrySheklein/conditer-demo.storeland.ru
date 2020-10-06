@@ -42,6 +42,13 @@ select:focus, textarea:focus {outline: 0;border-color: #052f38;}
 .input.invalidInput + label {display: none;color: #f962ad;font-size: 12px;text-align: left;margin-top: 5px}
 .input.error + label.error {font-size: 12px;color: #f85f5f;line-height: 22px;position: absolute;top: 100%;left: 0;z-index: 1;}
 
+@media (max-width: 576px) {
+  .clientForm .input.error + label.error,
+  .form .input.error + label.error {
+    position: relative;
+  }
+}
+
 @media (max-width:576px) {
   .input {height: 40px;font-size: 16px;}
 }
@@ -3168,10 +3175,13 @@ body.modal-open {overflow: hidden}
   margin-top: 15px;
 }
 /*** Показать пароль ***/
-.show-password {display: flex;position: absolute;z-index: 1;top: 0;right: 0;height: 100%;padding: 0 15px}
+.show-password {display: flex;position: absolute;z-index: 1;top: 0;right: 0;height: 50px;padding: 0 15px}
 .show-password .icon {fill: #d5daeb;width: 32px;height: 28px;margin: auto;}
 .show-password .icon._active {fill: #6053c7}
 
+@media (max-width: 576px) {
+  .show-password {height: 40px;}
+}
 /*** Быстрый заказ ***/
 .quick-order {max-width: 1020px}
 
