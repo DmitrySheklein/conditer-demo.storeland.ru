@@ -130,16 +130,7 @@ h6 {font-size: 16px;}
 ol.unstyled, ul.unstyled {margin: 0;padding: 0;list-style: none;list-style-position: inside;}
 dt, dd {line-height: 1.4;}
 .hide {display:none;}
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  clip: rect(0 0 0 0);
-  overflow: hidde  
-}
+.visually-hidden {position: absolute;width: 1px;height: 1px;margin: -1px;border: 0;padding: 0;clip: rect(0 0 0 0);overflow: hidden}
 .required em {color: #f962ad;}
 .left {float: left;}
 .right {float: right;}
@@ -184,14 +175,7 @@ label.invalidInput {color: #E80636;font-size: 90%;}
 .noty_body {font-size: 16px!important;text-align: center!important;zoom: 97%}
 .noty_theme__sunset.noty_type__error {background: #b73e55!important}
 .noty_theme__sunset.noty_type__success {background: #60d35e!important}
-#noty_layout__bottomCenter {
-  left: 5%;
-  right: 0;
-  bottom: 1%;
-  width: 100%;
-  max-width: 90%;
-  transform: none;
-}
+#noty_layout__bottomCenter {left: 5%;right: 0;bottom: 1%;width: 100%;max-width: 90%;-webkit-transform: none;transform: none}
 
 @media (max-width:576px) {
   #noty_layout__bottomRight {max-width:100%; width: calc(100% - 30px);right: 15px;left: 15px;}
@@ -462,21 +446,8 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
 /* Блок-обёртка для кнопок*/
 .buttons {display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center}
 /*! Кнопка удалить */
-.button-remove {
-    display: inline-block;
-    vertical-align: center;
-    width: 20px;
-    height: 20px;
-    line-height: 16px;
-    border-radius: 50%;
-    border: 1px solid #cacfd7;
-    text-align: center;
-}
-.button-remove .icon {
-  width: 8px;
-  height: 8px;
-  fill: #cacfd7;
-}
+.button-remove {display: inline-block;vertical-align: center;width: 20px;height: 20px;line-height: 16px;border-radius: 50%;border: 1px solid #cacfd7;text-align: center}
+.button-remove .icon {width: 8px;height: 8px;fill: #cacfd7}
 .button-remove:hover {border-color: #6053c7;}
 .button-remove:hover .icon {  fill: #6053c7;}
 /* Навигация */
@@ -570,35 +541,10 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
   }
 }
 /* Заголовки секций */
-.section-title {
-    display: inline-block;
-    vertical-align: middle;  
-    position: relative;
-    color: #052f38;
-    line-height: 1;
-    text-align: left;
-    text-transform: none;
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 30px;
-    z-index: 1;
-}
-.section-title .section-title__word {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-}
-.section-title .section-title__word:before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 6px;
-    border-radius: 3px;
-    background-color: #f9bada;
-    position: absolute;
-    bottom: 5px;
-    z-index: -1;
-}
+.section-title {display: inline-block;vertical-align: middle;position: relative;color: #052f38;line-height: 1;text-align: left;text-transform: none;font-size: 36px;font-weight: 700;margin-bottom: 30px;z-index: 1}
+.section-title .section-title__word {position: relative;display: inline-block;vertical-align: top}
+.section-title .section-title__word:before {content: '';display: block;width: 100%;height: 6px;border-radius: 3px;background-color: #f9bada;position: absolute;bottom: 5px;z-index: -1}
+
 @media (max-width: 480px){
   .section-title .section-title__word:before {
     height: 4px;
@@ -686,7 +632,6 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
 @media all and (max-width:576px) {
   .header .header__logo {padding:0;}
   .header .header__logo-img {
-    /* max-width: 80px; */
     max-height: 75px;
   }
 }
@@ -1105,10 +1050,7 @@ body.modal-open {overflow: hidden}
   .slideshow .slideshow__item {height: 370px;}
   .slideshow .slideshow__item .slideshow__item-content {max-width: 400px;}
 }
-@media all and (max-width:991px) {
-  /*.slideshow .slideshow__item {height: 565px}*/
-  /*.slideshow .owl-loaded .slideshow__item .slideshow__item-content {bottom: calc(50% - 125px);-webkit-transform: translateY(50%);transform: translateY(50%);max-width: 480px;}*/
-}
+
 
 @media all and (max-width: 576px){
 .slideshow .slideshow__item {height: auto}
@@ -1568,28 +1510,14 @@ body.modal-open {overflow: hidden}
 .politics._feedbackForm {text-align: left;margin-bottom: 10px;}
 .politics._feedbackForm a {display: inline-block;}
 /* Форма */
-.form {display: block;}
-.form._fancybox {
-  padding: 30px 15px 15px;
-}
-.form__legend {
-  margin-bottom:15px;text-transform: none;
-  font-weight: 700;
-  color: #052f38;  
-  font-size: 24px
-}
-.form__group {
-  padding: 0;
-  border: 0;
-  margin: 0;
-}
-.form__label {display: block;margin-bottom: 10px;}
-.form__field {position: relative;margin-bottom: 20px;}
-.form__input-wrap {position: relative;}
-.form__politics {
-  text-align: left;
-  margin-bottom: 10px;
-}
+.form {display: block}
+.form._fancybox {padding: 30px 15px 15px}
+.form__legend {margin-bottom: 15px;text-transform: none;font-weight: 700;color: #052f38;font-size: 24px}
+.form__group {padding: 0;border: 0;margin: 0}
+.form__label {display: block;margin-bottom: 10px}
+.form__field {position: relative;margin-bottom: 20px}
+.form__input-wrap {position: relative}
+.form__politics {text-align: left;margin-bottom: 10px}
 /*** Заголовки ***/
 #page-title {text-align: left; margin-bottom: 30px;}
 #page-title.index-catalog {padding: 15px 15px 0;}
