@@ -32,7 +32,7 @@
 !function(a){"function"==typeof define&&define.amd?define(["jquery","../jquery.validate.min"],a):"object"==typeof module&&module.exports?module.exports=a(require("jquery")):a(jQuery)}(function(a){return a.extend(a.validator.messages,{required:"Это поле необходимо заполнить.",remote:"Пожалуйста, введите правильное значение.",email:"Пожалуйста, введите корректный адрес электронной почты.",tel:"Пожалуйста, введите корректный телефон.",url:"Пожалуйста, введите корректный URL.",date:"Пожалуйста, введите корректную дату.",dateISO:"Пожалуйста, введите корректную дату в формате ISO.",number:"Пожалуйста, введите число.",digits:"Пожалуйста, вводите только цифры.",creditcard:"Пожалуйста, введите правильный номер кредитной карты.",equalTo:"Пожалуйста, введите такое же значение ещё раз.",extension:"Пожалуйста, выберите файл с правильным расширением.",maxlength:a.validator.format("Пожалуйста, введите не больше {0} символов."),minlength:a.validator.format("Пожалуйста, введите не меньше {0} символов."),rangelength:a.validator.format("Пожалуйста, введите значение длиной от {0} до {1} символов."),range:a.validator.format("Пожалуйста, введите число от {0} до {1}."),max:a.validator.format("Пожалуйста, введите число, меньшее или равное {0}."),min:a.validator.format("Пожалуйста, введите число, большее или равное {0}.")}),a});
 
 $.validator.methods.email = function( value, element ) {
-	return this.optional( element ) || /^[a-zA-Z0-9]+@[a-z]+\.[a-z]+/.test( value );
+	return this.optional( element ) || /([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})/.test( value );
 }
 $.validator.methods.tel = function( value, element ) {
 	return this.optional( element ) || /\+?\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}/.test( value );
