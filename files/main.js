@@ -1398,25 +1398,20 @@ function orderScripts(){
     
   }) */ 
   // Разделение поле адрес на Улица, Дом, Квартира
-  $('#quickform .button').on('click', function(){
-    var $quickDeliveryAddress = $('#quickDeliveryAddress'),
-        quickDeliveryAddressStreetValue = $('#quickDeliveryAddressStreet').val(),
-        quickDeliveryAddressHomeValue = $('#quickDeliveryAddressHome').val(),
-        quickDeliveryAddressFlatValue = $('#quickDeliveryAddressFlat').val();
-    
-    if(!$quickDeliveryAddress.length){
-      return;
-    }
-    
-    if(quickDeliveryAddressStreetValue !='' || quickDeliveryAddressHomeValue !='' || quickDeliveryAddressFlatValue !=''){
-      if ($quickDeliveryAddress.val().match( /(.*)(улица)+(.*)/i )) {
-        $quickDeliveryAddress.val(null);
+  $(function () {
+    $('#quickform .button, #confirmOrder .button').off('click').on('click', function(){
+      var $quickDeliveryAddress = $('#quickDeliveryAddress'),
+          quickDeliveryAddressStreetValue = $('#quickDeliveryAddressStreet').val(),
+          quickDeliveryAddressHomeValue = $('#quickDeliveryAddressHome').val(),
+          quickDeliveryAddressFlatValue = $('#quickDeliveryAddressFlat').val();
+      
+      if($quickDeliveryAddress.length && (quickDeliveryAddressStreetValue !='' || quickDeliveryAddressHomeValue !='' || quickDeliveryAddressFlatValue !='')){
+        $quickDeliveryAddress.val('Улица: ' + quickDeliveryAddressStreetValue + ', Дом/Корпус: ' + quickDeliveryAddressHomeValue + ', Квартира: ' + quickDeliveryAddressFlatValue);
       }
-      $quickDeliveryAddress.val('Улица: ' + quickDeliveryAddressStreetValue + ', Дом/Корпус: ' + quickDeliveryAddressHomeValue + ', Квартира: ' + quickDeliveryAddressFlatValue);
-      $(this).submit();
+      $('#quickform').submit()
       return false;
-    }
-  });
+    });    
+  })
   // Валидация формы на странице оформления заказа
   $("#quickform").on('submit', function(){
     // Если форма невалидна не отправляем её на сервер
