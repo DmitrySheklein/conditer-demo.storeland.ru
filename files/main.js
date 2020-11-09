@@ -1352,7 +1352,7 @@ function orderScripts(){
   }
   // Выбор диапазона времени доставки
   // Чтобы изменять диапазон со стороны используйте $('.quickform .quickform__select-convenient._period').val('0-2').trigger('refresh')
-  $('.quickform .quickform__select-convenient._period').on('change', function(){
+  $('.quickform select.quickform__select-convenient._period').on('change', function(){
     var convenientArr = $(this).val().split('-')
     
     if(convenientArr.length){
