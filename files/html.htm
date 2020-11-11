@@ -2521,17 +2521,20 @@
           </div>
           {% ENDIF %}
           {% IFNOT catalog_full_empty%}
-          <div class="footer-col col-xl-3 col-lg-3 col-md-4 col-sm-4">
+          <div class="footer-col col-xl-3 col-lg-3 col-md-4 col-sm-3">
             <div class="footer-collapse">
-              <h3 class="footer-collapse__title footer-col__title">Каталог</h3>
+              <h3 class="footer-collapse__title footer-col__title">Мой кабинет</h3>
               <ul class="footer-collapse__list">
-                {% FOR catalog_full%}
-                  {% IFNOT catalog_full.HIDE %}
-                    {% IF catalog_full.LEVEL = 0 %}
-                      <li class="footer-collapse__list-item"><a class="footer-collapse__list-link" href="{catalog_full.URL}" title="Перейти к категории &laquo;{catalog_full.NAME}&raquo;">{catalog_full.NAME}</a></li>
-                    {% ENDIF %}
-                  {% ENDIF %}
-                {% ENDFOR %}                  
+                {% IFNOT CLIENT_IS_LOGIN %}
+                <li class="footer-collapse__list-item"><a class="footer-collapse__list-link" href="{USER_LOGIN_URL}" title="Вход в личный кабинет" rel="nofollow">Вход</a></li>
+                <li class="footer-collapse__list-item"><a class="footer-collapse__list-link" href="{USER_REGISTER_URL}" title="Регистрация" rel="nofollow">Регистрация</a></li>
+                {% ELSE %}
+                <li class="footer-collapse__list-item"><a class="footer-collapse__list-link" href="{USER_SETTINGS_URL}" title="Личный кабинет" rel="nofollow">Мой кабинет</a></li>
+                <li class="footer-collapse__list-item"><a class="footer-collapse__list-link" href="{USER_HISTORY_LIST_URL}" title="История заказов" rel="nofollow">История</a></li>
+                <li class="footer-collapse__list-item"><a class="footer-collapse__list-link" href="{FAVORITES_URL}" title="Избранные товары" rel="nofollow">Избранное</a></li>
+                {% IF TARIFF_FEATURE_GOODS_COMPARE && SETTINGS_COMPARE_DISABLE=0 %}<li class="footer-collapse__list-item"><a class="footer-collapse__list-link" href="{COMPARE_URL}" title="Сравнение" rel="nofollow">Сравнение</a></li>{% ENDIF %}
+                <li class="footer-collapse__list-item"><a class="footer-collapse__list-link" href="{USER_LOGOUT_URL}" title="Выход" rel="nofollow">Выход</a></li>
+                {% ENDIF %}                         
               </ul>   
             </div>
           </div>
@@ -2816,7 +2819,6 @@
       cartAjaxQty();
       coupons();
       cartRelatedGoods();
-      cartFix();
     });
   </script>
   {% ENDIF %}

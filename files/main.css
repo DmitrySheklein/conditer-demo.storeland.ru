@@ -1459,9 +1459,6 @@ body.modal-open {overflow: hidden}
   .social-links .social-links__item:last-child {margin-right: 0}
 }
 .icon-social {width: 30px;height: 30px}
-.icon-social._vk:hover path {fill: #6771c1}
-.icon-social._whatsapp:hover path:first-child {fill: #76cd7a}
-.icon-social._instagram:hover > circle {fill: #e371a8}
 /* Контакты */
 .main-contacts {min-height: 155px;font-size: 18px;font-weight: 400;line-height: 28px}
 .main-contacts .main-contacts__phone a {line-height: 30px;font-size: 18px;font-weight: 500;}
