@@ -1442,8 +1442,9 @@ body.modal-open {overflow: hidden}
 }
 /* Соц. сети */
 .social-links {display: flex;justify-content: space-between;}
-.social-links._header {max-width: 160px;    margin-left: auto;}
-.social-links._footer {max-width: 160px;    margin-top: 30px;}
+.social-links._header {max-width: 160px;margin-left: auto;}
+.social-links._footer {margin-top: 30px;}
+.social-links._footer .social-links__item {margin-right: 5px;}
 .social-links .social-links__item {display: inline-block;margin-right: 10px;}
 .social-links .social-links__item:last-child {margin-right: 0}
 
@@ -1453,7 +1454,7 @@ body.modal-open {overflow: hidden}
 @media all and (max-width: 576px){
   .social-links._header {display: block;}
   .social-links {max-width: 100%;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-pack: justify;-ms-flex-pack: justify;justify-content: space-between}
-  .social-links .social-links__item {width: 40px;height: 40px;line-height: 40px;margin-right: 5px}
+  .social-links .social-links__item {margin-right: 5px}
   .social-links .social-links__item:nth-child(3n) {margin-right: 5px}
   .social-links .social-links__item:last-child {margin-right: 0}
 }
@@ -1477,11 +1478,11 @@ body.modal-open {overflow: hidden}
 .main-contacts__item {font-size: 14px}
 } 
 /* Способы оплаты */
-.payments {text-align: right;    color: #a8a8a8;}
-.payments .payment__ico {display: inline-block;vertical-align: middle;margin: 5px;cursor: pointer;}
-.payments .payment__ico:hover {opacity: .3;}
+.payments {padding: 10px 0;display: flex;flex-wrap: wrap;}
+.payments .payment__ico {display: inline-block;vertical-align: middle;margin-right: 5px;cursor: pointer;fill: #cfd5e9;}
+.payments .payment__ico:hover {opacity: .9;}
 @media all and (max-width: 991px){
-.payments {-ms-flex-item-align: center;align-self: center;}
+.payments {-ms-flex-item-align: center;align-self: center;justify-content: center;}
 .payments span {font-size: 0} 
 }
 @media all and (max-width: 576px){
