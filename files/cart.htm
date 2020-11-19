@@ -130,7 +130,7 @@
                 <span class="cart-list__name">
                   {cart_items.GOODS_NAME}
                 </span>
-                <span class="price {CURRENCY_CHAR_CODE} cart-list__price">{cart_items.ORDER_LINE_PRICE_NOW | money_format}<span class="cart-list__price-count">x {cart_items.ORDER_LINE_QUANTITY}</span></span>     
+                <span class="price {CURRENCY_CHAR_CODE} cart-list__price">{cart_items.GOODS_MOD_PRICE_NOW | money_format}<span class="cart-list__price-count">x {cart_items.ORDER_LINE_QUANTITY}</span></span>     
               </div>
             </li>
             {% ENDFOR %}
