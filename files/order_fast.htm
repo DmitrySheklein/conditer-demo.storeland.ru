@@ -33,7 +33,7 @@
                 </div>
               </div>
               <div class="quickform__item _email">
-                <label class="quickform__label">E-mail<em></em></label>
+                <label class="quickform__label">E-mail<em class="contactRegisterNeedElement" style="display: none;">*</em></label>
                 <div class="quickform__input-wrap">
                   <input id="contactEmail" name="form[contact][email]" value="{ORDER_FORM_CONTACT_EMAIL}" pattern="([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})" maxlength="255" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %} class="email input" type="email" placeholder=""/>
                 </div>

@@ -1307,10 +1307,10 @@ function orderScripts(){
   // При оформлении заказа дадим возможность зарегистрироваться пользователю
   $('#contactWantRegister').on('change', function(){
     if($(this).prop("checked")) {
-      $('.quickform__item._password').show();
+      $('.quickform__item._password, .contactRegisterNeedElement').show();
       $('#contactEmail, #contactPassWord').addClass('required');
     } else {
-      $('.quickform__item._password').hide();
+      $('.quickform__item._password, .contactRegisterNeedElement').hide();
       $('#contactEmail, #contactPassWord').removeClass('required');
     }
   });
