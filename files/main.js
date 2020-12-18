@@ -2604,7 +2604,7 @@ function indexPage() {
   {
     animateOut: 'fadeOut',
     onInitialized: function(event){
-      var colorsArray = ['#bceac0', '#fae0fc', '#f7efca', '#f7dfca','#d2caf7','#caeef7']
+      var colorsArray = ['#d4e4ec']
       var element = event.target; 
       var items = event.item.count;
 
@@ -2684,7 +2684,7 @@ function indexPage() {
     items: 4,
     animateOut: 'fadeOut',
     onInitialized: function(event){
-      var colorsArray = ['#e0e2f8', '#f8e0e0', '#ffffd7', '#d7ffdb']
+      var colorsArray = ['#d4e4ec']
       var element = event.target; 
       var items = event.item.count;
 
@@ -2712,7 +2712,7 @@ function indexPage() {
     {
     items: 2,
     onInitialized: function(event){
-      var colorsArray = ['#fce3a1', '#14d9c5']
+      var colorsArray = ['#d4e4ec']
       var element = event.target; 
       var items = event.item.count;
 
