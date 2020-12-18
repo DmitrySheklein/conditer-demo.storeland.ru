@@ -62,8 +62,9 @@ const uuidv4 = require('uuid/v4'); // <== NOW DEPRECATED!
 uuidv4();
 
 const {SITE} = require('./storeland-uploader-config.json');
-const {SECRET_KEY} = require('./secret-key.json');
-
+const SECRET_KEYS = require('./secret-key.json');
+const {SECRET_KEY} = SECRET_KEYS[SITE];
+console.log(SITE, SECRET_KEY);
 function checkConfig(cb){
 	if(!SECRET_KEY) {
 		notifier.notify({
