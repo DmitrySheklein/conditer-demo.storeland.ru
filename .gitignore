@@ -60,4 +60,5 @@ typings/
 # next.js build output
 .next
 
-storeland-uploader-config.json
+#storeland-uploader-config.json
+secret-key.json

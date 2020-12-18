@@ -61,15 +61,16 @@ const notifier = require('node-notifier');
 const uuidv4 = require('uuid/v4'); // <== NOW DEPRECATED!
 uuidv4();
 
-const {SECRET_KEY, SITE} = require('./storeland-uploader-config.json');
+const {SITE} = require('./storeland-uploader-config.json');
+const {SECRET_KEY} = require('./secret-key.json');
 
 function checkConfig(cb){
 	if(!SECRET_KEY) {
 		notifier.notify({
-			message: `Не задан SECRET_KEY в файле storeland-uploader-config.json`,
+			message: `Не задан SECRET_KEY в файле secret-key.json`,
 			type: 'info'
 		});
-		cb(new Error(`Не задан ${chalk.red(`SECRET_KEY`)} в файле ` + chalk.red(`storeland-uploader-config.json`)))
+		cb(new Error(`Не задан ${chalk.red(`SECRET_KEY`)} в файле ` + chalk.red(`secret-key.json`)))
 	}
 	if(!SITE) {
 		notifier.notify({
