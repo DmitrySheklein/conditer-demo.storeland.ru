@@ -934,6 +934,12 @@ a, button {-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-t
 .header .header-content._active .header-nav__item .header-nav__link._active {color: #f962ad;}
 .header .header-content._active .header-nav__item {display: block;padding-right: 0;}
 
+@media all and (min-width: 1200px){
+  .header .header-nav__item.mainnav__replaced {
+    display: block;
+    padding-right: 0;
+  }
+}
 @media all and (max-width: 1199px){
   .header .header-nav__item {position: relative;padding-right: 0;text-align: left;}
 }

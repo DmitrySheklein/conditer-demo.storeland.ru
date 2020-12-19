@@ -738,32 +738,52 @@ function mainFunctions() {
   })
   // Дополнительные пункты меню в шапке
   function headerMenu(){
-    var $menuList = $('.header-nav .header-nav__list');
-    var menuWidth = $menuList.width();
-    var $menuItems = $('.header-nav .header-nav__item');
-    var menuCount = $menuItems.length;
-    var WidthCounter = 0;
-    var containerCreate = false;
-    
-    var $moreItem = $('<li class="header-nav__item dropdown _more-menu"><a class="header-nav__link">Еще...</a></li>');
-    var $moreList = $('<ul>').addClass('dropdown__body');
-
-    $menuItems.each(function(i, item){
-      var $item = $(item);
-      var currentWidth = Math.ceil($item.outerWidth(true));
-      var moreItemsWidth = 45;
-      var nextItemWidth = Math.ceil($item.next().outerWidth(true))
-      
-      WidthCounter += currentWidth;
-      // console.log($item, WidthCounter, currentWidth, menuWidth)
-      if(containerCreate || (WidthCounter + nextItemWidth) > menuWidth) {
-        containerCreate = true;
-        $moreList.append($item.addClass('dropdown__item'));
+    var overMenuExist = $('.overflowMenu li').length;
+    if(overMenuExist){
+     $('.overflowMenu li').removeClass('mainnav__replaced');
+     $('.mainnav .mainnav__more').remove();
+     $('.overflowMenu li').each(function(){
+       $('.mainnav .header-nav__list').append($(this));
+     })
+    }
+    $('.header-nav').addClass('mainnav')
+    menuWidth = $('.mainnav').width();
+    menuCount = $('.header-nav .header-nav__item').length + 1;
+    var nextCheck = 0;
+    var CurrentWidthCounter = 0;
+    for(var i=1; i < menuCount;  i++){
+      currentWidth = parseInt(Math.ceil($('.header-nav .header-nav__item:nth-child('+i+')').width())) + 46;
+      nextCheck += currentWidth;
+      if(nextCheck > menuWidth){
+        var a = i;
+        for(a;a < menuCount;a++){
+          $('.header-nav .header-nav__item:nth-child('+ a +')').addClass('mainnav__replaced');
+        }
+        $('.mainnav .header-nav__list').append('<li class="header-nav__item mainnav__more dropdown _more-menu"><a class="header-nav__link">Еще...</a></li>');
+        $('.mainnav__more').append($('<ul>').addClass('overflowMenu dropdown__body'))
+        $('.mainnav .mainnav__replaced').each(function(){
+          $('.overflowMenu').append($(this));
+        });
+        menuMorePosition = parseInt($('.mainnav__more').position().left);
+        $('.mainnav .mainnav__more').on('click',function(){
+          $(this).hasClass('active') ? $(this).removeClass('active') : $(this).addClass('active');
+          $('.overflowMenu').hasClass('active') ? $('.overflowMenu').removeClass('active') : $('.overflowMenu').addClass('active');
+          $('.mainnav .header-nav__list').hasClass('active') ? $('.mainnav .header-nav__list').removeClass('active') : $('.mainnav .header-nav__list').addClass('active');
+        });
+        $(function($){
+          $(document).on('mouseup', function (e){ 
+            var div = $(".overflowMenu.active"); 
+            var btn = $(".mainnav .mainnav__more");
+            if (!div.is(e.target) && div.has(e.target).length === 0 && !btn.is(e.target)) {
+              div.removeClass('active');
+              btn.removeClass('active');
+              $('.mainnav .header-nav__list').removeClass('active');
+            }
+          });
+        });
+        return false;
       }
-    })
-    $moreItem.append($moreList);
-    $menuList.append($moreItem);
-    $menuList.addClass('_active')
+    }
   }     
   if(getClientWidth() >= 1200){
     headerMenu();
