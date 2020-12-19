@@ -1369,15 +1369,18 @@ function orderScripts(){
     var formData = $(this).serializeArray();
     // Сообщаем серверу, что мы пришли через ajax запрос
     formData.push({name: 'ajax_q', value: 1});
-    // Аяксом добавляем товар в корзину и вызываем форму быстрого заказа товара
+    var $orderBtns = $("#confirmOrder .button")
+    //  Аяксом оформляем заказ
     $.ajax({
       type    : "POST",
       dataType: 'json',
       cache    : false,
       url  	  : $(this).attr('action'),
       data		: formData,
+      timeout: 3000,
       beforeSend: function () {        
         preloadButton($('#confirmOrder .button'));
+        $orderBtns.addClass('_disabled')
       }, 
       success: function(data) {
         // Если заказ был успешно создан
@@ -1392,12 +1395,17 @@ function orderScripts(){
               open: null, 
               close: null
             }            
-          }).show()             
+          }).show()  
+          $orderBtns.removeClass('_disabled').html('Оформить заказ');
         } else {
           alert('Во время оформления заказа возникла неизвестная ошибка. Пожалуйста, обратитесь в службу технической поддержки.');
+          $orderBtns.removeClass('_disabled').html('Оформить заказ');
         }
-        $('#confirmOrder .button').html('Оформить заказ')
-      }
+        
+      },
+      error: function(){
+        $orderBtns.removeClass('_disabled').html('Оформить заказ')
+      }         
     });
     return false;      
   }).validate();
