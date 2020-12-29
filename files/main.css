@@ -2659,6 +2659,7 @@ body.modal-open {overflow: hidden}
   padding: 30px;
   max-width: 480px;
   width: 100%;
+  overflow: visible;
 }
 @media(max-width: 576px){
   .quickViewMod .product-view__order-wrap {
