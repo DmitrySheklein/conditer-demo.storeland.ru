@@ -121,7 +121,7 @@ h6 {font-size: 16px;}
 }
 .title-styled__word:before {content: '';display: block;width: 100%;height: 6px;border-radius: 3px;background-color: #f9bada;position: absolute;bottom: 5px;z-index: -1}
 @media (max-width: 480px){
-  ..title-styled__word:before {
+  .title-styled__word:before {
     height: 4px;
     bottom: 3px;
   }
@@ -2659,6 +2659,7 @@ body.modal-open {overflow: hidden}
   padding: 30px;
   max-width: 480px;
   width: 100%;
+  overflow: visible;
 }
 @media(max-width: 576px){
   .quickViewMod .product-view__order-wrap {
